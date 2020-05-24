@@ -13,10 +13,7 @@ namespace kata_TicTacToe
         private readonly int _width;
         private readonly int _length;
         private readonly IList<Coordinate> _board;
-       
-      
-      
-
+        
         public Board(int width, int length)
         {
             _width = width;
@@ -27,7 +24,6 @@ namespace kata_TicTacToe
         public IList<Coordinate> GenerateBoard()
         {
             
-
             for (var row = 1; row <= _width; row++)
             {
                 for (var column = 1; column <= _length; column++)
