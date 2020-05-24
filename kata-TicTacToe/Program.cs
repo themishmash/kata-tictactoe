@@ -6,7 +6,10 @@ namespace kata_TicTacToe
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var board = new Board(3, 3);
+            board.GenerateBoard();
+            Console.WriteLine(board.DisplayBoard());
+
         }
     }
 }
