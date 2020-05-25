@@ -1,10 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Xml;
 
 namespace kata_TicTacToe
 {
@@ -12,28 +6,31 @@ namespace kata_TicTacToe
     {
         private readonly int _width;
         private readonly int _length;
-        private readonly IList<Coordinate> _board;
+        public readonly IList<Coordinate> CoordinateList;
+        public CoordinateStatus CoordinateStatus;
+    
         
         public Board(int width, int length)
         {
             _width = width;
             _length = length;
-            _board = new List<Coordinate>();
+           //CoordinateStatus = CoordinateStatus.Blank; //--> this seems to be set even without this? 
+            CoordinateList = new List<Coordinate>();
         }
 
         public IList<Coordinate> GenerateBoard()
         {
-            
             for (var row = 1; row <= _width; row++)
             {
                 for (var column = 1; column <= _length; column++)
                 {
                     var square = new Coordinate(row, column);
-                    _board.Add(square);
+                    CoordinateList.Add(square);
+                   //CoordinateStatus = CoordinateStatus.Blank; --> this is set without this? 
                 }
             }
 
-            return _board;
+            return CoordinateList;
         }
         
 
@@ -41,7 +38,7 @@ namespace kata_TicTacToe
         { 
             var board = "";
             var i = 1;
-            while (i <= _board.Count)
+            while (i <= CoordinateList.Count)
             {
                 board += " . ";
                 if (i % _width == 0)
@@ -51,6 +48,31 @@ namespace kata_TicTacToe
                 i++;
             }
             return board;
+        }
+
+
+        public bool IsValidMove(int xCoordinate, int yCoordinate)
+        {
+            foreach (var spot in CoordinateList)
+            {
+                if (xCoordinate != spot.XCoordinate || yCoordinate != spot.YCoordinate) continue;
+                if (spot.CoordinateStatus == CoordinateStatus.Blank)
+                    
+                    return true;
+            }
+            return false;
+        }
+
+
+        public void ChangeCoordinateStatus()
+        {
+            foreach (var item in CoordinateList)
+            {
+                if (IsValidMove(item.XCoordinate, item.YCoordinate))
+                {
+                    item.CoordinateStatus = CoordinateStatus.Filled;
+                }
+            }
         }
     }
 }
