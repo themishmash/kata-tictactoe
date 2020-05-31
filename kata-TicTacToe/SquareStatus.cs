@@ -1,9 +1,9 @@
 namespace kata_TicTacToe
 {
-    public enum CoordinateStatus
+    public enum SquareStatus
     {
         Filled,
-        Blank,
-       
+        Blank
+
     }
 }
