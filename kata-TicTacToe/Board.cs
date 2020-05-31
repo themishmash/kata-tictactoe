@@ -47,25 +47,11 @@ namespace kata_TicTacToe
             return string.Join(System.Environment.NewLine, rows);
 
         }
-        
-        public string UpdateBoard()
+
+
+        public void IsValidMove(Move move, Symbol playerSymbol)
         {
-            var rows = new List<string>();
-            
-            foreach (var row in _boardSquares.GroupBy(s=> s.XCoordinate, s=> s))
-            {
-                rows.Add( string.Join("",row));
-               // rows.Add(string.Join(Symbol.Cross, row));
-            }
-
-            return string.Join(System.Environment.NewLine, rows);
-
-        }
-        
-
-        public void IsValidMove(int xCoordinate, int yCoordinate, Symbol playerSymbol)
-        {
-            var move = new Move(xCoordinate, yCoordinate);
+            //var move = new Move(xCoordinate, yCoordinate);
             foreach (var square in _boardSquares)
             {
                 if (square.XCoordinate == move.XCoordinate && square.YCoordinate == move.YCoordinate && square
@@ -80,7 +66,7 @@ namespace kata_TicTacToe
                 // if(index != -1)
                 //     customListItems[index] = newCustomListItem;
                
-                var newValidMove = new Square(xCoordinate, yCoordinate) {Symbol = playerSymbol};
+                var newValidMove = new Square(move.XCoordinate, move.YCoordinate) {Symbol = playerSymbol};
                 var newMoveCoordinate = _boardSquares.First(i => i.XCoordinate == move.XCoordinate && i.YCoordinate ==
                     move.YCoordinate);
                 var index = _boardSquares.IndexOf(newMoveCoordinate);
