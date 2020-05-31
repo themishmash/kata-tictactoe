@@ -34,6 +34,7 @@ namespace kata_TicTacToe
         public void MakeMove(int xCoordinate, int yCoordinate)
         {
             var move = new Move(xCoordinate, yCoordinate);
+            _board.IsValidMove(move, Symbol);
         }
     }
 }

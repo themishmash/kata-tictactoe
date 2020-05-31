@@ -52,13 +52,13 @@ namespace kata_TicTacToe.Tests
          // }
 
          [Fact]
-         public void ChangeSquareToPlayerSymbolForValidMovie()
+         public void ChangeSquareToPlayerSymbolXForValidMove()
          {
              var board = new Board(3, 3);
              var playerX = new Player(board){Symbol = Symbol.Cross};
-             //var move = new Move(1, 1);
              playerX.MakeMove(1, 1);
-             board.UpdateBoard();
+             
+             board.DisplayBoard();
              Assert.Equal(" X  .  . \n .  .  . \n .  .  . ",board.DisplayBoard());
          }
     }
