@@ -1,8 +1,9 @@
 namespace kata_TicTacToe
 {
-    public enum PlayerCounter
+    public enum Symbol
     {
+        None,
         Naught,
-        Crosses
+        Cross
     }
 }

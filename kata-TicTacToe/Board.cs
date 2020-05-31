@@ -1,78 +1,102 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace kata_TicTacToe
 {
     public class Board
     {
-        private readonly int _width;
-        private readonly int _length;
-        public readonly IList<Coordinate> CoordinateList;
-        public CoordinateStatus CoordinateStatus;
-    
-        
+     
+        private readonly List<Square> _boardSquares = new List<Square>();
+        //private readonly Move _move;
+
+
         public Board(int width, int length)
         {
-            _width = width;
-            _length = length;
-           //CoordinateStatus = CoordinateStatus.Blank; //--> this seems to be set even without this? 
-            CoordinateList = new List<Coordinate>();
+            GenerateBoard(width, length);
         }
 
-        public IList<Coordinate> GenerateBoard()
+        public int BoardSquaresCount()
         {
-            for (var row = 1; row <= _width; row++)
+            return _boardSquares.Count;
+        }
+        
+        private void GenerateBoard(int width, int length) 
+        {
+            for (var row = 1; row <= width; row++)
             {
-                for (var column = 1; column <= _length; column++)
+                for (var column = 1; column <= length; column++)
                 {
-                    var square = new Coordinate(row, column);
-                    CoordinateList.Add(square);
-                   //CoordinateStatus = CoordinateStatus.Blank; --> this is set without this? 
+                    var square = new Square(row, column);
+                    _boardSquares.Add(square);
                 }
             }
-
-            return CoordinateList;
         }
+        
         
 
         public string DisplayBoard()
-        { 
-            var board = "";
-            var i = 1;
-            while (i <= CoordinateList.Count)
-            {
-                board += " . ";
-                if (i % _width == 0)
-                {
-                    board += System.Environment.NewLine;
-                }
-                i++;
-            }
-            return board;
-        }
-
-
-        public bool IsValidMove(int xCoordinate, int yCoordinate)
         {
-            foreach (var spot in CoordinateList)
+            var rows = new List<string>();
+            
+            foreach (var row in _boardSquares.GroupBy(s=> s.XCoordinate, s=> s))
             {
-                if (xCoordinate != spot.XCoordinate || yCoordinate != spot.YCoordinate) continue;
-                if (spot.CoordinateStatus == CoordinateStatus.Blank)
-                    
-                    return true;
+                
+                rows.Add( string.Join("",row));
             }
-            return false;
+
+            return string.Join(System.Environment.NewLine, rows);
+
         }
-
-
-        public void ChangeCoordinateStatus()
+        
+        public string UpdateBoard()
         {
-            foreach (var item in CoordinateList)
+            var rows = new List<string>();
+            
+            foreach (var row in _boardSquares.GroupBy(s=> s.XCoordinate, s=> s))
             {
-                if (IsValidMove(item.XCoordinate, item.YCoordinate))
-                {
-                    item.CoordinateStatus = CoordinateStatus.Filled;
-                }
+                rows.Add( string.Join("",row));
+               // rows.Add(string.Join(Symbol.Cross, row));
+            }
+
+            return string.Join(System.Environment.NewLine, rows);
+
+        }
+        
+
+        public void IsValidMove(int xCoordinate, int yCoordinate, Symbol playerSymbol)
+        {
+            var move = new Move(xCoordinate, yCoordinate);
+            foreach (var square in _boardSquares)
+            {
+                if (square.XCoordinate == move.XCoordinate && square.YCoordinate == move.YCoordinate && square
+                        .SquareStatus ==
+                    SquareStatus
+                        .Blank)
+                    square.Symbol = playerSymbol;
+                
+                // customListItem2 = customListItems.Where(i=> i.name == "Item 2").First();
+                // var index = customListItems.IndexOf(customListItem2);
+                //
+                // if(index != -1)
+                //     customListItems[index] = newCustomListItem;
+               
+                var newValidMove = new Square(xCoordinate, yCoordinate) {Symbol = playerSymbol};
+                var newMoveCoordinate = _boardSquares.First(i => i.XCoordinate == move.XCoordinate && i.YCoordinate ==
+                    move.YCoordinate);
+                var index = _boardSquares.IndexOf(newMoveCoordinate);
+                if (index != -1)
+                    _boardSquares[index] = newValidMove;
+                
+             
+                //_boardSquares.Add(new Square(1,1){Symbol = playerSymbol});
+               // _boardSquares.Add(newMove);
+
+                return;
             }
         }
+
+        
+        
+        
     }
 }

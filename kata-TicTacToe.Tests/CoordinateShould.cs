@@ -1,4 +1,3 @@
-using System;
 using Xunit;
 
 namespace kata_TicTacToe.Tests
@@ -6,19 +5,14 @@ namespace kata_TicTacToe.Tests
     public class CoordinateShould
     {
         [Fact]
-        public void HaveXYCoordinates()
+        public void HaveXAndYCoordinates()
         {
-            var coordinate = new Coordinate(1,1);
+            var coordinate = new Square(1,1);
             Assert.Equal(1, coordinate.XCoordinate);
             Assert.Equal(1, coordinate.YCoordinate);
         }
 
-        // [Fact]
-        // public void BeEmptyToBeginWith()
-        // {
-        //     var sut = new Coordinate(1,1);
-        //     Assert.Equal(CoordinateStatus.Blank, sut.CoordinateStatus);
-        // }
+        
        
         
     }
