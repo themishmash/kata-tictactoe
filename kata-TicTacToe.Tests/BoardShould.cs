@@ -25,39 +25,26 @@ namespace kata_TicTacToe.Tests
         }
         
 
-        // [Fact]
-        // public void HaveBlankCoordinatesAtStartOfTheGame()
-        // {
-        //     var board = new Board(3, 3);
-        //     var blankCoordinate = new Coordinate(2,2);
-        //     board.
-        //     //Assert.True(board.IsValidMove(board.BoardSquares[0]));
-        //     
-        //     Assert.Equal(SquareStatus.Blank, blankCoordinate.SquareStatus);
-        // }
-
-        // [Fact]
-        //  public void ChangeCoordinateStatusToFilledIfValidMove()
-        //  {
-        //      var board = new Board(3, 3);
-        //      Assert.Equal(SquareStatus.Filled, board.ChangeStatusOfSquareForValidMove(1,1));
-        //  }
-         //
-         // [Fact]
-         // public void CoordinateStatusStaysFilledEvenIfCalledAgain()
-         // {
-         //     var board = new Board(3,3);
-         //     board.ChangeStatusOfSquareForValidMove(1, 1);
-         //     Assert.Equal(SquareStatus.Filled, board.ChangeStatusOfSquareForValidMove(1,1));
-         // }
-
          [Fact]
          public void ChangeSquareToPlayerSymbolXForValidMove()
          {
              var board = new Board(3, 3);
-             var playerX = new Player(board){Symbol = Symbol.Cross};
-             playerX.MakeMove(1, 1);
-             
+             //var playerX = new Player(board){Symbol = Symbol.Cross};
+             //playerX.MakeMove(1, 1);
+             var move = new Move(1,1);
+             board.PlaceSymbolToCoordinates(Symbol.Cross, move);
+             board.DisplayBoard();
+             Assert.Equal(" X  .  . \n .  .  . \n .  .  . ",board.DisplayBoard());
+         }
+
+         [Fact]
+         public void NotChangeWhenPlayerMakesMoveOnOccupiedSquare()
+         {
+             var board = new Board(3, 3);
+             var move = new Move(1,1 );
+             board.PlaceSymbolToCoordinates(Symbol.Cross, move);
+             var move2 = new Move(1,1);
+             board.PlaceSymbolToCoordinates(Symbol.Naught, move2);
              board.DisplayBoard();
              Assert.Equal(" X  .  . \n .  .  . \n .  .  . ",board.DisplayBoard());
          }
