@@ -6,8 +6,8 @@ namespace kata_TicTacToe
     public class Square
     {
         
-        public int XCoordinate { get; set; }
-        public int YCoordinate { get; set; }
+        public int XCoordinate { get;}
+        public int YCoordinate { get;}
         
         public SquareStatus SquareStatus { get; set; }
         public Symbol Symbol { get; set; }

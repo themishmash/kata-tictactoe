@@ -7,7 +7,6 @@ namespace kata_TicTacToe
     {
      
         private readonly List<Square> _boardSquares = new List<Square>();
-        //private readonly Move _move;
 
 
         public Board(int width, int length)
@@ -33,53 +32,47 @@ namespace kata_TicTacToe
         }
         
         
-
         public string DisplayBoard()
         {
             var rows = new List<string>();
             
             foreach (var row in _boardSquares.GroupBy(s=> s.XCoordinate, s=> s))
             {
-                
                 rows.Add( string.Join("",row));
             }
-
             return string.Join(System.Environment.NewLine, rows);
-
         }
 
+        
 
-        public void IsValidMove(Move move, Symbol playerSymbol)
+        private bool IsValidMove(Move move)
         {
-            //var move = new Move(xCoordinate, yCoordinate);
             foreach (var square in _boardSquares)
             {
-                if (square.XCoordinate == move.XCoordinate && square.YCoordinate == move.YCoordinate && square
-                        .SquareStatus ==
-                    SquareStatus
-                        .Blank)
-                    square.Symbol = playerSymbol;
-                
-                // customListItem2 = customListItems.Where(i=> i.name == "Item 2").First();
-                // var index = customListItems.IndexOf(customListItem2);
-                //
-                // if(index != -1)
-                //     customListItems[index] = newCustomListItem;
-               
-                var newValidMove = new Square(move.XCoordinate, move.YCoordinate) {Symbol = playerSymbol};
-                var newMoveCoordinate = _boardSquares.First(i => i.XCoordinate == move.XCoordinate && i.YCoordinate ==
-                    move.YCoordinate);
-                var index = _boardSquares.IndexOf(newMoveCoordinate);
-                if (index != -1)
-                    _boardSquares[index] = newValidMove;
-                
-             
-                //_boardSquares.Add(new Square(1,1){Symbol = playerSymbol});
-               // _boardSquares.Add(newMove);
-
-                return;
+                if (square.XCoordinate == move.XCoordinate && square.YCoordinate == move.YCoordinate && square.SquareStatus == SquareStatus.Blank && square.Symbol == Symbol.None)
+                    return true;
             }
+            return false;
         }
+
+        public bool PlaceSymbolToCoordinates(Symbol symbol, Move move)
+        {
+            if (!IsValidMove(move)) return false;
+            var newValidMove = new Square(move.XCoordinate, move.YCoordinate) {Symbol = symbol, SquareStatus = 
+            SquareStatus.Filled};
+            var foundNewMoveCoordinate = _boardSquares.First(i => i.XCoordinate == move.XCoordinate && i.YCoordinate ==
+                move.YCoordinate);
+            var index = _boardSquares.IndexOf(foundNewMoveCoordinate);
+            if (index != -1)
+                _boardSquares[index] = newValidMove;
+
+            return true;
+        }
+
+        // public bool CheckSquareBlank()
+        // {
+        //     return _boardSquares.Any(square => square.SquareStatus == SquareStatus.Blank && square.Symbol == Symbol.None);
+        // }
 
         
         
