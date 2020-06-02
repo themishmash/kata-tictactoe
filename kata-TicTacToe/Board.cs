@@ -69,13 +69,8 @@ namespace kata_TicTacToe
             return true;
         }
 
-        // public bool CheckSquareBlank()
-        // {
-        //     return _boardSquares.Any(square => square.SquareStatus == SquareStatus.Blank && square.Symbol == Symbol.None);
-        // }
 
-        
-        
-        
+
+
     }
 }
