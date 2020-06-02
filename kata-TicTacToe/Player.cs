@@ -15,18 +15,14 @@ namespace kata_TicTacToe
             _iio = iio;
         }
 
-        public bool PlayTurn(int xCoordinate, int yCoordinate, Symbol symbol)
+        public void PlayTurn(int xCoordinate, int yCoordinate, Symbol symbol)
+        //(int xCoordinate, int yCoordinate, Symbol symbol)
         {
             // var move = new Move(xCoordinate, yCoordinate);
             // _board.IsValidMove(move, Symbol);
-            
+            //_iio.AskQuestion("Please enter a coordinate") == _iio.ParseStringCoordinatesToInt();
             var move = new Move(xCoordinate, yCoordinate);
-            if (_board.PlaceSymbolToCoordinates(symbol, move))
-            {
-                return true;
-            }
-
-            return false;
+            _board.PlaceSymbolToCoordinates(symbol, move);
         }
     }
 }

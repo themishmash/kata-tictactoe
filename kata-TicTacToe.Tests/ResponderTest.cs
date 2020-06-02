@@ -13,5 +13,10 @@ namespace kata_TicTacToe.Tests
         {
             throw new System.NotImplementedException();
         }
+
+        public int[] ParseStringCoordinatesToInt(string number)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
