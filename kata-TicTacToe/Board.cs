@@ -6,7 +6,7 @@ namespace kata_TicTacToe
     public class Board
     {
      
-        private readonly List<Square> _boardSquares = new List<Square>();
+        public readonly List<Square> _boardSquares = new List<Square>();
 
 
         public Board(int width, int length)
@@ -45,19 +45,19 @@ namespace kata_TicTacToe
 
         
 
-        private bool IsValidMove(Move move)
-        {
-            foreach (var square in _boardSquares)
-            {
-                if (square.XCoordinate == move.XCoordinate && square.YCoordinate == move.YCoordinate && square.SquareStatus == SquareStatus.Blank && square.Symbol == Symbol.None)
-                    return true;
-            }
-            return false;
-        }
+        // private bool IsValidMove(Move move)
+        // {
+        //     foreach (var square in _boardSquares)
+        //     {
+        //         if (square.XCoordinate == move.XCoordinate && square.YCoordinate == move.YCoordinate && square.SquareStatus == SquareStatus.Blank && square.Symbol == Symbol.None)
+        //             return true;
+        //     }
+        //     return false;
+        // }
 
         public bool PlaceSymbolToCoordinates(Symbol symbol, Move move)
         {
-            if (!IsValidMove(move)) return false;
+            if (!Validator.IsValidMove(move,_boardSquares)) return false;
             var newValidMove = new Square(move.XCoordinate, move.YCoordinate) {Symbol = symbol, SquareStatus = 
             SquareStatus.Filled};
             var foundNewMoveCoordinate = _boardSquares.First(i => i.XCoordinate == move.XCoordinate && i.YCoordinate ==
