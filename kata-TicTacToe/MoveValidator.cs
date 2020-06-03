@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace kata_TicTacToe
 {
-    public static class Validator
+    public static class MoveValidator
     {
         public static bool IsValidMove(Move move, IEnumerable<Square> boardSquares)
         {

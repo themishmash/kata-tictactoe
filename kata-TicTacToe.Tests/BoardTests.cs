@@ -5,7 +5,7 @@ using Xunit;
 
 namespace kata_TicTacToe.Tests
 {
-    public class BoardShould
+    public class BoardTests
     {
         [Fact]
         public void CreateBoardOf9Squares()

@@ -2,14 +2,14 @@ using Xunit;
 
 namespace kata_TicTacToe.Tests
 {
-    public class PlayerShould
+    public class PlayerTests
     {
         private const int XCoordinate = 1;
         private const int YCoordinate = 1;
         [Fact]
          public void PlaceSymbolWithXYCoordinates()
          {
-             var input = new ResponderTest();
+             var input = new TestResponder();
              var playerX = new Player(input, Symbol.Cross);
              var move = playerX.PlayTurn();
              Assert.Equal(XCoordinate, move.XCoordinate);
@@ -17,9 +17,9 @@ namespace kata_TicTacToe.Tests
          }
 
          [Fact]
-         public void PlayerHasCorrectSymbol()
+         public void PlayerHasCorrectXSymbol()
          {
-             var input = new ResponderTest();
+             var input = new TestResponder();
              var playerX = new Player(input, Symbol.Cross);
              Assert.Equal(Symbol.Cross, playerX.Symbol);
          }
