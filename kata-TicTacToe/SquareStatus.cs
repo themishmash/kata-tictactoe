@@ -4,6 +4,5 @@ namespace kata_TicTacToe
     {
         Filled,
         Blank
-
     }
 }

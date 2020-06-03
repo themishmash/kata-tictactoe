@@ -2,6 +2,7 @@ namespace kata_TicTacToe
 {
     public interface IInputOutput
     {
-        public string AskQuestion(string question);
+        (int x, int y) AskQuestion(string answer);
+        
     }
 }

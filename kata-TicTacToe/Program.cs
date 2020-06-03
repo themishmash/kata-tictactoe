@@ -9,18 +9,13 @@ namespace kata_TicTacToe
             var board = new Board(3, 3);
 
             // Console.WriteLine( board.DisplayBoard());
-            // var playerX = new Player(board){Symbol = Symbol.Cross};
-            // playerX.MakeMove(1, 1);
-            //
-            // Console.WriteLine(board.DisplayBoard());
-            //
-            // var playerO = new Player(board){Symbol = Symbol.Naught};
-            // playerO.MakeMove(1,1);
+          // var consoleInput = new ConsoleInputOutput();
+          
+            // var playerX = new Player(board, consoleInput){Symbol = Symbol.Cross};
+            // playerX.PlayTurn(Symbol.Cross);
             
-            var move = new Move(1,1);
-            //board.PlaceSymbolToCoordinates(move);
-            
-            Console.WriteLine(board.DisplayBoard());
+            //playerX.PlayTurn(1, 1, Symbol.Cross);
+           Console.WriteLine(board.DisplayBoard());
             
 
         }

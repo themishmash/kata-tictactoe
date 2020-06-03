@@ -18,7 +18,6 @@ namespace kata_TicTacToe
             YCoordinate = yCoordinate;
             SquareStatus = SquareStatus.Blank; 
             Symbol = Symbol.None;
-           
         }
 
         public override string ToString()

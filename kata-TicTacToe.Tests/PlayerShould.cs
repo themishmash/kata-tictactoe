@@ -4,40 +4,50 @@ namespace kata_TicTacToe.Tests
 {
     public class PlayerShould
     {
+        private const int XCoordinate = 1;
+        private const int YCoordinate = 1;
         [Fact]
          public void PlaceSymbolWithXYCoordinates()
          {
-             var board = new Board(3, 3);
-             var input = new ResponderTest(1, 1);
-             var playerX = new Player(board, input){Symbol = Symbol.Cross};
-             playerX.PlayTurn(input.XCoordinate, input.YCoordinate, Symbol.Cross);
-             Assert.Equal(" X  .  . \n .  .  . \n .  .  . ",board.DisplayBoard());
+             var input = new ResponderTest();
+             var playerX = new Player(input, Symbol.Cross);
+             var move = playerX.PlayTurn();
+             Assert.Equal(XCoordinate, move.XCoordinate);
+             Assert.Equal(YCoordinate, move.YCoordinate);
          }
-         
+
          [Fact]
-         public void PlaceDifferentSymbolsWithTwoPlayers()
+         public void PlayerHasCorrectSymbol()
          {
-             var board = new Board(3, 3);
-             var playerXInput = new ResponderTest(1, 1);
-             var playerOInput = new ResponderTest(2, 2);
-             var playerX = new Player(board, playerXInput){Symbol = Symbol.Cross};
-             var playerO = new Player(board, playerOInput){Symbol = Symbol.Naught};
-             playerX.PlayTurn(playerXInput.XCoordinate, playerXInput.YCoordinate, Symbol.Cross);
-             playerO.PlayTurn(playerOInput.XCoordinate, playerOInput.YCoordinate, Symbol.Naught);
-             Assert.Equal(" X  .  . \n .  O  . \n .  .  . ",board.DisplayBoard());
+             var input = new ResponderTest();
+             var playerX = new Player(input, Symbol.Cross);
+             Assert.Equal(Symbol.Cross, playerX.Symbol);
          }
-         
-         [Fact]
-         public void NotPlaceSymbolOnOccupiedSquare()
-         {
-             var board = new Board(3, 3);
-             var playerXInput = new ResponderTest(1, 1);
-             var playerOInput = new ResponderTest(1, 1);
-             var playerX = new Player(board, playerXInput){Symbol = Symbol.Cross};
-             var playerO = new Player(board, playerOInput){Symbol = Symbol.Naught};
-             playerX.PlayTurn(playerXInput.XCoordinate, playerXInput.YCoordinate, Symbol.Cross);
-             playerO.PlayTurn(playerOInput.XCoordinate, playerOInput.YCoordinate, Symbol.Naught);
-             Assert.Equal(" X  .  . \n .  .  . \n .  .  . ",board.DisplayBoard());
-         }
+        
+        // [Fact]
+        // public void PlaceDifferentSymbolsWithTwoPlayers()
+        // {
+        //     var board = new Board(3, 3);
+        //     var playerXInput = new ResponderTest("1,1");
+        //     var playerOInput = new ResponderTest("2,2");
+        //     var playerX = new Player(board, playerXInput){Symbol = Symbol.Cross};
+        //     var playerO = new Player(board, playerOInput){Symbol = Symbol.Naught};
+        //     playerX.PlayTurn(Symbol.Cross);
+        //     playerO.PlayTurn(Symbol.Naught);
+        //     Assert.Equal(" X  .  . \n .  O  . \n .  .  . ",board.DisplayBoard());
+        // }
+        //
+        // [Fact]
+        // public void NotPlaceSymbolOnOccupiedSquare()
+        // {
+        //     var board = new Board(3, 3);
+        //     var playerXInput = new ResponderTest("1, 1");
+        //     var playerOInput = new ResponderTest("1, 1");
+        //     var playerX = new Player(board, playerXInput){Symbol = Symbol.Cross};
+        //     var playerO = new Player(board, playerOInput){Symbol = Symbol.Naught};
+        //     playerX.PlayTurn(Symbol.Cross);
+        //     playerO.PlayTurn(Symbol.Naught);
+        //     Assert.Equal(" X  .  . \n .  .  . \n .  .  . ",board.DisplayBoard());
+        // }
     }
 }

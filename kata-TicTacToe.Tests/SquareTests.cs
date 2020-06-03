@@ -2,7 +2,7 @@ using Xunit;
 
 namespace kata_TicTacToe.Tests
 {
-    public class CoordinateShould
+    public class SquareTests
     {
         [Fact]
         public void HaveXAndYCoordinates()
@@ -12,6 +12,13 @@ namespace kata_TicTacToe.Tests
             Assert.Equal(1, coordinate.YCoordinate);
         }
 
+        [Fact]
+        public void GetCorrectStringFromSymbol()
+        {
+            var square = new Square(1,1){Symbol = Symbol.Cross};
+            var str = square.ToString();
+            Assert.Equal(" X ", str);
+        }
         
        
         

@@ -18,8 +18,6 @@ namespace kata_TicTacToe.Tests
         public void GenerateSquaresInBoardWithCorrectCoordinates()
         {
             var board = new Board(3, 3);
-//loop to test for all correct coordinates 
-//or 4 corners
 
             Assert.Equal(" .  .  . \n .  .  . \n .  .  . ",board.DisplayBoard());
         }
