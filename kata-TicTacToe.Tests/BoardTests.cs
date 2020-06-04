@@ -39,7 +39,7 @@ namespace kata_TicTacToe.Tests
          public void NotChangeWhenPlayerMakesMoveOnOccupiedSquare()
          {
              var board = new Board(3, 3);
-             var move = new Move(1,1 );
+             var move = new Move(1,1);
              board.PlaceSymbolToCoordinates(Symbol.Cross, move);
              var move2 = new Move(1,1);
              board.PlaceSymbolToCoordinates(Symbol.Naught, move2);

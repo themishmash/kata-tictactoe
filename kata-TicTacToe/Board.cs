@@ -57,7 +57,8 @@ namespace kata_TicTacToe
 
         public bool PlaceSymbolToCoordinates(Symbol symbol, Move move)
         {
-            if (!MoveValidator.IsValidMove(move,_boardSquares)) return false;
+            //var moveValidator = new MoveValidator();
+            if (!MoveValidator.IsValidMove(move, _boardSquares)) return false;
             var newValidMove = new Square(move.XCoordinate, move.YCoordinate) {Symbol = symbol, SquareStatus = 
             SquareStatus.Filled};
             var foundNewMoveCoordinate = _boardSquares.First(i => i.XCoordinate == move.XCoordinate && i.YCoordinate ==

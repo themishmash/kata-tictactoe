@@ -16,7 +16,12 @@ namespace kata_TicTacToe
             
             //playerX.PlayTurn(1, 1, Symbol.Cross);
            Console.WriteLine(board.DisplayBoard());
-            
+           var consoleInputOutput = new ConsoleInputOutput();
+           var playerX = new Player(consoleInputOutput, Symbol.Cross);
+           //playerX.PlayTurn();
+           //board.PlaceSymbolToCoordinates(Symbol.Cross, playerX.PlayTurn());
+           Console.WriteLine(board.DisplayBoard());
+
 
         }
     }

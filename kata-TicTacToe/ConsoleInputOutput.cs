@@ -24,9 +24,8 @@ namespace kata_TicTacToe
             // }
         }
 
-      
 
-        public int[] ParseStringCoordinatesToInt(string number)
+        private int[] ParseStringCoordinatesToInt(string number)
         {
             var stringCoordinates = number.Split(",", StringSplitOptions.RemoveEmptyEntries);
             return stringCoordinates.Select(int.Parse).ToArray();
