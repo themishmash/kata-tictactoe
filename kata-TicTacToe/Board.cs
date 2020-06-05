@@ -44,20 +44,20 @@ namespace kata_TicTacToe
         }
 
         
-
-        // private bool IsValidMove(Move move)
-        // {
-        //     foreach (var square in _boardSquares)
-        //     {
-        //         if (square.XCoordinate == move.XCoordinate && square.YCoordinate == move.YCoordinate && square.SquareStatus == SquareStatus.Blank && square.Symbol == Symbol.None)
-        //             return true;
-        //     }
-        //     return false;
-        // }
+        
+        public bool IsSquareBlank(Move move)
+        {
+            foreach (var square in _boardSquares)
+            {
+                if (square.XCoordinate == move.XCoordinate && square.YCoordinate == move.YCoordinate && square.Symbol == Symbol.None)
+                    return true;
+            }
+            return false;
+        }
 
         public bool PlaceSymbolToCoordinates(Symbol symbol, Move move)
         {
-            if (!Validator.IsValidMove(move,_boardSquares)) return false;
+            if (!IsSquareBlank(move)) return false;
             var newValidMove = new Square(move.XCoordinate, move.YCoordinate) {Symbol = symbol, SquareStatus = 
             SquareStatus.Filled};
             var foundNewMoveCoordinate = _boardSquares.First(i => i.XCoordinate == move.XCoordinate && i.YCoordinate ==
