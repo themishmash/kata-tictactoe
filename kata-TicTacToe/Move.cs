@@ -7,14 +7,15 @@ namespace kata_TicTacToe
         public int YCoordinate { get; private set; }
 
         public SquareStatus SquareStatus;
-        //public Symbol Symbol;
-        public Move(int xCoordinate, int yCoordinate)
+        public Symbol Symbol;
+        public Move(int xCoordinate, int yCoordinate, Symbol symbol)
         {
            
             XCoordinate = xCoordinate;
             YCoordinate = yCoordinate;
             SquareStatus = SquareStatus.Filled;
             //Symbol = Symbol.None;
+            Symbol = symbol;
         }
 
 

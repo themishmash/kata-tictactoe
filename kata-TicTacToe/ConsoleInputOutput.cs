@@ -24,6 +24,11 @@ namespace kata_TicTacToe
             // }
         }
 
+        public void Output(string message)
+        {
+            Console.WriteLine(message);
+        }
+
 
         private int[] ParseStringCoordinatesToInt(string number)
         {

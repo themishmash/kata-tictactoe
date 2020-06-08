@@ -6,26 +6,39 @@ namespace kata_TicTacToe.Tests
     {
         //up to here
         [Fact]
-         public void PlaceSymbolOnVacantSpot()
+         public void MoveIsValidWhenCheckingToPlaceSymbolOnVacantSpot()
          {
              var board = new Board(3, 3);
-             var move = new Move(1, 1);
-             //board.PlaceSymbolToCoordinates(Symbol.Cross, move);
+             var move = new Move(1, 1, Symbol.Cross);
+           
              Assert.True(MoveValidator.IsValidMove(move, board));
          }
-         
-         [Fact]
-         public void CannotPlaceSymbolOnFilledSpot()
+
+         [Fact] public void MoveIsInvalidWhenCheckingToPlaceSymbolOnFilledSpot()
          {
              var board = new Board(3, 3);
-             var move = new Move(1, 1);
-             var move2 = new Move(1, 1);
-             board.PlaceSymbolToCoordinates(Symbol.Cross, move);
-             //board.PlaceSymbolToCoordinates(Symbol.Naught, move2);
-          
-             //Assert.True(MoveValidator.IsValidMove(move, board));
-             Assert.False(MoveValidator.IsValidMove(move2, board));
-          
+             var validMove = new Move(1, 1, Symbol.Cross);
+             var invalidMove = new Move(1, 1, Symbol.Naught);
+             board.PlaceSymbolToCoordinates(Symbol.Cross, validMove);
+            
+             Assert.False(MoveValidator.IsValidMove(invalidMove, board));
+         }
+
+         [Fact]
+         public void MoveIsInvalidWhenCheckingToPlaceSymbolOnSpotOutsideOfBoundaries()
+         {
+             var board = new Board(3, 3);
+             var move = new Move(4, 4, Symbol.Cross);
+             
+             Assert.False(MoveValidator.IsValidMove(move, board));
+         }
+
+         [Fact]
+         public void MoveIsInvalidWhenCheckingToPlaceSymbolOnSpotWithNegativeCoordinates()
+         {
+             var board = new Board(3,3);
+             var move = new Move(-1, -2, Symbol.Naught);
+             Assert.False(MoveValidator.IsValidMove(move, board));
          }
     }
 }

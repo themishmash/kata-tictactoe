@@ -5,8 +5,7 @@ namespace kata_TicTacToe
 {
     public class Board
     {
-     
-        public readonly List<Square> _boardSquares = new List<Square>();
+        private readonly List<Square> _boardSquares = new List<Square>();
 
 
         public Board(int width, int length)
@@ -53,6 +52,23 @@ namespace kata_TicTacToe
                     return true;
             }
             return false;
+        }
+        
+        public Symbol SymbolStatus(Move move)
+        {
+            foreach (var square in _boardSquares)
+            {
+                if (square.XCoordinate == move.XCoordinate && square.YCoordinate == move.YCoordinate && square.Symbol == Symbol.None)
+                    return square.Symbol;
+                if (square.XCoordinate == move.XCoordinate && square.YCoordinate == move.YCoordinate &&
+                    square.Symbol == Symbol.Cross)
+                    return square.Symbol;
+                if (square.XCoordinate == move.XCoordinate && square.YCoordinate == move.YCoordinate &&
+                    square.Symbol == Symbol.Naught)
+                    return square.Symbol;
+            }
+
+            return Symbol.None;
         }
 
         public bool PlaceSymbolToCoordinates(Symbol symbol, Move move)
