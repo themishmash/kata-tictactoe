@@ -18,7 +18,7 @@ namespace kata_TicTacToe.Tests
             var ticTacToe = new TicTacToe(new List<Player> {playerX}, console, board);
             ticTacToe.StartGame();
 
-            Assert.True(ticTacToe.IsHorizontalWin(playerX));
+            Assert.True(ticTacToe.IsHorizontalWinBoardSquares(playerX));
         }
         
         // [Fact]

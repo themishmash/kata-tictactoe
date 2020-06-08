@@ -74,10 +74,10 @@ namespace kata_TicTacToe
                 _board.PlaceSymbolToCoordinates(_players[0].Symbol, move);
                 var move2 = _players[1].PlayTurn();
                 _board.PlaceSymbolToCoordinates(_players[1].Symbol, move2);
-                _winningMoves.Add(move);
+                //_winningMoves.Add(move);
 
             }
-            if (IsHorizontalWin(_players[0]))
+            if (IsHorizontalWinBoardSquares(_players[0]))
             {
                 _iio.Output("winner");
             }
@@ -88,15 +88,26 @@ namespace kata_TicTacToe
 
         }
 
-        public bool IsHorizontalWin(Player player)
+        // public bool IsHorizontalWin(Player player)
+        // {
+        //     foreach (var square in _winningMoves)
+        //     {
+        //         if (square.XCoordinate == 1 && square.YCoordinate==1 && square.YCoordinate == 2 && square.YCoordinate==3 && square
+        //         .Symbol==player.Symbol)
+        //         {
+        //             return true;
+        //         }
+        //     }
+        //
+        //     return false;
+        // }
+        
+        public bool IsHorizontalWinBoardSquares(Player player)
         {
-            foreach (var square in _winningMoves)
+            if (_board._boardSquares[0].Symbol == player.Symbol &&  _board._boardSquares[1].Symbol == player.Symbol 
+            && _board._boardSquares[2].Symbol == player.Symbol)
             {
-                if (square.XCoordinate == 1 && square.YCoordinate==1 && square.YCoordinate == 2 && square.YCoordinate==3 && square
-                .Symbol==player.Symbol)
-                {
-                    return true;
-                }
+                return true;
             }
 
             return false;

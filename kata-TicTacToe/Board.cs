@@ -5,7 +5,7 @@ namespace kata_TicTacToe
 {
     public class Board
     {
-        private readonly List<Square> _boardSquares = new List<Square>();
+        public readonly List<Square> _boardSquares = new List<Square>();
 
 
         public Board(int width, int length)
