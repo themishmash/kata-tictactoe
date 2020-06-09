@@ -66,7 +66,7 @@ namespace kata_TicTacToe
             //     {new Move(3, 2), Symbol.None},
             //     {new Move(3, 3), Symbol.None}
             // };
-            _iio.Output("Here's the game");
+         
             _winningMoves = new List<Move>();
             for (var i = 0; i < 3; i++)
             {
@@ -74,13 +74,16 @@ namespace kata_TicTacToe
                 _board.PlaceSymbolToCoordinates(_players[0].Symbol, move);
                 var move2 = _players[1].PlayTurn();
                 _board.PlaceSymbolToCoordinates(_players[1].Symbol, move2);
-                //_winningMoves.Add(move);
+                _winningMoves.Add(move);
 
             }
-            if (IsHorizontalWinBoardSquares(_players[0]))
-            {
-                _iio.Output("winner");
-            }
+
+           
+            
+            // if (IsHorizontalWinBoardSquares(_players[0]))
+            // {
+            //     _iio.Output("winner");
+            // }
            
             
             // _winningList[move] = _players[0].Symbol;
@@ -90,9 +93,9 @@ namespace kata_TicTacToe
 
         // public bool IsHorizontalWin(Player player)
         // {
-        //     foreach (var square in _winningMoves)
+        //     foreach (var move in _winningMoves)
         //     {
-        //         if (square.XCoordinate == 1 && square.YCoordinate==1 && square.YCoordinate == 2 && square.YCoordinate==3 && square
+        //         if (move.XCoordinate == 1 && move.YCoordinate==1 && move.YCoordinate == 2 && move.YCoordinate==3 && move
         //         .Symbol==player.Symbol)
         //         {
         //             return true;
@@ -102,16 +105,16 @@ namespace kata_TicTacToe
         //     return false;
         // }
         
-        public bool IsHorizontalWinBoardSquares(Player player)
-        {
-            if (_board._boardSquares[0].Symbol == player.Symbol &&  _board._boardSquares[1].Symbol == player.Symbol 
-            && _board._boardSquares[2].Symbol == player.Symbol)
-            {
-                return true;
-            }
-
-            return false;
-        }
+        // public bool IsHorizontalWinBoardSquares(Player player)
+        // {
+        //     if (_board._boardSquares[0].Symbol == player.Symbol &&  _board._boardSquares[1].Symbol == player.Symbol 
+        //     && _board._boardSquares[2].Symbol == player.Symbol)
+        //     {
+        //         return true;
+        //     }
+        //
+        //     return false;
+        // }
 
     
     }

@@ -17,7 +17,7 @@ namespace kata_TicTacToe
         public Move PlayTurn()
         {
             var(x,y) = _iio.AskQuestion("What Coordinate do you want?");
-            var move = new Move(x, y, Symbol);
+            var move = new Move(x, y);
             return move;
         }
         

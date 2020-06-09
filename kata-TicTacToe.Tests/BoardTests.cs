@@ -29,7 +29,7 @@ namespace kata_TicTacToe.Tests
              var board = new Board(3, 3);
              //var playerX = new Player(board){Symbol = Symbol.Cross};
              //playerX.MakeMove(1, 1);
-             var move = new Move(1,1, Symbol.Cross);
+             var move = new Move(1,1);
              board.PlaceSymbolToCoordinates(Symbol.Cross, move);
              board.DisplayBoard();
              Assert.Equal(" X  .  . \n .  .  . \n .  .  . ",board.DisplayBoard());
@@ -39,9 +39,9 @@ namespace kata_TicTacToe.Tests
          public void NotChangeWhenPlayerMakesMoveOnOccupiedSquare()
          {
              var board = new Board(3, 3);
-             var move = new Move(1,1, Symbol.Cross);
+             var move = new Move(1,1);
              board.PlaceSymbolToCoordinates(Symbol.Cross, move);
-             var move2 = new Move(1,1, Symbol.Naught);
+             var move2 = new Move(1,1);
              board.PlaceSymbolToCoordinates(Symbol.Naught, move2);
              board.DisplayBoard();
              Assert.Equal(" X  .  . \n .  .  . \n .  .  . ",board.DisplayBoard());
