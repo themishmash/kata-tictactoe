@@ -9,7 +9,7 @@ namespace kata_TicTacToe
         private readonly List<Player> _players;
         private readonly IInputOutput _iio;
         private readonly Board _board;
-        private List<Move> _winningMoves;
+        private List<Move> _playerMoves;
         //private Dictionary<Move, Symbol> _winningList; 
         
         
@@ -54,69 +54,24 @@ namespace kata_TicTacToe
 
         public void StartGame()
         {
-            // _winningList = new Dictionary<Move, Symbol>
-            // {
-            //     {new Move(1, 1), Symbol.None},
-            //     {new Move(1, 2), Symbol.None},
-            //     {new Move(1, 3), Symbol.None},
-            //     {new Move(2, 1), Symbol.None},
-            //     {new Move(2, 2), Symbol.None},
-            //     {new Move(2, 3), Symbol.None},
-            //     {new Move(3, 1), Symbol.None},
-            //     {new Move(3, 2), Symbol.None},
-            //     {new Move(3, 3), Symbol.None}
-            // };
-         
-            _winningMoves = new List<Move>();
-            for (var i = 0; i < 3; i++)
+
+            _playerMoves = new List<Move>();
+            for (var i = 0; i <=3 ; i++)
             {
                 var move = _players[0].PlayTurn();
                 _board.PlaceSymbolToCoordinates(_players[0].Symbol, move);
-                var move2 = _players[1].PlayTurn();
-                _board.PlaceSymbolToCoordinates(_players[1].Symbol, move2);
-                _winningMoves.Add(move);
+                // var move2 = _players[1].PlayTurn();
+                // _board.PlaceSymbolToCoordinates(_players[1].Symbol, move2);
+                _playerMoves.Add(move);
 
             }
 
            
             
-            // if (IsHorizontalWinBoardSquares(_players[0]))
-            // {
-            //     _iio.Output("winner");
-            // }
-           
-            
-            // _winningList[move] = _players[0].Symbol;
-            // _winningList[move2] = _players[1].Symbol;
-
         }
 
-        // public bool IsHorizontalWin(Player player)
-        // {
-        //     foreach (var move in _winningMoves)
-        //     {
-        //         if (move.XCoordinate == 1 && move.YCoordinate==1 && move.YCoordinate == 2 && move.YCoordinate==3 && move
-        //         .Symbol==player.Symbol)
-        //         {
-        //             return true;
-        //         }
-        //     }
-        //
-        //     return false;
-        // }
+      
         
-        // public bool IsHorizontalWinBoardSquares(Player player)
-        // {
-        //     if (_board._boardSquares[0].Symbol == player.Symbol &&  _board._boardSquares[1].Symbol == player.Symbol 
-        //     && _board._boardSquares[2].Symbol == player.Symbol)
-        //     {
-        //         return true;
-        //     }
-        //
-        //     return false;
-        // }
-
-    
     }
     
 }
