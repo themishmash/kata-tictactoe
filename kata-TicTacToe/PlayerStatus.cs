@@ -4,8 +4,8 @@ namespace kata_TicTacToe
     {
         Playing,
         Won,
-        Draw,
-        Lose,
+        Drew,
+        Lost,
         Quit
     }
 }

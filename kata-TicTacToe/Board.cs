@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -98,13 +99,53 @@ namespace kata_TicTacToe
             {
                 return true;
             }
-            if (_boardSquares[6].Symbol == symbol && _boardSquares[7].Symbol == symbol &&
+            return _boardSquares[6].Symbol == symbol && _boardSquares[7].Symbol == symbol &&
+                   _boardSquares[8].Symbol == symbol;
+        }
+
+        // public bool HasWonHorizontallyAll(Symbol symbol)
+        // {
+        //     var squareRoot = Math.Sqrt(BoardSquaresCount());
+        //     // foreach (var square in _boardSquares)
+        //     // {
+        //     //     
+        //     // }
+        //     for (var i = 0; i <= squareRoot; i++)
+        //     {
+        //         if (_boardSquares[i].Symbol == symbol)
+        //         {
+        //             return true;
+        //         }
+        //     }
+        //
+        //     return false;
+        // }
+        
+        public bool HasWonVertically(Symbol symbol)
+        {
+            if (_boardSquares[0].Symbol == symbol && _boardSquares[3].Symbol == symbol &&
+                _boardSquares[6].Symbol == symbol)
+            {
+                return true;
+            }
+            if (_boardSquares[1].Symbol == symbol && _boardSquares[4].Symbol == symbol &&
+                _boardSquares[7].Symbol == symbol)
+            {
+                return true;
+            }
+            return _boardSquares[2].Symbol == symbol && _boardSquares[5].Symbol == symbol &&
+                   _boardSquares[8].Symbol == symbol;
+        }
+        
+        public bool HasWonDiagonally(Symbol symbol)
+        {
+            if (_boardSquares[0].Symbol == symbol && _boardSquares[4].Symbol == symbol &&
                 _boardSquares[8].Symbol == symbol)
             {
                 return true;
             }
-                
-            return false;
+            return _boardSquares[2].Symbol == symbol && _boardSquares[4].Symbol == symbol &&
+                   _boardSquares[6].Symbol == symbol;
         }
 
        
