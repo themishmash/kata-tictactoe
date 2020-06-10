@@ -15,11 +15,9 @@ namespace kata_TicTacToe.Tests
             var board = new Board(3,3);
             var testInputX = new AutomatedPlayer((1,1),(1,2),(1,3));
             var playerX = new Player(testInputX, Symbol.Cross);
-            //var console = new ConsoleInputOutput();
             var ticTacToe = new TicTacToe(new List<Player> {playerX}, testInputX, board);
             ticTacToe.StartGame();
-           // playerX.PlayTurn();
-        
+
             Assert.Equal(" X  X  X \n .  .  . \n .  .  . ",board.DisplayBoard());
         }
         

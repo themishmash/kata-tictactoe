@@ -65,13 +65,13 @@ namespace kata_TicTacToe.Tests
         //     return (0,0);
         // }
         
-        public (int x,int y) AskQuestion(string question)
+        public (int x, int y) AskQuestion(string question)
         {
             
             // var newMove = _playerMoves.First();
             // _playerMoves.RemoveAt(0);
             // return (newMove.XCoordinate, newMove.YCoordinate);
-            Move ? newMove = null;
+            Move newMove = null;
          
             for(var i = 0; i < _playerMoves.Count; i--)
             {

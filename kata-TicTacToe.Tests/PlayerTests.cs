@@ -15,7 +15,7 @@ namespace kata_TicTacToe.Tests
              Assert.Equal(1, move.YCoordinate);
          }
         
-         
+        
          
         [Fact]
         public void PlayerHasCorrectXSymbol()
@@ -25,30 +25,5 @@ namespace kata_TicTacToe.Tests
             Assert.Equal(Symbol.Cross, playerX.Symbol);
         }
         
-        // [Fact]
-        // public void PlaceDifferentSymbolsWithTwoPlayers()
-        // {
-        //     var board = new Board(3, 3);
-        //     var playerXInput = new ResponderTest("1,1");
-        //     var playerOInput = new ResponderTest("2,2");
-        //     var playerX = new Player(board, playerXInput){Symbol = Symbol.Cross};
-        //     var playerO = new Player(board, playerOInput){Symbol = Symbol.Naught};
-        //     playerX.PlayTurn(Symbol.Cross);
-        //     playerO.PlayTurn(Symbol.Naught);
-        //     Assert.Equal(" X  .  . \n .  O  . \n .  .  . ",board.DisplayBoard());
-        // }
-        //
-        // [Fact]
-        // public void NotPlaceSymbolOnOccupiedSquare()
-        // {
-        //     var board = new Board(3, 3);
-        //     var playerXInput = new ResponderTest("1, 1");
-        //     var playerOInput = new ResponderTest("1, 1");
-        //     var playerX = new Player(board, playerXInput){Symbol = Symbol.Cross};
-        //     var playerO = new Player(board, playerOInput){Symbol = Symbol.Naught};
-        //     playerX.PlayTurn(Symbol.Cross);
-        //     playerO.PlayTurn(Symbol.Naught);
-        //     Assert.Equal(" X  .  . \n .  .  . \n .  .  . ",board.DisplayBoard());
-        // }
     }
 }

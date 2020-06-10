@@ -17,11 +17,7 @@ namespace kata_TicTacToe
             var answer = Console.ReadLine();
             var coordinates = ParseStringCoordinatesToInt(answer);
             return (coordinates[0], coordinates[1]);
-            // return Console.ReadLine();
-            // if(Validator.AreNumbersValid(answer));
-            // {
-            //     coordinateNumbers = _iio.ParseStringCoordinatesToInt(answer);
-            // }
+      
         }
 
         public void Output(string message)
