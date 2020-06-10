@@ -8,26 +8,14 @@ namespace kata_TicTacToe
         static void Main(string[] args)
         {
             var board = new Board(3, 3);
-
-            // Console.WriteLine( board.DisplayBoard());
-          // var consoleInput = new ConsoleInputOutput();
-          
-            // var playerX = new Player(board, consoleInput){Symbol = Symbol.Cross};
-            // playerX.PlayTurn(Symbol.Cross);
             
-            //playerX.PlayTurn(1, 1, Symbol.Cross);
            Console.WriteLine(board.DisplayBoard());
            var consoleInputOutput = new ConsoleInputOutput();
-           var players = new List<Player>()
-           {
-               new Player(consoleInputOutput, Symbol.Cross),
-               new Player(consoleInputOutput, Symbol.Naught),
-           };
-          
-           // playerX.PlayTurn();
-           // board.PlaceSymbolToCoordinates(Symbol.Cross, playerX.PlayTurn());
-           var ticTacToe = new TicTacToe(players, consoleInputOutput, board);
-           ticTacToe.StartGame();
+           var player1 = new Player(consoleInputOutput, Symbol.Cross);
+           var player2 = new Player(consoleInputOutput, Symbol.Naught);
+       
+           var ticTacToe = new TicTacToe(board, player1, player2, consoleInputOutput);
+           ticTacToe.PlayGame();
            Console.WriteLine(board.DisplayBoard());
 
 

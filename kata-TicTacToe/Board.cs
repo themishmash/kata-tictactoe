@@ -86,7 +86,27 @@ namespace kata_TicTacToe
         }
 
 
+        public bool HasWonHorizontally(Symbol symbol)
+        {
+            if (_boardSquares[0].Symbol == symbol && _boardSquares[1].Symbol == symbol &&
+                _boardSquares[2].Symbol == symbol)
+            {
+                return true;
+            }
+            if (_boardSquares[3].Symbol == symbol && _boardSquares[4].Symbol == symbol &&
+                _boardSquares[5].Symbol == symbol)
+            {
+                return true;
+            }
+            if (_boardSquares[6].Symbol == symbol && _boardSquares[7].Symbol == symbol &&
+                _boardSquares[8].Symbol == symbol)
+            {
+                return true;
+            }
+                
+            return false;
+        }
 
-
+       
     }
 }

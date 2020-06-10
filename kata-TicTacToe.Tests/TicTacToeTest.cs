@@ -12,14 +12,25 @@ namespace kata_TicTacToe.Tests
         [Fact]
         public void PlayerWinsHorizontally()
         {
+            //arrange
             var board = new Board(3,3);
-            var testInputX = new AutomatedPlayer((1,1),(1,2),(1,3));
+            var testInputX = new PlayerInput((1,1),(1,2),(1,3));
             var playerX = new Player(testInputX, Symbol.Cross);
-            var ticTacToe = new TicTacToe(new List<Player> {playerX}, testInputX, board);
-            ticTacToe.StartGame();
+            var testInputO = new PlayerInput((2,1),(3,1),(2,2));
+            var playerO = new Player(testInputO, Symbol.Naught);
+           
+            var ticTacToe = new TicTacToe(board, playerX, playerO,new NullInputOutput());
+            //act
+            ticTacToe.PlayGame();
 
-            Assert.Equal(" X  X  X \n .  .  . \n .  .  . ",board.DisplayBoard());
+            Assert.Equal(" X  X  X \n O  O  . \n O  .  . ",board.DisplayBoard());
+            Assert.True(ticTacToe.HasPlayerWon(playerX));
+            Assert.False(ticTacToe.HasPlayerWon(playerO));
+            Assert.Equal(PlayerStatus.Won, playerX.PlayerStatus);
+            //Assert.Equal(PlayerStatus.Won, playerO.PlayerStatus);
         }
+        
+        
         
        
     }

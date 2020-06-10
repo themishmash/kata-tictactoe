@@ -8,19 +8,21 @@ namespace kata_TicTacToe.Tests
         [Fact]
          public void PlaceSymbolWithXYCoordinates()
          {
-             var input = new AutomatedPlayer((1,1));
+             //arrange
+             var input = new PlayerInput((1,1));
              var playerX = new Player(input, Symbol.Cross);
+             //act
              var move = playerX.PlayTurn();
+             //assert
              Assert.Equal(1, move.XCoordinate);
              Assert.Equal(1, move.YCoordinate);
          }
-        
         
          
         [Fact]
         public void PlayerHasCorrectXSymbol()
         {
-            var input = new AutomatedPlayer((1,1));
+            var input = new PlayerInput((1,1));
             var playerX = new Player(input, Symbol.Cross);
             Assert.Equal(Symbol.Cross, playerX.Symbol);
         }
