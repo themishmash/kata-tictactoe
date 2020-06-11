@@ -68,6 +68,7 @@ namespace kata_TicTacToe
                         _board.DisplayBoard();
                        break;
                     }
+                    
                     var move2 = _player2.PlayTurn();
                     _board.PlaceSymbolToCoordinates(_player2.Symbol, move2);
                     _iio.Output(_board.DisplayBoard());
@@ -78,31 +79,24 @@ namespace kata_TicTacToe
                         _board.DisplayBoard();
                         break;
                     }
-                
-                    // if (HasPlayerWon(_players[0]) || HasPlayerWon(_players[1]))
-                    // {
-                    //     _iio.Output("winner");
-                    //     _board.DisplayBoard();
-                    // };
+                    
+                    CheckDraw();
+                    
+            }
+        }
 
-                    // if (HasPlayerWon(_player1))
-                    // {
-                    //     _player1.PlayerStatus = PlayerStatus.Won;
-                    //     _board.DisplayBoard();
-                    // }
-
-                }
+        private void CheckDraw()
+        {
+            if (!_board.HasDraw()) return;
+            _player1.PlayerStatus = PlayerStatus.Drew;
+            _player2.PlayerStatus = PlayerStatus.Drew;
         }
 
 
         public bool HasPlayerWon(Player player)
         {
-            if (_board.HasWonHorizontally(player.Symbol) || _board.HasWonVertically(player.Symbol) || _board.HasWonDiagonally(player.Symbol))
-            {
-                return true;
-            }
-
-            return false;
+            return _board.HasWonHorizontallyAll(player.Symbol) || _board.HasWonVertically(player.Symbol) || _board
+            .HasWonDiagonally(player.Symbol);
         }
     }
     
