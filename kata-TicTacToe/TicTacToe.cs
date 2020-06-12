@@ -97,7 +97,7 @@ namespace kata_TicTacToe
         {
             return _board.HasWonHorizontallyCheckCoordinates(player.Symbol) || _board.HasWonVerticallyCheckCoordinates(player.Symbol)
              || _board
-            .HasWonDiagonally(player.Symbol);
+            .HasWonDiagonallyLeftToRightCheckCoordinates(player.Symbol) || _board.HasWonDiagonallyRightToLeftCheckCoordinates(player.Symbol);
         }
     }
     

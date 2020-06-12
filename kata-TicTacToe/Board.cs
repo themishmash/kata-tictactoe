@@ -149,6 +149,34 @@ namespace kata_TicTacToe
             return false;
         }
         
+        public bool HasWonDiagonallyLeftToRightCheckCoordinates(Symbol symbol)
+        {
+            var squareRoot = Math.Sqrt(BoardSquaresCount());
+            var intSquare = Convert.ToInt32(squareRoot);
+
+            for (var i = 1; i <= intSquare; i++)
+            {
+                var diagonal = _boardSquares.Where(r => r.XCoordinate == r.YCoordinate);
+                if (diagonal.All(square => square.Symbol == symbol))
+                    return true;
+            }
+            return false;
+        }
+        
+        public bool HasWonDiagonallyRightToLeftCheckCoordinates(Symbol symbol)
+        {
+            var squareRoot = Math.Sqrt(BoardSquaresCount());
+            var intSquare = Convert.ToInt32(squareRoot);
+
+            for (var i = 1; i <= intSquare; i++)
+            {
+                var diagonal = _boardSquares.Where(r => r.XCoordinate + r.YCoordinate == (intSquare +1));
+                if (diagonal.All(square => square.Symbol == symbol))
+                    return true;
+            }
+            return false;
+        }
+        
 
         // public bool HasWonHorizontallyAll(Symbol symbol)
         // {

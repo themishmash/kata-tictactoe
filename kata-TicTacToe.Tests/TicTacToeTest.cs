@@ -71,11 +71,30 @@ namespace kata_TicTacToe.Tests
         }
         
         [Fact]
-        public void PlayerWinsDiagonally()
+        public void PlayerWinsDiagonallyLeftToRight()
         {
             //arrange
             var board = new Board(3,3);
             var testInputX = new PlayerInput((1,1),(2,2),(3,3));
+            var playerX = new Player(testInputX, Symbol.Cross);
+            var testInputO = new PlayerInput((2,1),(3,2),(1,2));
+            var playerO = new Player(testInputO, Symbol.Naught);
+           
+            var ticTacToe = new TicTacToe(board, playerX, playerO,new NullInputOutput());
+            //act
+            ticTacToe.PlayGame();
+            
+            Assert.True(ticTacToe.HasPlayerWon(playerX));
+            Assert.False(ticTacToe.HasPlayerWon(playerO));
+            Assert.Equal(PlayerStatus.Won, playerX.PlayerStatus);
+        }
+        
+        [Fact]
+        public void PlayerWinsDiagonallyRightToLeft()
+        {
+            //arrange
+            var board = new Board(3,3);
+            var testInputX = new PlayerInput((1,3),(2,2),(3,1));
             var playerX = new Player(testInputX, Symbol.Cross);
             var testInputO = new PlayerInput((2,1),(3,2),(1,2));
             var playerO = new Player(testInputO, Symbol.Naught);
@@ -102,7 +121,7 @@ namespace kata_TicTacToe.Tests
             
             ticTactToe.PlayGame();
             Assert.Equal(PlayerStatus.Drew, playerX.PlayerStatus);
-            Assert.Equal(PlayerStatus.Drew, playerX.PlayerStatus);
+            //Assert.Equal(PlayerStatus.Drew, playerX.PlayerStatus);
             
         }
         
