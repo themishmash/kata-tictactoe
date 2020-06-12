@@ -43,8 +43,6 @@ namespace kata_TicTacToe
             }
             return string.Join(System.Environment.NewLine, rows);
         }
-
-        
         
         public bool IsSquareBlank(Move move)
         {
@@ -56,22 +54,6 @@ namespace kata_TicTacToe
             return false;
         }
         
-        // public Symbol SymbolStatus(Move move)
-        // {
-        //     foreach (var square in _boardSquares)
-        //     {
-        //         if (square.XCoordinate == move.XCoordinate && square.YCoordinate == move.YCoordinate && square.Symbol == Symbol.None)
-        //             return square.Symbol;
-        //         if (square.XCoordinate == move.XCoordinate && square.YCoordinate == move.YCoordinate &&
-        //             square.Symbol == Symbol.Cross)
-        //             return square.Symbol;
-        //         if (square.XCoordinate == move.XCoordinate && square.YCoordinate == move.YCoordinate &&
-        //             square.Symbol == Symbol.Naught)
-        //             return square.Symbol;
-        //     }
-        //
-        //     return Symbol.None;
-        // }
 
         public bool PlaceSymbolToCoordinates(Symbol symbol, Move move)
         {
@@ -88,6 +70,7 @@ namespace kata_TicTacToe
         }
 
 
+        //using index only to check win
         public bool HasWonHorizontally(Symbol symbol)
         {
 
@@ -104,23 +87,37 @@ namespace kata_TicTacToe
             return _boardSquares[6].Symbol == symbol && _boardSquares[7].Symbol == symbol &&
                    _boardSquares[8].Symbol == symbol;
         }
-
-        public bool HasWonHorizontallyAll(Symbol symbol)
+        
+        
+        public bool HasWonVertically(Symbol symbol)
         {
-            var squareRoot = Math.Sqrt(BoardSquaresCount());
-            var intSquare = Convert.ToInt32(squareRoot);
-            
-                var row1 = _boardSquares.Where((square, index) => index < (intSquare - 1));
-                if (row1.All(x => x.Symbol == symbol))
-                    return true;
-                
-                var row2 = _boardSquares.Where((square, index) => index > (intSquare - 1) && index < ((2*intSquare)));
-                if (row2.All(x => x.Symbol == symbol))
-                     return true;
-                
-                return false;
+            if (_boardSquares[0].Symbol == symbol && _boardSquares[3].Symbol == symbol &&
+                _boardSquares[6].Symbol == symbol)
+            {
+                return true;
+            }
+            if (_boardSquares[1].Symbol == symbol && _boardSquares[4].Symbol == symbol &&
+                _boardSquares[7].Symbol == symbol)
+            {
+                return true;
+            }
+            return _boardSquares[2].Symbol == symbol && _boardSquares[5].Symbol == symbol &&
+                   _boardSquares[8].Symbol == symbol;
         }
+        
+        public bool HasWonDiagonally(Symbol symbol)
+        {
+            if (_boardSquares[0].Symbol == symbol && _boardSquares[4].Symbol == symbol &&
+                _boardSquares[8].Symbol == symbol)
+            {
+                return true;
+            }
+            return _boardSquares[2].Symbol == symbol && _boardSquares[4].Symbol == symbol &&
+                   _boardSquares[6].Symbol == symbol;
+        }
+        
 
+        //Using coordinates to check wins
         public bool HasWonHorizontallyCheckCoordinates(Symbol symbol)
         {
             var squareRoot = Math.Sqrt(BoardSquaresCount());
@@ -177,86 +174,9 @@ namespace kata_TicTacToe
             return false;
         }
         
-
-        // public bool HasWonHorizontallyAll(Symbol symbol)
-        // {
-            // var squareRoot = Math.Sqrt(BoardSquaresCount());
-            // var intSquare = Convert.ToInt32(squareRoot);
-            //
-            // for (var index = 0; index < 3; index++)
-            // {
-            //     if (_boardSquares[index].Symbol == symbol)
-            //     {
-            //         _wins.Add(_boardSquares[index]);
-            //     }
-            //     
-            // }
-
-            // for (var i = 0; i < _boardSquares.Count; i++)
-            // {
-            //     if (_boardSquares[i].Symbol == symbol)
-            //     {
-            //         _wins.Add(_boardSquares[i]);
-            //         if (_wins.Count >= 3 && symbol == Symbol.Cross || _wins.Count >= 3 && symbol == Symbol.Naught)
-            //         {
-            //             return true;
-            //         }
-            //
-            //       if(_wins.Contains(_boardSquares[]))
-            //     }
-            // }
-
-
-           // return false;
-            // for (var index = 0; index <= squareRoot; index++)
-            // {
-            //   var item = _boardSquares[index].Symbol == symbol;
-            // }
-            //
-            // return false;
-            // var query = _boardSquares.Where((elements, index) => (index < intSquare - 1));
-            // foreach (var b in query)
-            // {
-            //     if (b.Symbol == symbol)
-            //         return true;
-            //     return false;
-            // }
-            //
-            // return false;
-
-
-
-
-
-        //}
         
-        public bool HasWonVertically(Symbol symbol)
-        {
-            if (_boardSquares[0].Symbol == symbol && _boardSquares[3].Symbol == symbol &&
-                _boardSquares[6].Symbol == symbol)
-            {
-                return true;
-            }
-            if (_boardSquares[1].Symbol == symbol && _boardSquares[4].Symbol == symbol &&
-                _boardSquares[7].Symbol == symbol)
-            {
-                return true;
-            }
-            return _boardSquares[2].Symbol == symbol && _boardSquares[5].Symbol == symbol &&
-                   _boardSquares[8].Symbol == symbol;
-        }
         
-        public bool HasWonDiagonally(Symbol symbol)
-        {
-            if (_boardSquares[0].Symbol == symbol && _boardSquares[4].Symbol == symbol &&
-                _boardSquares[8].Symbol == symbol)
-            {
-                return true;
-            }
-            return _boardSquares[2].Symbol == symbol && _boardSquares[4].Symbol == symbol &&
-                   _boardSquares[6].Symbol == symbol;
-        }
-
+        //Draw
         public bool HasDraw()
         {
             if (_boardSquares.TrueForAll(x => x.SquareStatus == SquareStatus.Filled))
