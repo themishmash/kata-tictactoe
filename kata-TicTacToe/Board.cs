@@ -118,11 +118,35 @@ namespace kata_TicTacToe
                 if (row2.All(x => x.Symbol == symbol))
                      return true;
                 
-                
                 return false;
-                
-                
+        }
 
+        public bool HasWonHorizontallyCheckCoordinates(Symbol symbol)
+        {
+            var squareRoot = Math.Sqrt(BoardSquaresCount());
+            var intSquare = Convert.ToInt32(squareRoot);
+
+            for (var i = 1; i <= intSquare; i++)
+            {
+                var row = _boardSquares.Where(r => r.XCoordinate == i);
+                if (row.All(square => square.Symbol == symbol))
+                    return true;
+            }
+            return false;
+        }
+        
+        public bool HasWonVerticallyCheckCoordinates(Symbol symbol)
+        {
+            var squareRoot = Math.Sqrt(BoardSquaresCount());
+            var intSquare = Convert.ToInt32(squareRoot);
+
+            for (var i = 1; i <= intSquare; i++)
+            {
+                var column = _boardSquares.Where(r => r.YCoordinate == i);
+                if (column.All(square => square.Symbol == symbol))
+                    return true;
+            }
+            return false;
         }
         
 

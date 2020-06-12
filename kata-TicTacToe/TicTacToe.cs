@@ -95,7 +95,8 @@ namespace kata_TicTacToe
 
         public bool HasPlayerWon(Player player)
         {
-            return _board.HasWonHorizontallyAll(player.Symbol) || _board.HasWonVertically(player.Symbol) || _board
+            return _board.HasWonHorizontallyCheckCoordinates(player.Symbol) || _board.HasWonVerticallyCheckCoordinates(player.Symbol)
+             || _board
             .HasWonDiagonally(player.Symbol);
         }
     }
