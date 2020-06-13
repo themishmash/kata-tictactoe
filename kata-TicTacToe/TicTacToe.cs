@@ -22,46 +22,24 @@ namespace kata_TicTacToe
             PlayGame();
         }
 
-        // public void PlayGame()
-        // {
-        //     while (_player1.PlayerStatus == PlayerStatus.Playing || _player2.PlayerStatus == PlayerStatus.Playing)
-        //     for (var i = 0; i <3 ; i++)
-        //     {
-        //         
-        //         var move = _player1.PlayTurn();
-        //         _board.PlaceSymbolToCoordinates(_player1.Symbol, move);
-        //         var move2 = _player2.PlayTurn();
-        //         _board.PlaceSymbolToCoordinates(_player2.Symbol, move2);
-        //         
-        //         _board.DisplayBoard();
-        //         
-        //         // if (HasPlayerWon(_players[0]) || HasPlayerWon(_players[1]))
-        //         // {
-        //         //     _iio.Output("winner");
-        //         //     _board.DisplayBoard();
-        //         // };
-        //
-        //         if (HasPlayerWon(_player1))
-        //         {
-        //             _player1.PlayerStatus = PlayerStatus.Won;
-        //             _board.DisplayBoard();
-        //         }
-        //
-        //     }
-        //
-        //
-        //    // _board.DisplayBoard();
-        // }
-        
+       
         public void PlayGame()
         {
             while (_player1.PlayerStatus == PlayerStatus.Playing && _player2.PlayerStatus == PlayerStatus.Playing)
             {
                 _iio.Output(_board.DisplayBoard());
                     var move = _player1.PlayTurn();
-                    _board.PlaceSymbolToCoordinates(_player1.Symbol, move);
+                    //need to have move validator
+                    
+                        _board.PlaceSymbolToCoordinates(_player1.Symbol, move);
+                
+                    
+                    
                     _iio.Output(_board.DisplayBoard());
-                    if (HasPlayerWon(_player1))
+                    
+                    //can also pass in player's move. 
+                    //move win check logic into own class. 
+                    if (HasPlayerWon(_player1, move))
                     {
                         _player1.PlayerStatus = PlayerStatus.Won;
                         _player2.PlayerStatus = PlayerStatus.Lost;
@@ -72,7 +50,7 @@ namespace kata_TicTacToe
                     var move2 = _player2.PlayTurn();
                     _board.PlaceSymbolToCoordinates(_player2.Symbol, move2);
                     _iio.Output(_board.DisplayBoard());
-                    if (HasPlayerWon(_player2))
+                    if (HasPlayerWon(_player2, move))
                     {
                         _player2.PlayerStatus = PlayerStatus.Won;
                         _player1.PlayerStatus = PlayerStatus.Lost;
@@ -81,7 +59,6 @@ namespace kata_TicTacToe
                     }
                     
                     CheckDraw();
-                    
             }
         }
 
@@ -93,9 +70,10 @@ namespace kata_TicTacToe
         }
 
 
-        public bool HasPlayerWon(Player player)
+        public bool HasPlayerWon(Player player, Move move)
         {
-            return _board.HasWonHorizontallyCheckCoordinates(player.Symbol) || _board.HasWonVerticallyCheckCoordinates(player.Symbol)
+            return _board.HasWonHorizontallyCheckCoordinates(player.Symbol, move.XCoordinate) || _board
+            .HasWonVerticallyCheckCoordinates(player.Symbol)
              || _board
             .HasWonDiagonallyLeftToRightCheckCoordinates(player.Symbol) || _board.HasWonDiagonallyRightToLeftCheckCoordinates(player.Symbol);
         }

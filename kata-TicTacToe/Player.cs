@@ -16,7 +16,7 @@ namespace kata_TicTacToe
             PlayerStatus = PlayerStatus.Playing;
         }
 
-        public virtual Move PlayTurn()
+        public Move PlayTurn()
         {
             var(x,y) = _iio.AskQuestion("What Coordinate do you want?");
             var move = new Move(x, y);

@@ -7,7 +7,7 @@ namespace kata_TicTacToe
     {
         static void Main(string[] args)
         { 
-            var board = new Board(3, 3);
+            var board = new Board(3);
             var consoleInputOutput = new ConsoleInputOutput(); 
             var player1 = new Player(consoleInputOutput, Symbol.Cross);
             var player2 = new Player(consoleInputOutput, Symbol.Naught);

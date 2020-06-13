@@ -7,7 +7,6 @@ namespace kata_TicTacToe.Tests
     public class PlayerInput : IInputOutput
     {
         private readonly (int x, int y) _turn;
-        private readonly (int x, int y) _turn1;
         private readonly (int x, int y) _turn2;
         private readonly (int x, int y) _turn3;
         private readonly (int x, int y) _turn4;

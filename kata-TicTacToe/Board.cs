@@ -9,15 +9,17 @@ namespace kata_TicTacToe
     {
        private readonly List<Square> _boardSquares = new List<Square>();
        private readonly List<Square> _wins = new List<Square>();
-
-        public Board(int width, int length)
+       private readonly int _size;
+       
+        public Board(int size)
         {
-            GenerateBoard(width, length);
+            _size = size;
+            GenerateBoard(size, size);
         }
 
         public int BoardSquaresCount()
         {
-            return _boardSquares.Count;
+            return _size;
         }
         
         private void GenerateBoard(int width, int length) 
@@ -65,79 +67,31 @@ namespace kata_TicTacToe
             var index = _boardSquares.IndexOf(foundNewMoveCoordinate);
             if (index != -1)
                 _boardSquares[index] = newValidMove;
-
             return true;
         }
+        
 
-
-        //using index only to check win
-        public bool HasWonHorizontally(Symbol symbol)
+        public Symbol GetSymbolAtCoordinates(int xCoordinate, int yCoordinate)
         {
-
-            if (_boardSquares[0].Symbol == symbol && _boardSquares[1].Symbol == symbol &&
-                _boardSquares[2].Symbol == symbol)
-            {
-                return true;
-            }
-            if (_boardSquares[3].Symbol == symbol && _boardSquares[4].Symbol == symbol &&
-                _boardSquares[5].Symbol == symbol)
-            {
-                return true;
-            }
-            return _boardSquares[6].Symbol == symbol && _boardSquares[7].Symbol == symbol &&
-                   _boardSquares[8].Symbol == symbol;
+            return _boardSquares[(xCoordinate-1) * _size + (yCoordinate-1)].Symbol;
         }
-        
-        
-        public bool HasWonVertically(Symbol symbol)
-        {
-            if (_boardSquares[0].Symbol == symbol && _boardSquares[3].Symbol == symbol &&
-                _boardSquares[6].Symbol == symbol)
-            {
-                return true;
-            }
-            if (_boardSquares[1].Symbol == symbol && _boardSquares[4].Symbol == symbol &&
-                _boardSquares[7].Symbol == symbol)
-            {
-                return true;
-            }
-            return _boardSquares[2].Symbol == symbol && _boardSquares[5].Symbol == symbol &&
-                   _boardSquares[8].Symbol == symbol;
-        }
-        
-        public bool HasWonDiagonally(Symbol symbol)
-        {
-            if (_boardSquares[0].Symbol == symbol && _boardSquares[4].Symbol == symbol &&
-                _boardSquares[8].Symbol == symbol)
-            {
-                return true;
-            }
-            return _boardSquares[2].Symbol == symbol && _boardSquares[4].Symbol == symbol &&
-                   _boardSquares[6].Symbol == symbol;
-        }
-        
 
         //Using coordinates to check wins
-        public bool HasWonHorizontallyCheckCoordinates(Symbol symbol)
+        public bool HasWonHorizontallyCheckCoordinates(Symbol symbol, int xCoordinate)
         {
-            var squareRoot = Math.Sqrt(BoardSquaresCount());
-            var intSquare = Convert.ToInt32(squareRoot);
-
-            for (var i = 1; i <= intSquare; i++)
+            for (var y = 1; y <= _size; y++)
             {
-                var row = _boardSquares.Where(r => r.XCoordinate == i);
-                if (row.All(square => square.Symbol == symbol))
-                    return true;
+                var getSymbol = GetSymbolAtCoordinates(xCoordinate, y) != symbol;
+              if(GetSymbolAtCoordinates(xCoordinate, y) != symbol )
+                    return false;
             }
-            return false;
+            return true;
         }
         
         public bool HasWonVerticallyCheckCoordinates(Symbol symbol)
         {
-            var squareRoot = Math.Sqrt(BoardSquaresCount());
-            var intSquare = Convert.ToInt32(squareRoot);
 
-            for (var i = 1; i <= intSquare; i++)
+            for (var i = 1; i <= _size; i++)
             {
                 var column = _boardSquares.Where(r => r.YCoordinate == i);
                 if (column.All(square => square.Symbol == symbol))
@@ -148,10 +102,8 @@ namespace kata_TicTacToe
         
         public bool HasWonDiagonallyLeftToRightCheckCoordinates(Symbol symbol)
         {
-            var squareRoot = Math.Sqrt(BoardSquaresCount());
-            var intSquare = Convert.ToInt32(squareRoot);
 
-            for (var i = 1; i <= intSquare; i++)
+            for (var i = 1; i <= _size; i++)
             {
                 var diagonal = _boardSquares.Where(r => r.XCoordinate == r.YCoordinate);
                 if (diagonal.All(square => square.Symbol == symbol))
@@ -162,12 +114,10 @@ namespace kata_TicTacToe
         
         public bool HasWonDiagonallyRightToLeftCheckCoordinates(Symbol symbol)
         {
-            var squareRoot = Math.Sqrt(BoardSquaresCount());
-            var intSquare = Convert.ToInt32(squareRoot);
 
-            for (var i = 1; i <= intSquare; i++)
+            for (var i = 1; i <= _size; i++)
             {
-                var diagonal = _boardSquares.Where(r => r.XCoordinate + r.YCoordinate == (intSquare +1));
+                var diagonal = _boardSquares.Where(r => r.XCoordinate + r.YCoordinate == (_size +1));
                 if (diagonal.All(square => square.Symbol == symbol))
                     return true;
             }
