@@ -8,6 +8,7 @@ namespace kata_TicTacToe
     {
         //private readonly List<Player> _players;
         private readonly IInputOutput _iio;
+        private readonly WinningMoves _winningMoves;
         private readonly Board _board;
         private readonly Player _player1;
         private readonly Player _player2;
@@ -17,6 +18,7 @@ namespace kata_TicTacToe
         {
             _iio = iio;
             _board = board;
+            _winningMoves = new WinningMoves(board);
             _player1 = player1;
             _player2 = player2;
             PlayGame();
@@ -39,8 +41,6 @@ namespace kata_TicTacToe
                         }
                         
                 
-                
-                    
                     
                     _iio.Output(_board.DisplayBoard());
                     
@@ -79,10 +79,10 @@ namespace kata_TicTacToe
 
         public bool HasPlayerWon(Player player, Move move)
         {
-            return _board.HasWonHorizontallyCheckCoordinates(player.Symbol, move.XCoordinate) || _board
+            return _winningMoves.HasWonHorizontallyCheckCoordinates(player.Symbol, move.XCoordinate) || _winningMoves
             .HasWonVerticallyCheckCoordinates(player.Symbol, move.YCoordinate)
-             || _board
-            .HasWonDiagonallyLeftToRightCheckCoordinates(player.Symbol) || _board.HasWonDiagonallyRightToLeftCheckCoordinates(player.Symbol);
+             || _winningMoves
+            .HasWonDiagonallyLeftToRightCheckCoordinates(player.Symbol) || _winningMoves.HasWonDiagonallyRightToLeftCheckCoordinates(player.Symbol);
         }
     }
     
