@@ -28,10 +28,17 @@ namespace kata_TicTacToe
             while (_player1.PlayerStatus == PlayerStatus.Playing && _player2.PlayerStatus == PlayerStatus.Playing)
             {
                 _iio.Output(_board.DisplayBoard());
+                
+                
                     var move = _player1.PlayTurn();
-                    //need to have move validator
-                    
-                        _board.PlaceSymbolToCoordinates(_player1.Symbol, move);
+                    if(MoveValidator.IsValidMove(move, _board));
+                        //need to have move validator
+                        {
+                            _board.PlaceSymbolToCoordinates(_player1.Symbol, move);
+                            _iio.Output("valid move");
+                        }
+                        
+                
                 
                     
                     
@@ -73,7 +80,7 @@ namespace kata_TicTacToe
         public bool HasPlayerWon(Player player, Move move)
         {
             return _board.HasWonHorizontallyCheckCoordinates(player.Symbol, move.XCoordinate) || _board
-            .HasWonVerticallyCheckCoordinates(player.Symbol)
+            .HasWonVerticallyCheckCoordinates(player.Symbol, move.YCoordinate)
              || _board
             .HasWonDiagonallyLeftToRightCheckCoordinates(player.Symbol) || _board.HasWonDiagonallyRightToLeftCheckCoordinates(player.Symbol);
         }

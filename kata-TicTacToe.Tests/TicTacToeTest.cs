@@ -20,8 +20,7 @@ namespace kata_TicTacToe.Tests
             
             var ticTacToe = new TicTacToe(board, playerX, playerO,new NullInputOutput());
             //act
-            ticTacToe.PlayGame();
-
+           
             //Assert
             Assert.Equal(" X  X  X \n O  .  . \n O  .  . ",board.DisplayBoard());
             // Assert.True(ticTacToe.HasPlayerWon(playerX));
@@ -42,7 +41,7 @@ namespace kata_TicTacToe.Tests
             
             var ticTacToe = new TicTacToe(board, playerX, playerO,new NullInputOutput());
             //act
-            ticTacToe.PlayGame();
+           
         
             //Assert
             // Assert.Equal(" X  X  X \n O  .  . \n O  .  . ",board.DisplayBoard());
@@ -63,7 +62,7 @@ namespace kata_TicTacToe.Tests
            
             var ticTacToe = new TicTacToe(board, playerX, playerO,new NullInputOutput());
             //act
-            ticTacToe.PlayGame();
+            
             
             // Assert.True(ticTacToe.HasPlayerWon(playerX));
             // Assert.False(ticTacToe.HasPlayerWon(playerO));
@@ -79,11 +78,10 @@ namespace kata_TicTacToe.Tests
             var playerX = new Player(testInputX, Symbol.Cross);
             var testInputO = new PlayerInput((2,1),(3,2),(1,2));
             var playerO = new Player(testInputO, Symbol.Naught);
-           
-            var ticTacToe = new TicTacToe(board, playerX, playerO,new NullInputOutput());
             //act
-            ticTacToe.PlayGame();
-            
+            var ticTacToe = new TicTacToe(board, playerX, playerO,new NullInputOutput());
+          
+
             // Assert.True(ticTacToe.HasPlayerWon(playerX, move));
             // Assert.False(ticTacToe.HasPlayerWon(playerO));
             Assert.Equal(PlayerStatus.Won, playerX.PlayerStatus);
@@ -101,8 +99,7 @@ namespace kata_TicTacToe.Tests
            
             var ticTacToe = new TicTacToe(board, playerX, playerO,new NullInputOutput());
             //act
-            ticTacToe.PlayGame();
-            
+
             // Assert.True(ticTacToe.HasPlayerWon(playerX));
             // Assert.False(ticTacToe.HasPlayerWon(playerO));
             Assert.Equal(PlayerStatus.Won, playerX.PlayerStatus);
@@ -117,11 +114,10 @@ namespace kata_TicTacToe.Tests
             var playerX = new Player(testInputX, Symbol.Cross);
             var testInputO = new PlayerInput((1,2), (2,3),(3,1),(2,2));
             var playerO = new Player(testInputO, Symbol.Naught);
-            var ticTactToe = new TicTacToe(board, playerX, playerO, new NullInputOutput());
+            var ticTactToe = new TicTacToe(board, playerX, playerO, iio: new NullInputOutput());
             
-            ticTactToe.PlayGame();
-            Assert.Equal(PlayerStatus.Drew, playerX.PlayerStatus);
             //Assert.Equal(PlayerStatus.Drew, playerX.PlayerStatus);
+            Assert.Equal(PlayerStatus.Drew, playerO.PlayerStatus);
             
         }
         
@@ -136,7 +132,6 @@ namespace kata_TicTacToe.Tests
             var playerO = new Player(testInputO, Symbol.Naught);
             var ticTactToe = new TicTacToe(board, playerX, playerO, new NullInputOutput());
             
-            ticTactToe.PlayGame();
             Assert.Equal(PlayerStatus.Won, playerX.PlayerStatus);
             
         }
