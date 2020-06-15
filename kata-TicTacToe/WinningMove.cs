@@ -16,7 +16,6 @@ namespace kata_TicTacToe
         {
             for (var y = 1; y <= _board.Size; y++)
             {
-                var getSymbol = _board.GetSymbolAtCoordinates(xCoordinate, y) != symbol;
                 if(_board.GetSymbolAtCoordinates(xCoordinate, y) != symbol )
                     return false;
             }

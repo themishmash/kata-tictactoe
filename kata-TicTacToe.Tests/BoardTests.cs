@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Transactions;
 using Xunit;
 
 namespace kata_TicTacToe.Tests

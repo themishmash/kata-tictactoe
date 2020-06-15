@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace kata_TicTacToe
+﻿namespace kata_TicTacToe
 {
     class Program
     {

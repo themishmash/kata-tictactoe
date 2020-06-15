@@ -9,7 +9,6 @@ namespace kata_TicTacToe.Tests
 
         public void Output(string message)
         {
-            return;
         }
     }
 }

@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace kata_TicTacToe.Tests
 {
@@ -12,15 +10,8 @@ namespace kata_TicTacToe.Tests
         private readonly (int x, int y) _turn4;
         private readonly (int x, int y) _turn5;
 
-        private int _counter = 0;
+        private int _counter;
         
-        // public AutomatedPlayer((int x,int y) turn1, (int x, int y) turn2)
-        // {
-        //     _turn1 = turn1;
-        //     _turn2 = turn2;
-        //    
-        // }
-
         public PlayerInput((int x, int y) turn, (int x, int y) turn2, (int x, int y) turn3)
         {
             _turn = turn;
@@ -51,7 +42,6 @@ namespace kata_TicTacToe.Tests
             _turn = turn;
         }
         
-        
         public (int x, int y) AskQuestion(string question)
         {
             _counter++;
@@ -70,7 +60,6 @@ namespace kata_TicTacToe.Tests
         {
             throw new NotImplementedException();
         }
-        
         
     }
 }
