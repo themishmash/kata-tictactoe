@@ -2,16 +2,15 @@ using System.Linq;
 
 namespace kata_TicTacToe
 {
-    public class WinningMoves
+    public class WinningMove
     {
         
         private readonly Board _board;
 
-        public WinningMoves(Board board)
+        public WinningMove(Board board)
         {
             _board = board;
         }
-
 
         public bool HasWonHorizontallyCheckCoordinates(Symbol symbol, int xCoordinate)
         {

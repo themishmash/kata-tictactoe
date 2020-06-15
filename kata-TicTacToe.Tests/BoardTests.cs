@@ -11,7 +11,7 @@ namespace kata_TicTacToe.Tests
         public void CreateBoardOf9Squares()
         {
             var board = new Board(3);
-            Assert.Equal(9, board.BoardSquaresCount());
+            Assert.Equal(9, board.Size);
         }
         
         [Fact]

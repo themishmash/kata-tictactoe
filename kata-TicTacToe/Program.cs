@@ -13,7 +13,7 @@ namespace kata_TicTacToe
             var player2 = new Player(consoleInputOutput, Symbol.Naught);
           
            var ticTacToe = new TicTacToe(board, player1, player2, consoleInputOutput);
-          // ticTacToe.PlayGame();
+           ticTacToe.PlayGame();
           // Console.WriteLine(board.DisplayBoard());
 
 

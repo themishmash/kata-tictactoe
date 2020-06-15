@@ -16,11 +16,6 @@ namespace kata_TicTacToe
             Size = size;
             GenerateBoard(size, size);
         }
-
-        public int BoardSquaresCount()
-        {
-            return Size;
-        }
         
         private void GenerateBoard(int width, int length) 
         {
@@ -57,12 +52,13 @@ namespace kata_TicTacToe
         
         public void PlaceSymbolToCoordinates(Symbol symbol, Move move)
         {
-           if (!IsSquareBlank(move)) return;
+           //if (!IsSquareBlank(move)) return;
             var newValidMove = new Square(move.XCoordinate, move.YCoordinate) {Symbol = symbol, SquareStatus = 
             SquareStatus.Filled};
-            var foundNewMoveCoordinate = _boardSquares.First(i => i.XCoordinate == move.XCoordinate && i.YCoordinate ==
+            var foundNewMoveCoordinateInList = _boardSquares.First(square => square.XCoordinate == move.XCoordinate && square
+            .YCoordinate ==
                 move.YCoordinate);
-            var index = _boardSquares.IndexOf(foundNewMoveCoordinate);
+            var index = _boardSquares.IndexOf(foundNewMoveCoordinateInList);
             if (index != -1)
                 _boardSquares[index] = newValidMove;
         }
@@ -70,6 +66,24 @@ namespace kata_TicTacToe
         public Symbol GetSymbolAtCoordinates(int xCoordinate, int yCoordinate)
         {
             return _boardSquares[(xCoordinate-1) * Size + (yCoordinate-1)].Symbol;
+        }
+        
+        public IEnumerable<Square> FindSumXCoordinateYCoordinateEqualSizePlusOne()
+        {
+            var diagonal = _boardSquares.Where(square => square.XCoordinate + square.YCoordinate == (Size + 1));
+            return diagonal;
+        }
+        
+        public IEnumerable<Square> FindCoordinatesWhereXCoordinateEqualsYCoordinate()
+        {
+            var diagonal = _boardSquares.Where(square => square.XCoordinate == square.YCoordinate);
+            return diagonal;
+        }
+
+        //Draw
+        public bool HasDraw()
+        {
+            return _boardSquares.TrueForAll(square => square.SquareStatus == SquareStatus.Filled);
         }
         
         // public bool HasWonVerticallyCheckCoordinates(Symbol symbol)
@@ -106,11 +120,7 @@ namespace kata_TicTacToe
         //     return false;
         // }
 
-        public IEnumerable<Square> FindCoordinatesWhereXCoordinateEqualsYCoordinate()
-        {
-            var diagonal = _boardSquares.Where(r => r.XCoordinate == r.YCoordinate);
-            return diagonal;
-        }
+        
         
         // public bool HasWonDiagonallyRightToLeftCheckCoordinates(Symbol symbol)
         // {
@@ -124,19 +134,7 @@ namespace kata_TicTacToe
         //     return false;
         // }
 
-        public IEnumerable<Square> FindSumXCoordinateYCoordinateEqualSizePlusOne()
-        {
-            var diagonal = _boardSquares.Where(r => r.XCoordinate + r.YCoordinate == (Size + 1));
-            return diagonal;
-        }
-
-        //Draw
-        public bool HasDraw()
-        {
-            if (_boardSquares.TrueForAll(x => x.SquareStatus == SquareStatus.Filled))
-                return true;
-            return false;
-        }
+        
 
        
     }

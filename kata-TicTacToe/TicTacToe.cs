@@ -6,9 +6,8 @@ namespace kata_TicTacToe
 {
     public class TicTacToe
     {
-        //private readonly List<Player> _players;
         private readonly IInputOutput _iio;
-        private readonly WinningMoves _winningMoves;
+        private readonly WinningMove _winningMove;
         private readonly Board _board;
         private readonly Player _player1;
         private readonly Player _player2;
@@ -16,12 +15,11 @@ namespace kata_TicTacToe
 
         public TicTacToe(Board board, Player player1, Player player2, IInputOutput iio)
         {
-            _iio = iio;
             _board = board;
-            _winningMoves = new WinningMoves(board);
             _player1 = player1;
             _player2 = player2;
-            PlayGame();
+            _iio = iio;
+            _winningMove = new WinningMove(board);
         }
 
        
@@ -31,41 +29,43 @@ namespace kata_TicTacToe
             {
                 _iio.Output(_board.DisplayBoard());
                 
-                
-                    var move = _player1.PlayTurn();
-                    if(MoveValidator.IsValidMove(move, _board));
-                        //need to have move validator
-                        {
-                            _board.PlaceSymbolToCoordinates(_player1.Symbol, move);
-                            _iio.Output("valid move");
-                        }
-                        
-                
-                    
+                var move = _player1.PlayTurn();
+                if(MoveValidator.IsValidMove(move, _board))
+                {
+                    _board.PlaceSymbolToCoordinates(_player1.Symbol, move);
                     _iio.Output(_board.DisplayBoard());
+                }
+                
+                if (HasPlayerWon(_player1, move))
+                {
+                    _player1.PlayerStatus = PlayerStatus.Won;
+                    _player2.PlayerStatus = PlayerStatus.Lost;
+                    _board.DisplayBoard();
+                    break;
+                }
+                CheckDraw();
                     
-                    //can also pass in player's move. 
-                    //move win check logic into own class. 
-                    if (HasPlayerWon(_player1, move))
-                    {
-                        _player1.PlayerStatus = PlayerStatus.Won;
-                        _player2.PlayerStatus = PlayerStatus.Lost;
-                        _board.DisplayBoard();
-                       break;
-                    }
-                    
-                    var move2 = _player2.PlayTurn();
+                //check if player 1 won or lose or draw (if not then execute the line below)
+
+                if (_player1.PlayerStatus != PlayerStatus.Playing) continue;
+                
+                var move2 = _player2.PlayTurn();
+
+                if (MoveValidator.IsValidMove(move2, _board))
+                {
                     _board.PlaceSymbolToCoordinates(_player2.Symbol, move2);
                     _iio.Output(_board.DisplayBoard());
-                    if (HasPlayerWon(_player2, move))
-                    {
-                        _player2.PlayerStatus = PlayerStatus.Won;
-                        _player1.PlayerStatus = PlayerStatus.Lost;
-                        _board.DisplayBoard();
-                        break;
-                    }
-                    
-                    CheckDraw();
+                }
+
+                if (HasPlayerWon(_player2, move))
+                {
+                    _player2.PlayerStatus = PlayerStatus.Won;
+                    _player1.PlayerStatus = PlayerStatus.Lost;
+                    _board.DisplayBoard();
+                    break;
+                }
+                CheckDraw();
+
             }
         }
 
@@ -75,15 +75,16 @@ namespace kata_TicTacToe
             _player1.PlayerStatus = PlayerStatus.Drew;
             _player2.PlayerStatus = PlayerStatus.Drew;
         }
-
-
-        public bool HasPlayerWon(Player player, Move move)
+        
+        private bool HasPlayerWon(Player player, Move move)
         {
-            return _winningMoves.HasWonHorizontallyCheckCoordinates(player.Symbol, move.XCoordinate) || _winningMoves
+            return _winningMove.HasWonHorizontallyCheckCoordinates(player.Symbol, move.XCoordinate) || _winningMove
             .HasWonVerticallyCheckCoordinates(player.Symbol, move.YCoordinate)
-             || _winningMoves
-            .HasWonDiagonallyLeftToRightCheckCoordinates(player.Symbol) || _winningMoves.HasWonDiagonallyRightToLeftCheckCoordinates(player.Symbol);
+             || _winningMove
+            .HasWonDiagonallyLeftToRightCheckCoordinates(player.Symbol) || _winningMove.HasWonDiagonallyRightToLeftCheckCoordinates(player.Symbol);
         }
     }
     
+    //checkdrawreturn player status - switch?
+    //check won - return playerstatus - switch?
 }
