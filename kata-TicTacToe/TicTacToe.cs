@@ -25,7 +25,10 @@ namespace kata_TicTacToe
             {
                 _iio.Output(_board.DisplayBoard());
                 
+                _iio.Output("Player 1");
                 var move = _player1.PlayTurn();
+                
+                
                 if(MoveValidator.IsValidMove(move, _board))
                 {
                     _board.PlaceSymbolToCoordinates(_player1.Symbol, move);
@@ -45,6 +48,7 @@ namespace kata_TicTacToe
 
                 if (_player1.PlayerStatus != PlayerStatus.Playing) continue;
                 
+                _iio.Output("Player 2");
                 var move2 = _player2.PlayTurn();
 
                 if (MoveValidator.IsValidMove(move2, _board))

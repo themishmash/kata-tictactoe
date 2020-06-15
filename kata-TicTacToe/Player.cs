@@ -18,7 +18,7 @@ namespace kata_TicTacToe
 
         public Move PlayTurn()
         {
-            var(x,y) = _iio.AskQuestion("What Coordinate do you want?");
+            var(x,y) = _iio.AskQuestion("Please enter a coord x,y to place your X or enter 'q' to give up");
             var move = new Move(x, y);
             return move;
         }
