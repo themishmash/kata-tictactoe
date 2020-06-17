@@ -21,6 +21,5 @@ namespace kata_TicTacToe
             return move;
         }
         
-      
     }
 }

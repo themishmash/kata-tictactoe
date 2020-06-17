@@ -31,8 +31,7 @@ namespace kata_TicTacToe
             }
             return true;
         }
-// [ _ _ _ _ _ _ _ _ ]
-// [ [ _ _ _ ] [ _ _ _ ] [ _ _ _ ] ]
+
         public bool DidWinDiagonallyLTR(Symbol symbol)
         {
             for (var i =  _board.Size; i >=1; i--)

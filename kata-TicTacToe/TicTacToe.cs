@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace kata_TicTacToe
 {
     public class TicTacToe
@@ -20,60 +18,9 @@ namespace kata_TicTacToe
             _winningMove = new WinningMove(board);
         }
 
-       
-        // public void PlayGame()
-        // {
-        //     while (_player1.PlayerStatus == PlayerStatus.Playing && _player2.PlayerStatus == PlayerStatus.Playing)
-        //     { 
-        //         _iio.Output(_board.DisplayBoard());
-        //         
-        //         _iio.Output("Player 1");
-        //         var move = _player1.PlayTurn();
-        //         
-        //         
-        //         if(MoveValidator.IsValidMove(move, _board))
-        //         {
-        //             _board.PlaceSymbolToCoordinates(_player1.Symbol, move);
-        //             _iio.Output(_board.DisplayBoard());
-        //         }
-        //         
-        //         if (HasPlayerWon(_player1, move))
-        //         {
-        //             ChangePlayerStatus(_player1);
-        //             _board.DisplayBoard();
-        //             break;
-        //         }
-        //         CheckDraw();
-        //             
-        //         //check if player 1 won or lose or draw (if not then execute the line below)
-        //
-        //         if (_player1.PlayerStatus != PlayerStatus.Playing) continue;
-        //         
-        //         _iio.Output("Player 2");
-        //         var move2 = _player2.PlayTurn();
-        //
-        //         if (MoveValidator.IsValidMove(move2, _board))
-        //         {
-        //             _board.PlaceSymbolToCoordinates(_player2.Symbol, move2);
-        //             _iio.Output(_board.DisplayBoard());
-        //         }
-        //
-        //         if (HasPlayerWon(_player2, move))
-        //         {
-        //             ChangePlayerStatus(_player2);
-        //             _board.DisplayBoard();
-        //             break;
-        //         }
-        //         CheckDraw();
-        //
-        //     }
-        // }
-        
-         public void PlayGame()
+        public void PlayGame()
          {
              var turn = 0;
-            //var gamePlay = true;
-
              _iio.Output(_board.DisplayBoard());
              while (true)
              {
@@ -108,14 +55,11 @@ namespace kata_TicTacToe
                  _player1.PlayerStatus = PlayerStatus.Drew;
                  _player2.PlayerStatus = PlayerStatus.Drew;
                  break;
-
              }
          }
-
-
+        
         private void ChangePlayerStatus(Player player)
         {
-
             if (player == _player1)
             {
                 _player1.PlayerStatus = PlayerStatus.Won;
@@ -129,15 +73,6 @@ namespace kata_TicTacToe
             
         }
 
-        private void CheckDraw()
-        {
-            if (_board.HasDraw())
-            {
-                _player1.PlayerStatus = PlayerStatus.Drew;
-                _player2.PlayerStatus = PlayerStatus.Drew;
-            }
-        }
-        
         private bool HasPlayerWon(Player player, Move move)
         {
             return _winningMove.HasWonHorizontallyCheckCoordinates(player.Symbol, move.XCoordinate) || _winningMove

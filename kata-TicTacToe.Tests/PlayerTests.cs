@@ -6,7 +6,7 @@ namespace kata_TicTacToe.Tests
     {
         
         [Fact]
-         public void PlaceSymbolWithXYCoordinates()
+         public void PlaceSymbolWithXAndYCoordinates()
          {
              //arrange
              var input = new PlayerInput((1,1));

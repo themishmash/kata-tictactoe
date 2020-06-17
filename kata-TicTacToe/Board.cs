@@ -50,7 +50,6 @@ namespace kata_TicTacToe
         
         public void PlaceSymbolToCoordinates(Symbol symbol, Move move)
         {
-           //if (!IsSquareBlank(move)) return;
             var newValidMove = new Square(move.XCoordinate, move.YCoordinate) {Symbol = symbol, SquareStatus = 
             SquareStatus.Filled};
             var foundNewMoveCoordinateInList = _boardSquares.First(square => square.XCoordinate == move.XCoordinate && square
