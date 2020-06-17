@@ -12,7 +12,7 @@ namespace kata_TicTacToe.Tests
              var input = new PlayerInput((1,1));
              var playerX = new Player(input, Symbol.Cross);
              //act
-             var move = playerX.GetCoordinates();
+             var move = playerX.PlayTurn();
              //assert
              Assert.Equal(1, move.XCoordinate);
              Assert.Equal(1, move.YCoordinate);
