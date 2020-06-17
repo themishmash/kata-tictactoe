@@ -4,6 +4,7 @@ namespace kata_TicTacToe
     {
         (int x, int y) AskQuestion(string answer);
 
+        
         void Output(string message);
 
     }

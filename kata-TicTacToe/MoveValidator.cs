@@ -16,10 +16,10 @@ namespace kata_TicTacToe
             return xCoordinate >= 0 && yCoordinate >= 0;
         }
 
-        public static bool HasQuit(string input)
-        {
-            return input == "q";
-        }
+        // public static bool HasQuit(string input)
+        // {
+        //     return input == "q";
+        // }
     
     }
 }

@@ -31,6 +31,26 @@ namespace kata_TicTacToe
             }
             return true;
         }
+// [ _ _ _ _ _ _ _ _ ]
+// [ [ _ _ _ ] [ _ _ _ ] [ _ _ _ ] ]
+        public bool DidWinDiagonallyLTR(Symbol symbol)
+        {
+            for (var i =  _board.Size; i >=1; i--)
+            {
+                if (_board.GetSymbolAtCoordinates(i, i) != symbol) return false;
+            }
+
+            return true;
+        }
+        public bool DidWinHorizontalRTL(Symbol symbol)
+        {
+            for (var i = 1; i <= _board.Size; i++)
+            {
+                if (_board.GetSymbolAtCoordinates(i, i) != symbol) return false;
+            }
+
+            return true;
+        }
         
         public bool HasWonDiagonallyLeftToRightCheckCoordinates(Symbol symbol)
         {
