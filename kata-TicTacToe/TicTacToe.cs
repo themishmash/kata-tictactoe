@@ -46,7 +46,6 @@ namespace kata_TicTacToe
                  if (HasPlayerWon(currentPlayer, move))
                  {
                      ChangePlayerStatus(currentPlayer);
-                     _board.DisplayBoard();
                      _iio.Output(_board.DisplayBoard());
                      break;
                  }
@@ -77,8 +76,7 @@ namespace kata_TicTacToe
         {
             return _winningMove.HasWonHorizontallyCheckCoordinates(player.Symbol, move.XCoordinate) || _winningMove
             .HasWonVerticallyCheckCoordinates(player.Symbol, move.YCoordinate)
-             || _winningMove
-            .HasWonDiagonallyLeftToRightCheckCoordinates(player.Symbol) || _winningMove.HasWonDiagonallyRightToLeftCheckCoordinates(player.Symbol);
+             || _winningMove.HasWonDiagonalLtr(player.Symbol) || _winningMove.HasWonDiagonalRtl(player.Symbol);
         }
     }
     

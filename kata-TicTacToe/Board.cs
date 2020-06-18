@@ -64,18 +64,6 @@ namespace kata_TicTacToe
         {
             return _boardSquares[(xCoordinate-1) * Size + (yCoordinate-1)].Symbol;
         }
-        
-        public IEnumerable<Square> FindSumXCoordinateYCoordinateEqualSizePlusOne()
-        {
-            var diagonal = _boardSquares.Where(square => square.XCoordinate + square.YCoordinate == (Size + 1));
-            return diagonal;
-        }
-        
-        public IEnumerable<Square> FindCoordinatesWhereXCoordinateEqualsYCoordinate()
-        {
-            var diagonal = _boardSquares.Where(square => square.XCoordinate == square.YCoordinate);
-            return diagonal;
-        }
 
         //Draw
         public bool HasDraw()
@@ -83,56 +71,6 @@ namespace kata_TicTacToe
             return _boardSquares.TrueForAll(square => square.SquareStatus == SquareStatus.Filled);
         }
         
-        // public bool HasWonVerticallyCheckCoordinates(Symbol symbol)
-        // {
-        //
-        //     for (var i = 1; i <= _size; i++)
-        //     {
-        //         var column = _boardSquares.Where(r => r.YCoordinate == i);
-        //         if (column.All(square => square.Symbol == symbol))
-        //             return true;
-        //     }
-        //     return false;
-        // }
-        
-        // public bool HasWonVerticallyCheckCoordinates(Symbol symbol, int yCoordinate)
-        // {
-        //
-        //     for (var x = 1; x <= Size; x++)
-        //     {
-        //         if (GetSymbolAtCoordinates(x, yCoordinate) != symbol)
-        //             return false;
-        //     }
-        //     return true;
-        // }
-        // public bool HasWonDiagonallyLeftToRightCheckCoordinates(Symbol symbol)
-        // {
-        //
-        //     for (var i = 1; i <= Size; i++)
-        //     {
-        //         var diagonal = FindCoordinatesWhereXCoordinateEqualsYCoordinate();
-        //         if (diagonal.All(square => square.Symbol == symbol))
-        //             return true;
-        //     }
-        //     return false;
-        // }
-
-        
-        
-        // public bool HasWonDiagonallyRightToLeftCheckCoordinates(Symbol symbol)
-        // {
-        //
-        //     for (var i = 1; i <= Size; i++)
-        //     {
-        //         var diagonal = FindSumXCoordinateYCoordinateEqualSizePlusOne();
-        //         if (diagonal.All(square => square.Symbol == symbol))
-        //             return true;
-        //     }
-        //     return false;
-        // }
-
-        
-
        
     }
 }

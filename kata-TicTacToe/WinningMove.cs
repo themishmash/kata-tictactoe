@@ -1,5 +1,3 @@
-using System.Linq;
-
 namespace kata_TicTacToe
 {
     public class WinningMove
@@ -32,7 +30,7 @@ namespace kata_TicTacToe
             return true;
         }
 
-        public bool DidWinDiagonallyLTR(Symbol symbol)
+        public bool HasWonDiagonalLtr(Symbol symbol)
         {
             for (var i =  _board.Size; i >=1; i--)
             {
@@ -41,36 +39,15 @@ namespace kata_TicTacToe
 
             return true;
         }
-        public bool DidWinHorizontalRTL(Symbol symbol)
+        public bool HasWonDiagonalRtl(Symbol symbol)
         {
             for (var i = 1; i <= _board.Size; i++)
             {
-                if (_board.GetSymbolAtCoordinates(i, i) != symbol) return false;
+                if (_board.GetSymbolAtCoordinates((_board.Size + 1 - i), i) != symbol) return false;
             }
 
             return true;
         }
-        
-        public bool HasWonDiagonallyLeftToRightCheckCoordinates(Symbol symbol)
-        {
-            for (var i = 1; i <= _board.Size; i++)
-            {
-                var diagonal = _board.FindCoordinatesWhereXCoordinateEqualsYCoordinate();
-                if (diagonal.All(square => square.Symbol == symbol))
-                    return true;
-            }
-            return false;
-        }
-        
-        public bool HasWonDiagonallyRightToLeftCheckCoordinates(Symbol symbol)
-        {
-            for (var i = 1; i <= _board.Size; i++)
-            {
-                var diagonal = _board.FindSumXCoordinateYCoordinateEqualSizePlusOne();
-                if (diagonal.All(square => square.Symbol == symbol))
-                    return true;
-            }
-            return false;
-        }
+
     }
 }
