@@ -28,13 +28,6 @@ namespace kata_TicTacToe
                  var currentPlayer = turn % 2 == 0 ? _player2 : _player1;
                  var move = currentPlayer.PlayTurn();
                  
-                 // if(MoveValidator.IsValidMove(move, _board))
-                 // {
-                 //     _board.PlaceSymbolToCoordinates(currentPlayer.Symbol, move);
-                 //     _iio.Output(_board.DisplayBoard());
-                 //     continue;
-                 // }
-                 
                  while(!MoveValidator.IsValidMove(move, _board))
                  {
                      move = currentPlayer.PlayTurn();
