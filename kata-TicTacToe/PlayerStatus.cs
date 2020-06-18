@@ -5,7 +5,6 @@ namespace kata_TicTacToe
         Playing,
         Won,
         Drew,
-        Lost,
-        Quit
+        Lost
     }
 }
