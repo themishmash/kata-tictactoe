@@ -76,9 +76,7 @@ namespace kata_TicTacToe
 
         private bool HasPlayerWon(Player player, Move move)
         {
-            return _winningMove.HasWonHorizontallyCheckCoordinates(player.Symbol, move.XCoordinate) || _winningMove
-                                                                                                        .HasWonVerticallyCheckCoordinates(player.Symbol, move.YCoordinate)
-                                                                                                    || _winningMove.HasWonDiagonalLtr(player.Symbol) || _winningMove.HasWonDiagonalRtl(player.Symbol);
+            return _winningMove.HasWonHorizontallyCheckCoordinates(player.Symbol, move.XCoordinate) || _winningMove.HasWonVerticallyCheckCoordinates(player.Symbol, move.YCoordinate) || _winningMove.HasWonDiagonalLtr(player.Symbol) || _winningMove.HasWonDiagonalRtl(player.Symbol);
         }
     }
     
