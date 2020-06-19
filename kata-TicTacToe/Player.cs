@@ -16,8 +16,6 @@ namespace kata_TicTacToe
             Name = name;
             Symbol = symbol;
             PlayerStatus = PlayerStatus.Playing;
-         
-
         }
 
         public Move PlayTurn()
