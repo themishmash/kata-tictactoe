@@ -7,7 +7,6 @@ namespace kata_TicTacToe
         private readonly IInputOutput _iio;
 
         public Symbol Symbol { get; private set; }
-        public PlayerStatus PlayerStatus { get; set; }
         private string Name { get; }
 
         public Player(IInputOutput iio, Symbol symbol, string name)
@@ -15,7 +14,7 @@ namespace kata_TicTacToe
             _iio = iio;
             Name = name;
             Symbol = symbol;
-            PlayerStatus = PlayerStatus.Playing;
+          
         }
 
         public Move PlayTurn()

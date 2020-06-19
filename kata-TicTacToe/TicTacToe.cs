@@ -9,6 +9,7 @@ namespace kata_TicTacToe
         private readonly Board _board;
         private readonly Player _player1;
         private readonly Player _player2;
+        public GameStatus GameStatus { get; private set; }
 
 
         public TicTacToe(Board board, Player player1, Player player2, IInputOutput iio)
@@ -18,6 +19,7 @@ namespace kata_TicTacToe
             _player2 = player2??throw new ArgumentException(nameof(player2));
             _iio = iio??throw new ArgumentException(nameof(iio));
             _winningMove = new WinningMove(board);
+            GameStatus = GameStatus.Playing;
         }
         
 
@@ -43,7 +45,7 @@ namespace kata_TicTacToe
 
                  if (HasPlayerWon(currentPlayer, move))
                  {
-                     ChangePlayerStatus(currentPlayer);
+                     GameStatus = GameStatus.Won;
                      _iio.Output("Move accepted, well done you've won the game!");
                      _iio.Output(_board.DisplayBoard());
                      return;
@@ -52,27 +54,12 @@ namespace kata_TicTacToe
                  if (_board.IsFull())
                  {
                      _iio.Output("No winner today, there is a draw!");
-                     _player1.PlayerStatus = PlayerStatus.Drew;
-                     _player2.PlayerStatus = PlayerStatus.Drew;
+                     GameStatus = GameStatus.Drew;
                      return;
                  }
              }
         }
         
-        private void ChangePlayerStatus(Player player)
-        {
-            if (player == _player1)
-            {
-                _player1.PlayerStatus = PlayerStatus.Won;
-                _player2.PlayerStatus = PlayerStatus.Lost;
-            }
-            else
-            {
-                _player2.PlayerStatus = PlayerStatus.Won;
-                _player1.PlayerStatus = PlayerStatus.Lost;
-            }
-            
-        }
 
         private bool HasPlayerWon(Player player, Move move)
         {

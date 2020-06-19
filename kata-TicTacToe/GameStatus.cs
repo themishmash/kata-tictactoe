@@ -1,6 +1,6 @@
 namespace kata_TicTacToe
 {
-    public enum PlayerStatus
+    public enum GameStatus
     {
         Playing,
         Won,

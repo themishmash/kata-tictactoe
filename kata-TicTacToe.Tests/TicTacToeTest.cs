@@ -21,7 +21,8 @@ namespace kata_TicTacToe.Tests
             ticTacToe.PlayGame();
             //Assert
             Assert.Equal(" X  X  X \n O  .  . \n O  .  . ",board.DisplayBoard());
-            Assert.Equal(PlayerStatus.Won, playerX.PlayerStatus);
+            // Assert.Equal(GameStatus.Won, playerX.GameStatus);
+            Assert.Equal(GameStatus.Won, ticTacToe.GameStatus);
         }
         
         [Fact]
@@ -39,7 +40,7 @@ namespace kata_TicTacToe.Tests
             //act
             ticTacToe.PlayGame();
             //Assert
-            Assert.Equal(PlayerStatus.Won, playerX.PlayerStatus);
+            Assert.Equal(GameStatus.Won, ticTacToe.GameStatus);
         }
         
         [Fact]
@@ -54,7 +55,7 @@ namespace kata_TicTacToe.Tests
             var ticTacToe = new TicTacToe(board, playerX, playerO,new NullInputOutput());
             //act
             ticTacToe.PlayGame();
-            Assert.Equal(PlayerStatus.Won, playerX.PlayerStatus);
+            Assert.Equal(GameStatus.Won, ticTacToe.GameStatus);
         }
         
         [Fact]
@@ -69,7 +70,7 @@ namespace kata_TicTacToe.Tests
             //act
             var ticTacToe = new TicTacToe(board, playerX, playerO,new NullInputOutput());
             ticTacToe.PlayGame();
-            Assert.Equal(PlayerStatus.Won, playerX.PlayerStatus);
+            Assert.Equal(GameStatus.Won, ticTacToe.GameStatus);
         }
         
         [Fact]
@@ -85,7 +86,7 @@ namespace kata_TicTacToe.Tests
             var ticTacToe = new TicTacToe(board, playerX, playerO,new NullInputOutput());
             //act
             ticTacToe.PlayGame();
-            Assert.Equal(PlayerStatus.Won, playerX.PlayerStatus);
+            Assert.Equal(GameStatus.Won, ticTacToe.GameStatus);
         }
         
         [Fact]
@@ -99,7 +100,7 @@ namespace kata_TicTacToe.Tests
             var playerO = new Player(testInputO, Symbol.Naught, "player o");
             var ticTacToe = new TicTacToe(board, playerX, playerO, iio: new NullInputOutput());
             ticTacToe.PlayGame();
-            Assert.Equal(PlayerStatus.Drew, playerO.PlayerStatus);
+            Assert.Equal(GameStatus.Drew, ticTacToe.GameStatus);
         }
         
         [Fact]
@@ -115,7 +116,7 @@ namespace kata_TicTacToe.Tests
             //Act
             ticTacToe.PlayGame();
             //Assert
-            Assert.Equal(PlayerStatus.Won, playerX.PlayerStatus);
+            Assert.Equal(GameStatus.Won, ticTacToe.GameStatus);
         }
         
     }
