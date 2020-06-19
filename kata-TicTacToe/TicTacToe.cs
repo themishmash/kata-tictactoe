@@ -26,8 +26,7 @@ namespace kata_TicTacToe
         public void PlayGame()
         {
             Player currentPlayer = null;
-             _iio.Output("Welcome to Tic Tac Toe!");
-             _iio.Output("Here's the current board:");
+            _iio.Output("Here's the current board:");
              _iio.Output(_board.DisplayBoard());
              while (true)
              {

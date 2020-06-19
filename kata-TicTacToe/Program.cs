@@ -5,18 +5,30 @@ namespace kata_TicTacToe
     class Program
     {
         static void Main(string[] args)
-        { 
+        {
+            Console.WriteLine("Welcome to Tic Tac Toe!");
+            Player player1;
+            Player player2;
             var board = new Board(3);
-            var consoleInputOutput = new ConsoleInputOutput(); 
-            //ask question of name here
+            var consoleInputOutput = new ConsoleInputOutput();
             Console.WriteLine("Player 1: what is your name?");
             var name = Console.ReadLine();
-            var player1 = new Player(consoleInputOutput, Symbol.Cross, name);  
             Console.WriteLine("Player 2: what is your name?");
             var name2 = Console.ReadLine();
-            var player2 = new Player(consoleInputOutput, Symbol.Naught, name2);
+            Console.WriteLine("Who would like to go first?");
+            var firstPlayer = Console.ReadLine();
+            if (firstPlayer == name)
+            {
+                player1 = new Player(consoleInputOutput, Symbol.Cross, name);
+                player2 = new Player(consoleInputOutput, Symbol.Naught, name2);
+            }
+            else
+            {
+                player1 = new Player(consoleInputOutput, Symbol.Naught, name2);
+                player2 = new Player(consoleInputOutput, Symbol.Cross, name);
+            }
+            
             var ticTacToe = new TicTacToe(board, player1, player2, consoleInputOutput);
-           
             ticTacToe.PlayGame();
             
 //delegation
