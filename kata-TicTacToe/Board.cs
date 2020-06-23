@@ -59,9 +59,10 @@ namespace kata_TicTacToe
         
         public void PlaceSymbolToCoordinates(Symbol symbol, Move move)
         {
-            var spot = _boardSquares.Find(s => s.XCoordinate == move.XCoordinate && s.YCoordinate == move.YCoordinate);
-            _boardSquares[_boardSquares.IndexOf(spot)].Symbol = symbol;
-            //_boardSquares[_boardSquares.IndexOf(spot)].SquareStatus = SquareStatus.Filled;
+            //Windy way
+            // var spot = _boardSquares.Find(s => s.XCoordinate == move.XCoordinate && s.YCoordinate == move.YCoordinate);
+            // _boardSquares[_boardSquares.IndexOf(spot)].Symbol = symbol;
+            
             
             // your list contains 9 square obj
             //     find the coordinate
@@ -70,13 +71,20 @@ namespace kata_TicTacToe
             //I was creating a new object, find the coordinate and then updating with new object
             
 
-            // var newValidMove = new Square(move.XCoordinate, move.YCoordinate) {Symbol = symbol};
-            // var foundNewMoveCoordinateInList = _boardSquares.First(square => square.XCoordinate == move.XCoordinate && square
-            // .YCoordinate ==
-            //     move.YCoordinate);
-            // var index = _boardSquares.IndexOf(foundNewMoveCoordinateInList);
-            // if (index != -1)
-            //     _boardSquares[index] = newValidMove;
+             var newValidMove = new Square(move.XCoordinate, move.YCoordinate) {Symbol = symbol};
+             var foundNewMoveCoordinateInList = _boardSquares.First(square => square.XCoordinate == move.XCoordinate && square
+             .YCoordinate ==
+                 move.YCoordinate);
+             var index = _boardSquares.IndexOf(foundNewMoveCoordinateInList);
+             if (index != -1)
+                 _boardSquares[index] = newValidMove;
+            
+             //_boardSquares = new List<Square>().AsReadOnly();
+            
+            //Sol showing his way
+            // _boardSquares.Insert(_boardSquares.Find(s => s.XCoordinate != move.XCoordinate && s.YCoordinate != move
+            //     .YCoordinate));
+            // _boardSquares.Add(new Square(move.XCoordinate,move.YCoordinate, symbol));
         }
         
         public Symbol GetSymbolAtCoordinates(int xCoordinate, int yCoordinate)

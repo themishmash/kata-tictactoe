@@ -7,8 +7,8 @@ namespace kata_TicTacToe
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Tic Tac Toe!");
-            Player player1;
-            Player player2;
+            Player player1 = null;
+            Player player2 = null;
             var board = new Board(3);
             var consoleInputOutput = new ConsoleInputOutput();
             Console.WriteLine("Player 1: what is your name?");
@@ -17,15 +17,22 @@ namespace kata_TicTacToe
             var name2 = Console.ReadLine();
             Console.WriteLine("Who would like to go first?");
             var firstPlayer = Console.ReadLine();
-            if (firstPlayer == name)
+            if (firstPlayer == name && firstPlayer != "computer")
             {
-                player1 = new Player(consoleInputOutput, Symbol.Cross, name);
-                player2 = new Player(consoleInputOutput, Symbol.Naught, name2);
+                player1 = new Human(consoleInputOutput, Symbol.Cross, name);
+                player2 = new Human(consoleInputOutput, Symbol.Naught, name2);
             }
-            else
+
+            else if (firstPlayer == name2)
             {
-                player1 = new Player(consoleInputOutput, Symbol.Naught, name2);
-                player2 = new Player(consoleInputOutput, Symbol.Cross, name);
+                player1 = new Human(consoleInputOutput, Symbol.Naught, name2);
+                player2 = new Human(consoleInputOutput, Symbol.Cross, name);
+            }
+            
+            else if (firstPlayer == "computer")
+            {
+                player1 = new Computer(Symbol.Naught,new ComputerInputOutput(board), "computer");
+                player2 = new Human(consoleInputOutput, Symbol.Cross, name2);
             }
             
             var ticTacToe = new TicTacToe(board, player1, player2, consoleInputOutput);
