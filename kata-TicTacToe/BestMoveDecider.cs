@@ -25,9 +25,10 @@ namespace kata_TicTacToe
             //throw new System.NotImplementedException();
             
             //check if board empty 
-            var xCoordinate = 2;
-            var yCoordinate = 2;
+            int xCoordinate = 2;
+            int yCoordinate = 2;
             var move = new Move(xCoordinate, yCoordinate);
+            
             //return startingMove;
             if (_board.IsSquareBlank(move))
             {
@@ -45,6 +46,11 @@ namespace kata_TicTacToe
             {
                 move = new Move(_board.GetVerticalEmptySpot().XCoordinate, _board.GetVerticalEmptySpot().YCoordinate);
             }
+            // else if (_board.HasOpponentSymbolIinDiagonalLTR(Symbol.Naught))
+            // {
+            //     move = new Move(_board.GetDiagonalEmptySpotRTL().XCoordinate, _board.GetDiagonalEmptySpotLTR()
+            //     .YCoordinate);
+            // }
             else
             {
                 move = new Move(_board.FindEmptyCorner().XCoordinate, _board.FindEmptyCorner().YCoordinate);

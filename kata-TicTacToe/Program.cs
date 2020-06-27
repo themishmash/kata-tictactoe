@@ -11,10 +11,11 @@ namespace kata_TicTacToe
             Player player2 = null;
             var board = new Board(3);
             var consoleInputOutput = new ConsoleInputOutput();
+            var bestMoveDecider = new BestMoveDecider(board);
             var randomNumberGenerator = new RandomNumberGenerator();
-           // player1 = new ComputerRandom(computerInputOutput, Symbol.Naught, "computer");
-            player1 = new RandomPlayer(randomNumberGenerator, Symbol.Naught, "random player");
-            player2 = new Human(consoleInputOutput, Symbol.Cross, "human");
+            var computerSmart = new ComputerNeverLose(Symbol.Cross, "computer", bestMoveDecider);
+            //player1 = new RandomPlayer(randomNumberGenerator, Symbol.Naught, "random player");
+            player2 = new Human(consoleInputOutput, Symbol.Naught, "human");
             // Console.WriteLine("Player 1: what is your name?");
             // var name = Console.ReadLine();
             // Console.WriteLine("Player 2: what is your name?");
@@ -39,7 +40,7 @@ namespace kata_TicTacToe
             //     player2 = new Human(consoleInputOutput, Symbol.Cross, name2);
             // }
             //
-            var ticTacToe = new TicTacToe(board, player1, player2, consoleInputOutput);
+            var ticTacToe = new TicTacToe(board, computerSmart, player2, consoleInputOutput);
             ticTacToe.PlayGame();
             
 //delegation
