@@ -1,24 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace kata_TicTacToe.Tests
 {
     public class RandomPlayerInput: NumberGenerator
     {
-        private readonly int _coordinate;
-        
+        private readonly int _xCoordinate;
+        private readonly int _yCoordinate;
 
-        public RandomPlayerInput(int coordinate)
+
+        public RandomPlayerInput(int xCoordinate, int yCoordinate)
         {
-            _coordinate = coordinate;
-           
+            _xCoordinate = xCoordinate;
+            _yCoordinate = yCoordinate;
         }
 
 
-        public int GetNumber(int minimum, int maximum)
+        public int GetXCoordinate(int minimum, int maximum)
         {
-            return _coordinate;
+            return _xCoordinate;
+        }
+
+        public int GetYCoordinate(int minimum, int maximum)
+        {
+            return _yCoordinate;
         }
     }
 }

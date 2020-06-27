@@ -7,6 +7,7 @@ namespace kata_TicTacToe
         private readonly IMoveDecider _moveDecider;
         private readonly Board _board;
         private readonly WinningMove _winningMove;
+        private readonly Symbol Symbol;
 
         public ComputerNeverLose(Symbol symbol, string name, IMoveDecider moveDecider) : base(symbol, name)
         {
@@ -20,11 +21,8 @@ namespace kata_TicTacToe
 
         public override Move PlayTurn()
         {
-            var random = new Random();
-            var randomXCoordinate = random.Next(0, _board.Size + 1);
-            var randomYCoordinate = random.Next(0, _board.Size + 1);
-            var move = new Move(randomXCoordinate, randomYCoordinate);
-            return move;
+           //_board.PlaceSymbolToCoordinates(Symbol, _moveDecider.NextMove());
+           return _moveDecider.NextMove();
         }
 
         //check to see if can win - put down if can

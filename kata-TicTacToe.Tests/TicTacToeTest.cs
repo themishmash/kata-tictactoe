@@ -119,5 +119,30 @@ namespace kata_TicTacToe.Tests
             Assert.Equal(GameStatus.Won, ticTacToe.GameStatus);
         }
         
+        // [Fact]
+        // public void ComputerMakeMove2()
+        // {
+        //     //Arrange
+        //     var board = new Board(3);
+        //     var testInputO = new PlayerInput((3,1));
+        //     var playerO = new Human(testInputO, Symbol.Naught, "player o");
+        //     var bestMoveDecider = new BestMoveDecider(board);
+        //     var computer = new ComputerNeverLose(Symbol.Cross, "computer", bestMoveDecider);
+        //     
+        //     var ticTacToe = new TicTacToe(board, computer, playerO, new NullInputOutput() );
+        //     
+        //     //Act
+        //     //computer.PlayTurn();
+        //    // var move1 = new Move(3,1);
+        //    // board.PlaceSymbolToCoordinates(Symbol.Naught,move1);
+        //    // var computerMove1 = computer.PlayTurn();
+        //    ticTacToe.PlayGame();
+        //     
+        //     
+        //     //Assert
+        //     Assert.Equal(" X  .  . \n .  X  . \n O  .  . ",board.DisplayBoard());
+        //     // Assert.Equal(1, computerMove1.XCoordinate);
+        //     // Assert.Equal(1, computerMove1.YCoordinate);
+        // }
     }
 }

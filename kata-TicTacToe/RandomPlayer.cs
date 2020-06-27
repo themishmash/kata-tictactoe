@@ -13,8 +13,8 @@ namespace kata_TicTacToe
 
         public override Move PlayTurn()
         {
-            var xCoordinate = _iNumberGenerator.GetNumber(1, 3);
-            var yCoordinate = _iNumberGenerator.GetNumber(1, 3);
+            var xCoordinate = _iNumberGenerator.GetXCoordinate(1, 3);
+            var yCoordinate = _iNumberGenerator.GetYCoordinate(1, 3);
             var move = new Move(xCoordinate, yCoordinate);
             return move;
         }

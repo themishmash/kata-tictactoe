@@ -48,6 +48,49 @@ namespace kata_TicTacToe
             }
             return false;
         }
+
+        public Square FindEmptyCorner()
+        {
+            var cornerSpot = _boardSquares.FirstOrDefault(s => s.XCoordinate == s.YCoordinate || s.XCoordinate + s.YCoordinate
+                == (Size + 1) && s.Symbol == Symbol.None);
+           // PlaceSymbolToCoordinates(Symbol.Cross, new Move(cornerSpot.XCoordinate, cornerSpot.YCoordinate));
+            return cornerSpot;
+        }
+
+        public bool CheckOpponentWinHorizontally(Symbol symbol)
+        {
+            for (var i = 1; i <= Size; i++)
+            {
+                var row = _boardSquares.Where(r => r.XCoordinate == i);
+                var numberRow = row.Count(x => x.Symbol == symbol);
+                if (numberRow == 2)
+                {
+                 
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public Square GetEmptySpot()
+        {
+            for (var i = 1; i <= Size; i++)
+            {
+                var row = _boardSquares.Where(r => r.XCoordinate == i);
+                var numberRow = row.Count(x => x.Symbol == Symbol.Naught);
+                if (numberRow == 2)
+                {
+                    var emptySpot = row.Where(x => x.Symbol == Symbol.None);
+                    foreach (var spot in emptySpot)
+                    {
+                        return spot;
+                    }
+                }
+            }
+            
+            return null;
+        }
+        
         
         public void PlaceSymbolToCoordinates(Symbol symbol, Move move)
         {
@@ -60,6 +103,7 @@ namespace kata_TicTacToe
         {
             return _boardSquares[(xCoordinate-1) * Size + (yCoordinate-1)].Symbol;
         }
+        
 
         //Draw
         public bool IsFull()
