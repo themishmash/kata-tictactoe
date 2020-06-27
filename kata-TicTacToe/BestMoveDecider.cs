@@ -39,7 +39,11 @@ namespace kata_TicTacToe
             
             if (_board.CheckOpponentWinHorizontally(Symbol.Naught))
             {
-                move = new Move(_board.GetEmptySpot().XCoordinate, _board.GetEmptySpot().YCoordinate);
+                move = new Move(_board.GetHorizontalEmptySpot().XCoordinate, _board.GetHorizontalEmptySpot().YCoordinate);
+            }
+            else if (_board.CheckOpponentWinVertically(Symbol.Naught))
+            {
+                move = new Move(_board.GetVerticalEmptySpot().XCoordinate, _board.GetVerticalEmptySpot().YCoordinate);
             }
             else
             {

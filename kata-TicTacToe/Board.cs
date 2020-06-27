@@ -72,7 +72,7 @@ namespace kata_TicTacToe
             return false;
         }
 
-        public Square GetEmptySpot()
+        public Square GetHorizontalEmptySpot()
         {
             for (var i = 1; i <= Size; i++)
             {
@@ -90,6 +90,40 @@ namespace kata_TicTacToe
             
             return null;
         }
+        
+        public bool CheckOpponentWinVertically(Symbol symbol)
+        {
+            for (var i = 1; i <= Size; i++)
+            {
+                var column = _boardSquares.Where(r => r.YCoordinate == i);
+                var numberColumn = column.Count(x => x.Symbol == symbol);
+                if (numberColumn == 2)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public Square GetVerticalEmptySpot()
+        {
+            for (var i = 1; i <= Size; i++)
+            {
+                var row = _boardSquares.Where(r => r.YCoordinate == i);
+                var numberColumn = row.Count(x => x.Symbol == Symbol.Naught);
+                if (numberColumn == 2)
+                {
+                    var emptySpot = row.Where(x => x.Symbol == Symbol.None);
+                    foreach (var spot in emptySpot)
+                    {
+                        return spot;
+                    }
+                }
+            }
+            
+            return null;
+        }
+
         
         
         public void PlaceSymbolToCoordinates(Symbol symbol, Move move)

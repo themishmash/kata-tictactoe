@@ -50,7 +50,7 @@ namespace kata_TicTacToe.Tests
         }
 
         [Fact]
-        public void MakeMove3Block()
+        public void MakeMove3BlockHorizontalWin()
         {
             //Arrange
             var board = new Board(3);
@@ -64,21 +64,84 @@ namespace kata_TicTacToe.Tests
             board.PlaceSymbolToCoordinates(Symbol.Naught,move1);
             
             var computerMove2 = computer.PlayTurn();
-            board.PlaceSymbolToCoordinates(computer.Symbol, computerMove1);
+            board.PlaceSymbolToCoordinates(computer.Symbol, computerMove2);
             
             var move2 = new Move(3,3);
             board.PlaceSymbolToCoordinates(Symbol.Naught, move2);
             
-           
-
             //Act
             var computerMove3 = computer.PlayTurn();
-            board.PlaceSymbolToCoordinates(computer.Symbol, computerMove2);
+            board.PlaceSymbolToCoordinates(computer.Symbol, computerMove3);
             
             //Assert
             Assert.Equal(3, computerMove3.XCoordinate);
             Assert.Equal(2, computerMove3.YCoordinate);
         }
+        
+        [Fact]
+        public void MakeMove3BlockVerticalWin()
+        {
+            //Arrange
+            var board = new Board(3);
+            var bestMoveDecider = new BestMoveDecider(board);
+            var computer = new ComputerNeverLose(Symbol.Cross, "computer", bestMoveDecider);
+            
+           
+            var computerMove1 =  computer.PlayTurn();
+            board.PlaceSymbolToCoordinates(computer.Symbol, computerMove1);
+           
+            var move1 = new Move(3,3);
+            board.PlaceSymbolToCoordinates(Symbol.Naught,move1);
+            
+            var computerMove2 = computer.PlayTurn();
+            board.PlaceSymbolToCoordinates(computer.Symbol, computerMove2);
+            
+            var move2 = new Move(2,3);
+            board.PlaceSymbolToCoordinates(Symbol.Naught, move2);
+            
+            //Act
+            var computerMove3 = computer.PlayTurn();
+            board.PlaceSymbolToCoordinates(computer.Symbol, computerMove3);
+            
+            //Assert
+            Assert.Equal(1, computerMove3.XCoordinate);
+            Assert.Equal(3, computerMove3.YCoordinate);
+        }
+
+        // [Fact]
+        // public void MakeMove4WinInsteadOfBlock()
+        // {
+        //     //Arrange
+        //     var board = new Board(3);
+        //     var bestMoveDecider = new BestMoveDecider(board);
+        //     var computer = new ComputerNeverLose(Symbol.Cross, "computer", bestMoveDecider);
+        //     var computerMove1 =  computer.PlayTurn();
+        //     board.PlaceSymbolToCoordinates(computer.Symbol, computerMove1);
+        //     var move1 = new Move(3,1);
+        //     board.PlaceSymbolToCoordinates(Symbol.Naught,move1);
+        //     
+        //     var computerMove2 = computer.PlayTurn();
+        //     board.PlaceSymbolToCoordinates(computer.Symbol, computerMove2);
+        //     
+        //     var move2 = new Move(3,3);
+        //     board.PlaceSymbolToCoordinates(Symbol.Naught, move2);
+        //     
+        //     var computerMove3 = computer.PlayTurn();
+        //     board.PlaceSymbolToCoordinates(computer.Symbol, computerMove3);
+        //     
+        //     var move3 = new Move(2,3);
+        //     board.PlaceSymbolToCoordinates(Symbol.Naught, move3);
+        //     
+        //     //Act
+        //     var computerMove4 = computer.PlayTurn();
+        //     board.PlaceSymbolToCoordinates(computer.Symbol, computerMove4);
+        //
+        //     //Assert 
+        //     Assert.Equal(1, computerMove4.XCoordinate);
+        //     Assert.Equal(2, computerMove4.YCoordinate);
+        // }
+        
+        
         
     }
 }
