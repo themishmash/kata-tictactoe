@@ -24,7 +24,7 @@ namespace kata_TicTacToe
             //list of moves made perhaps? 
             //throw new System.NotImplementedException();
             
-            //check if board empty 
+
             int xCoordinate = 2;
             int yCoordinate = 2;
             var move = new Move(xCoordinate, yCoordinate);
@@ -34,9 +34,6 @@ namespace kata_TicTacToe
             {
                 return move;
             }
-
-            //CheckOpponentMoves();
-        //_board.CheckOpponentWinHorizontally(Symbol.Naught);
             
             if (_board.CheckOpponentWinHorizontally(Symbol.Naught))
             {
@@ -46,18 +43,32 @@ namespace kata_TicTacToe
             {
                 move = new Move(_board.GetVerticalEmptySpot().XCoordinate, _board.GetVerticalEmptySpot().YCoordinate);
             }
-            // else if (_board.HasOpponentSymbolIinDiagonalLTR(Symbol.Naught))
-            // {
-            //     move = new Move(_board.GetDiagonalEmptySpotRTL().XCoordinate, _board.GetDiagonalEmptySpotLTR()
-            //     .YCoordinate);
-            // }
-            else
+            else if (_board.HasTwoOpponentSymbolIinDiagonalRTL(Symbol.Naught))
+            {
+                move = new Move(_board.GetDiagonalEmptySpotRTL().XCoordinate, _board.GetDiagonalEmptySpotRTL()
+                .YCoordinate);
+            }
+            else if (_board.HasOpponentSymbolInDiagonalLTR(Symbol.Naught))
+            {
+                if (_board.CheckEmptySpotDiagonalRTL())
+                {
+                    move = new Move(_board.GetDiagonalEmptySpotRTL().XCoordinate, _board.GetDiagonalEmptySpotRTL().YCoordinate);
+                }
+               
+            }
+            else if (_board.HasEmptyCorner())
             {
                 move = new Move(_board.FindEmptyCorner().XCoordinate, _board.FindEmptyCorner().YCoordinate);
             }
+            else 
+            {
+                //(_board.HasMoreThanOneBlankSquare())
+               move = new Move(_board.FindEmptySpot().XCoordinate, _board.FindEmptySpot().YCoordinate);
+               return move;
+            }
             
-           return move;
-           // CheckOpponentMoves();
+            return move;
+            // CheckOpponentMoves();
 
 
 
