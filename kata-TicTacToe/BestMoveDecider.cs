@@ -9,6 +9,7 @@ namespace kata_TicTacToe
         public BestMoveDecider(Board board)
         {
             _board = board;
+            //first move = get firstmove
         }
         
         public Move NextMove()
@@ -23,8 +24,8 @@ namespace kata_TicTacToe
         
             //list of moves made perhaps? 
             //throw new System.NotImplementedException();
-            
 
+            //GetCoordinateMove();
             int xCoordinate = 2;
             int yCoordinate = 2;
             var move = new Move(xCoordinate, yCoordinate);
@@ -33,6 +34,11 @@ namespace kata_TicTacToe
             if (_board.IsSquareBlank(move))
             {
                 return move;
+            }
+
+            if (_board.CheckWinDiagonalLTR(Symbol.Cross))
+            {
+                return new Move(_board.GetWinningSpotDiagonalLTR().XCoordinate, _board.GetWinningSpotDiagonalLTR().YCoordinate);
             }
             
             if (_board.CheckOpponentWinHorizontally(Symbol.Naught))
@@ -48,13 +54,10 @@ namespace kata_TicTacToe
                 move = new Move(_board.GetDiagonalEmptySpotRTL().XCoordinate, _board.GetDiagonalEmptySpotRTL()
                 .YCoordinate);
             }
-            else if (_board.HasOpponentSymbolInDiagonalLTR(Symbol.Naught))
+            else if (_board.HasOpponentSymbolInDiagonalLTR(Symbol.Naught) && _board.CheckEmptySpotDiagonalRTL())
             {
-                if (_board.CheckEmptySpotDiagonalRTL())
-                {
+                
                     move = new Move(_board.GetDiagonalEmptySpotRTL().XCoordinate, _board.GetDiagonalEmptySpotRTL().YCoordinate);
-                }
-               
             }
             else if (_board.HasEmptyCorner())
             {
@@ -74,7 +77,22 @@ namespace kata_TicTacToe
 
         }
 
-       
+        // private Move GetCoordinateMove()
+        // {
+        //     var move = new Move(2,2);
+        //     if (_board.IsSquareBlank(move))
+        //     {
+        //         return move;
+        //     }
+        //
+        //     else if (_board.NumberOfFilledSquares() == 1)
+        //     {
+        //         move = new Move(_board.FindEmptySpot().XCoordinate, _board.FindEmptySpot().YCoordinate);
+        //         return move;
+        //     }
+        //     
+        // }
+
 
         //need to look through list of boardsquares and find an empty corner. so check boardsquares and look at x and y coordinates - where they equal one another, where they equal size+1 together - AND they are empty
         // private void CheckCorners()

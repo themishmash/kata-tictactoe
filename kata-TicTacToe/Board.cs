@@ -50,6 +50,12 @@ namespace kata_TicTacToe
             return false;
         }
 
+        public int NumberOfFilledSquares()
+        {
+            var num =_boardSquares.Where(s => s.Symbol == Symbol.Cross || s.Symbol == Symbol.Naught).Count();
+            return num;
+        }
+
         public void PlaceSymbolToCoordinates(Symbol symbol, Move move)
         {
             
@@ -87,11 +93,11 @@ namespace kata_TicTacToe
 
         public bool HasEmptyCorner()
         {
-            var cornerSpot = _boardSquares.Where(s => s.XCoordinate == s.YCoordinate && s.Symbol == Symbol.None || s
+            var cornerSpot = _boardSquares.Where(s => s.XCoordinate == s.YCoordinate || s
                     .XCoordinate
                 + s
                     .YCoordinate
-                == (Size + 1) && s.Symbol == Symbol.None);
+                == (Size + 1));
             var emptySpot = cornerSpot.Count(x => x.Symbol == Symbol.None);
             if (emptySpot > 1)
             {
@@ -265,6 +271,89 @@ namespace kata_TicTacToe
 
             return false;
         }
-       
+
+        public bool CheckWinHorizontal(Symbol symbol)
+        {
+            for (var i = 1; i <= Size; i++)
+            {
+                var row = _boardSquares.Where(r => r.XCoordinate == i);
+                var numberRow = row.Count(x => x.Symbol == symbol);
+                var emptySpot = row.Count(x => x.Symbol == Symbol.None);
+                if (numberRow == 2 && emptySpot == 1 )
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public Square GetHorizonalWinningSpot()
+        {
+            for (var i = 1; i <= Size; i++)
+            {
+                var row = _boardSquares.Where(r => r.XCoordinate == i);
+                var numberRow = row.Count(x => x.Symbol == Symbol.Cross);
+                if (numberRow == 2)
+                {
+                    var emptySpot = row.Where(x => x.Symbol != Symbol.Cross);
+                    return emptySpot.FirstOrDefault();
+                }
+            }
+            
+            return null;
+        }
+        
+        
+        
+        
+        
+        //Diagonal LTR
+        public bool CheckWinDiagonalLTR(Symbol symbol)
+        {
+            var diagonal = _boardSquares.Where(s => s.XCoordinate == s.YCoordinate);
+            var filledSpots = diagonal.Count(x => x.Symbol == symbol);
+            var emptySpot = diagonal.Count(x => x.Symbol == Symbol.None);
+            if (filledSpots == 2 && emptySpot == 1)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        
+        public Square GetWinningSpotDiagonalLTR()
+        {
+            var diagonal = _boardSquares.Where(s => s.XCoordinate == s.YCoordinate);
+            var emptySpot = diagonal.Where(x => x.Symbol == Symbol.None);
+            return emptySpot.FirstOrDefault();
+        }
+
+        public bool CheckWinDiagonalRTL(Symbol symbol)
+        {
+            var diagonal = _boardSquares.Where(s => s.XCoordinate + s.YCoordinate == (Size +1));
+            var filledSpots = diagonal.Count(x => x.Symbol == symbol);
+            var emptySpot = diagonal.Count(x => x.Symbol == Symbol.None);
+            if (filledSpots == 2 && emptySpot == 1)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        
+        public Square GetWinningSpotDiagonalRTL()
+        {
+            var diagonal = _boardSquares.Where(s => s.XCoordinate + s.YCoordinate == (Size + 1));
+            var emptySpot = diagonal.Where(x => x.Symbol == Symbol.None);
+            return emptySpot.FirstOrDefault();
+        }
+
+        
+        
+        
+        
+        
+        
+        
     }
 }
