@@ -247,7 +247,7 @@ namespace kata_TicTacToe.Tests
         }
 
         [Fact]
-        public void CanWinPlayer1()
+        public void CanWinDiagonalLTRPlayer1()
         {
             //Arrange
             var board = new Board(3);
@@ -272,6 +272,113 @@ namespace kata_TicTacToe.Tests
             Assert.Equal(3, computerMove3.XCoordinate);
             Assert.Equal(3, computerMove3.YCoordinate);
         }
+        
+        [Fact]
+        public void CanWinDiagonalRTLPlayer1()
+        {
+            //Arrange
+            var board = new Board(3);
+            var bestMoveDecider = new BestMoveDecider(board);
+            var computer = new ComputerNeverLose(Symbol.Cross, "computer", bestMoveDecider);
+            var computerMove1 =  computer.PlayTurn();
+            board.PlaceSymbolToCoordinates(computer.Symbol, computerMove1);
+            
+            var move1 = new Move(1,2);
+            board.PlaceSymbolToCoordinates(Symbol.Naught,move1);
+            
+            var computerMove2 = computer.PlayTurn();
+            board.PlaceSymbolToCoordinates(computer.Symbol, computerMove2);
+            
+            var move2 = new Move(3, 3);
+            board.PlaceSymbolToCoordinates(Symbol.Naught, move2);
+            
+            var computerMove3 = computer.PlayTurn();
+            board.PlaceSymbolToCoordinates(computer.Symbol, computerMove3);
+            
+            var move3 = new Move(2, 3);
+            board.PlaceSymbolToCoordinates(Symbol.Naught, move3);
+            
+            //Act
+            var computerMove4 = computer.PlayTurn();
+            board.PlaceSymbolToCoordinates(computer.Symbol, computerMove4);
+            
+            //Assert
+            Assert.Equal(3, computerMove4.XCoordinate);
+            Assert.Equal(1, computerMove4.YCoordinate);
+        }
+        //o_x
+        //xxx
+        //o__
+        [Fact]
+        public void CanWinHorizontalPlayer1()
+        {
+            var board = new Board(3);
+            var bestMoveDecider = new BestMoveDecider(board);
+            var computer = new ComputerNeverLose(Symbol.Cross, "computer", bestMoveDecider);
+            var computerMove1 =  computer.PlayTurn();
+            board.PlaceSymbolToCoordinates(computer.Symbol, computerMove1);
+            
+            var move1 = new Move(1,1);
+            board.PlaceSymbolToCoordinates(Symbol.Naught,move1);
+            
+            var computerMove2 = computer.PlayTurn();
+            board.PlaceSymbolToCoordinates(computer.Symbol, computerMove2);
+            
+            var move2 = new Move(3, 1);
+            board.PlaceSymbolToCoordinates(Symbol.Naught, move2);
+            
+            var computerMove3 = computer.PlayTurn();
+            board.PlaceSymbolToCoordinates(computer.Symbol, computerMove3);
+            
+            var move3 = new Move(3, 2);
+            board.PlaceSymbolToCoordinates(Symbol.Naught, move3);
+            
+            //Act
+            var computerMove4 = computer.PlayTurn();
+            board.PlaceSymbolToCoordinates(computer.Symbol, computerMove4);
+            
+            //Assert
+            Assert.Equal(2, computerMove4.XCoordinate);
+            Assert.Equal(3, computerMove4.YCoordinate);
+        }
+        
+        //x_o
+        //_x_
+        //oxo
+        [Fact]
+        public void CanWinVerticalPlayer1()
+        {
+            var board = new Board(3);
+            var bestMoveDecider = new BestMoveDecider(board);
+            var computer = new ComputerNeverLose(Symbol.Cross, "computer", bestMoveDecider);
+            var computerMove1 =  computer.PlayTurn();
+            board.PlaceSymbolToCoordinates(computer.Symbol, computerMove1);
+            
+            var move1 = new Move(3,1);
+            board.PlaceSymbolToCoordinates(Symbol.Naught,move1);
+            
+            var computerMove2 = computer.PlayTurn();
+            board.PlaceSymbolToCoordinates(computer.Symbol, computerMove2);
+            
+            var move2 = new Move(3, 3);
+            board.PlaceSymbolToCoordinates(Symbol.Naught, move2);
+            
+            var computerMove3 = computer.PlayTurn();
+            board.PlaceSymbolToCoordinates(computer.Symbol, computerMove3);
+            
+            var move3 = new Move(1, 3);
+            board.PlaceSymbolToCoordinates(Symbol.Naught, move3);
+            
+            //Act
+            var computerMove4 = computer.PlayTurn();
+            board.PlaceSymbolToCoordinates(computer.Symbol, computerMove4);
+            
+            //Assert
+            Assert.Equal(1, computerMove4.XCoordinate);
+            Assert.Equal(2, computerMove4.YCoordinate);
+        }
+        
+        
         
     }
 }

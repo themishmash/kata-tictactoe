@@ -40,6 +40,21 @@ namespace kata_TicTacToe
             {
                 return new Move(_board.GetWinningSpotDiagonalLTR().XCoordinate, _board.GetWinningSpotDiagonalLTR().YCoordinate);
             }
+
+            if (_board.CheckWinDiagonalRTL(Symbol.Cross))
+            {
+                return new Move(_board.GetWinningSpotDiagonalRTL().XCoordinate, _board.GetWinningSpotDiagonalRTL().YCoordinate);
+            }
+
+            if (_board.CheckWinHorizontal(Symbol.Cross))
+            {
+                return new Move(_board.GetWinningSpotHorizontal().XCoordinate, _board.GetWinningSpotHorizontal().YCoordinate);
+            }
+
+            if (_board.CheckWinVertically(Symbol.Cross))
+            {
+                return new Move(_board.GetWinningSpotVertical().XCoordinate, _board.GetWinningSpotVertical().YCoordinate);
+            }
             
             if (_board.CheckOpponentWinHorizontally(Symbol.Naught))
             {
