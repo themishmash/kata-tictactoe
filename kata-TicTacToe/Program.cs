@@ -40,7 +40,7 @@ namespace kata_TicTacToe
             //     player2 = new Human(consoleInputOutput, Symbol.Cross, name2);
             // }
             //
-            var ticTacToe = new TicTacToe(board, computerSmart, player2, consoleInputOutput);
+            var ticTacToe = new TicTacToe(board, player2, computerSmart, consoleInputOutput);
             ticTacToe.PlayGame();
             
 //delegation

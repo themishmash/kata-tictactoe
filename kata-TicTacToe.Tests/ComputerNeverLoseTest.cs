@@ -306,9 +306,7 @@ namespace kata_TicTacToe.Tests
             Assert.Equal(3, computerMove4.XCoordinate);
             Assert.Equal(1, computerMove4.YCoordinate);
         }
-        //o_x
-        //xxx
-        //o__
+      
         [Fact]
         public void CanWinHorizontalPlayer1()
         {
@@ -342,9 +340,6 @@ namespace kata_TicTacToe.Tests
             Assert.Equal(3, computerMove4.YCoordinate);
         }
         
-        //x_o
-        //_x_
-        //oxo
         [Fact]
         public void CanWinVerticalPlayer1()
         {
@@ -377,8 +372,6 @@ namespace kata_TicTacToe.Tests
             Assert.Equal(1, computerMove4.XCoordinate);
             Assert.Equal(2, computerMove4.YCoordinate);
         }
-        
-        
         
     }
 }

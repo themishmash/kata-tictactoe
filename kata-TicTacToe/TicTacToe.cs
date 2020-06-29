@@ -10,7 +10,6 @@ namespace kata_TicTacToe
         private readonly Board _board;
         private readonly Player _player1;
         private readonly Player _player2;
-        public readonly List<Move> ListOfMoves;
         public GameStatus GameStatus { get; private set; }
 
 
@@ -21,7 +20,6 @@ namespace kata_TicTacToe
             _player2 = player2??throw new ArgumentException(nameof(player2));
             _iio = iio??throw new ArgumentException(nameof(iio));
             _winningMove = new WinningMove(board);
-            ListOfMoves = new List<Move>();
             GameStatus = GameStatus.Playing;
         }
         
@@ -42,8 +40,6 @@ namespace kata_TicTacToe
                      move = currentPlayer.PlayTurn();
                  }
 
-                ListOfMoves.Add(move); //access by computernever lose
-                 
                  _board.PlaceSymbolToCoordinates(currentPlayer.Symbol, move);
                  _iio.Output("Move accepted, here's the current board:");
                  _iio.Output(_board.DisplayBoard());
