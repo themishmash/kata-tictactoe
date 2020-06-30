@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+
 namespace kata_TicTacToe
 {
     public class BestMoveDecider:IMoveDecider
@@ -7,7 +10,6 @@ namespace kata_TicTacToe
         public BestMoveDecider(Board board)
         {
             _board = board;
-            //first move = get firstmove
         }
         
         public Move NextMove() //pass in player? so can get symbol?
@@ -15,20 +17,19 @@ namespace kata_TicTacToe
             var xCoordinate = (_board.Size + 1) / 2;
             var yCoordinate = (_board.Size + 1) / 2;
             var move = new Move(xCoordinate, yCoordinate);
-
-            //return startingMove;
+            
             if (_board.IsSquareBlank(move))
             {
                 return move;
             }
             
-            move = GetOptimalMove(Symbol.Cross);
+            move = GetBestMove(Symbol.Cross);
             if (move != null) return move;
 
-            move = GetOptimalMove(Symbol.Naught);
+            move = GetBestMove(Symbol.Naught);
             if (move != null) return move;
             
-            if (_board.HasOpponentSymbolInDiagonalLTR(Symbol.Naught) && _board.CheckEmptySpotDiagonalRTL())
+            if (HasOpponentSymbolInDiagonalLTR(Symbol.Naught) && _board.CheckEmptySpotDiagonalRTL())
             {
                 return new Move(_board.GetDiagonalEmptySpotRTL().XCoordinate, _board.GetDiagonalEmptySpotRTL()
                 .YCoordinate);
@@ -43,7 +44,7 @@ namespace kata_TicTacToe
         }
         
 
-        private Move GetOptimalMove(Symbol symbol) //pass in symbol as parameter
+        private Move GetBestMove(Symbol symbol) //pass in symbol as parameter
         {
             if (_board.CheckRow(symbol))
             {
@@ -72,5 +73,22 @@ namespace kata_TicTacToe
 
             return null;
         }
+
+        private bool HasOpponentSymbolInDiagonalLTR(Symbol symbol)
+            {
+                //find way to refacotr this method too
+                var diagonal = new[]
+                {
+                    _board.GetSymbolAtCoordinates(1, 1),
+                    _board.GetSymbolAtCoordinates(2, 2),
+                    _board.GetSymbolAtCoordinates(3, 3)
+                };
+                
+                var numberDiagonal = diagonal.Count(s => s == symbol);
+                var emptySpot = diagonal.Count(s => s == Symbol.None);
+                return numberDiagonal == 1 && emptySpot == 1;
+            }
     }
+    
+    
 }

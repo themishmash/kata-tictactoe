@@ -119,6 +119,9 @@ namespace kata_TicTacToe.Tests
             Assert.Equal(GameStatus.Won, ticTacToe.GameStatus);
         }
         
+        //create another test with best move computer player can play a game - don't necessarily need to win. 
+        
+        
         // [Fact]
         // public void ComputerMakeMove2()
         // {

@@ -54,6 +54,12 @@ namespace kata_TicTacToe
         {
             return _boardSquares[(xCoordinate-1) * Size + (yCoordinate-1)].Symbol;
         }
+
+        public (int x, int y) GetCoordinatesFromSquare(Square square)
+        {
+            var foundSquare =_boardSquares.Find(s => s.XCoordinate == square.XCoordinate && s.YCoordinate == square.YCoordinate);
+            return (foundSquare.XCoordinate, foundSquare.YCoordinate);
+        }
         
         public bool IsFull()
         {
@@ -117,19 +123,25 @@ namespace kata_TicTacToe
             return null;
         }
          
-        public bool HasOpponentSymbolInDiagonalLTR(Symbol symbol)
-        {
-            var diagonal = _boardSquares.Where(s => s.XCoordinate == s.YCoordinate);
-            var numberDiagonal = diagonal.Count(x => x.Symbol == symbol);
-            var emptySpot = diagonal.Count(x => x.Symbol == Symbol.None);
-            return numberDiagonal == 1 && emptySpot == 1;
-        }
+        // public bool HasOpponentSymbolInDiagonalLTR(Symbol symbol)
+        // {
+        //     var diagonal = new[]
+        //     {
+        //         GetSymbolAtCoordinates(1, 1),
+        //         GetSymbolAtCoordinates(2, 2),
+        //         GetSymbolAtCoordinates(3, 3)
+        //     };
+        //     
+        //     var numberDiagonal = diagonal.Count(s => s == symbol);
+        //     var emptySpot = diagonal.Count(s => s == Symbol.None);
+        //     return numberDiagonal == 1 && emptySpot == 1;
+        // }
         
         public Square GetDiagonalEmptySpotLTR()
         {
             var diagonal = _boardSquares.Where(s => s.XCoordinate == s.YCoordinate);
-                var emptySpot = diagonal.Where(x => x.Symbol == Symbol.None);
-                return emptySpot.FirstOrDefault();
+            var emptySpot = diagonal.Where(x => x.Symbol == Symbol.None);
+            return emptySpot.FirstOrDefault();
         }
         
         public Square GetDiagonalEmptySpotRTL()
@@ -176,7 +188,6 @@ namespace kata_TicTacToe
             return false;
         }
         
-        //Diagonal LTR
         public bool CheckDiagonalLTR(Symbol symbol)
         {
             var diagonal = _boardSquares.Where(s => s.XCoordinate == s.YCoordinate);
