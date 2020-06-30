@@ -55,12 +55,6 @@ namespace kata_TicTacToe
             return _boardSquares[(xCoordinate-1) * Size + (yCoordinate-1)].Symbol;
         }
 
-        public (int x, int y) GetCoordinatesFromSquare(Square square)
-        {
-            var foundSquare =_boardSquares.Find(s => s.XCoordinate == square.XCoordinate && s.YCoordinate == square.YCoordinate);
-            return (foundSquare.XCoordinate, foundSquare.YCoordinate);
-        }
-        
         public bool IsFull()
         {
             return _boardSquares.TrueForAll(square => square.Symbol != Symbol.None);
@@ -71,7 +65,7 @@ namespace kata_TicTacToe
             var emptySquares = _boardSquares.Where(x => x.Symbol == Symbol.None);
             return emptySquares.FirstOrDefault();
         }
-        
+
         public bool HasEmptyCorner()
         {
             var cornerSpot = _boardSquares.Where(s => s.XCoordinate == s.YCoordinate || s
@@ -92,6 +86,22 @@ namespace kata_TicTacToe
                 == (Size + 1) && s.Symbol == Symbol.None);
             return cornerSpot.FirstOrDefault();
         }
+         
+         public IEnumerable<Square> GetDiagonalSpotsLtr()
+         {
+             return _boardSquares.Where(s =>
+                 s.XCoordinate == s.YCoordinate);
+         }
+
+         // public IEnumerable<Square> GetRowSpots()
+         // {
+         //     for (var i = 1; i <= Size; i++)
+         //     {
+         //        return _boardSquares.Where(s => s.XCoordinate == i);
+         //     }
+         //
+         //     return _boardSquares;
+         // }
 
          public Square GetRowEmptySpot(Symbol symbol)
         {
