@@ -19,13 +19,8 @@ namespace kata_TicTacToe.Tests
             //Assert
            Assert.Equal(2, move.XCoordinate);
            Assert.Equal(2, move.YCoordinate);
-           //Assert.Equal(" .  .  . \n .  X  . \n .  .  . ",board.DisplayBoard());
         }
         
-        //make move 2
-        //make move 3
-        //make move 4
-        //make move 5
 
         [Fact]
         public void MakeMove2AsPlayer1()
@@ -372,6 +367,8 @@ namespace kata_TicTacToe.Tests
             Assert.Equal(1, computerMove4.XCoordinate);
             Assert.Equal(2, computerMove4.YCoordinate);
         }
+        
+        
         
     }
 }

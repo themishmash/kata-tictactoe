@@ -12,10 +12,10 @@ namespace kata_TicTacToe
         
         public Move NextMove() //pass in player? so can get symbol?
         {
-            var xCoordinate = 2;
-            var yCoordinate = 2;
+            var xCoordinate = (_board.Size + 1) / 2;
+            var yCoordinate = (_board.Size + 1) / 2;
             var move = new Move(xCoordinate, yCoordinate);
-            
+
             //return startingMove;
             if (_board.IsSquareBlank(move))
             {
@@ -41,6 +41,7 @@ namespace kata_TicTacToe
             
             return new Move(_board.FindEmptySpot().XCoordinate, _board.FindEmptySpot().YCoordinate);
         }
+        
 
         private Move GetOptimalMove(Symbol symbol) //pass in symbol as parameter
         {

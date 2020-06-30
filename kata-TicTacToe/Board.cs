@@ -193,6 +193,5 @@ namespace kata_TicTacToe
             return filledSpots == 2 && emptySpot == 1;
         }
         
-       
     }
 }
