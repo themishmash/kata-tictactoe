@@ -59,68 +59,79 @@ namespace kata_TicTacToe
         {
             return _boardSquares.TrueForAll(square => square.Symbol != Symbol.None);
         }
-
-        public Square FindEmptySpot()
+        public IEnumerable<Square> GetSpots()
         {
-            var emptySquares = _boardSquares.Where(x => x.Symbol == Symbol.None);
-            return emptySquares.FirstOrDefault();
+            return _boardSquares.FindAll(s => s.XCoordinate <= Size);
         }
-
-        public bool HasEmptyCorner()
+        public IEnumerable<Square> GetDiagonalSpotsLtr()
         {
-            var cornerSpot = _boardSquares.Where(s => s.XCoordinate == s.YCoordinate || s
-                    .XCoordinate
-                + s
-                    .YCoordinate
-                == (Size + 1));
-            var emptySpot = cornerSpot.Count(x => x.Symbol == Symbol.None);
-            return emptySpot > 1;
+            return _boardSquares.Where(s =>
+                s.XCoordinate == s.YCoordinate);
         }
         
-         public Square GetEmptyCorner()
+        public IEnumerable<Square> GetDiagonalSpotsRtl()
         {
-            var cornerSpot = _boardSquares.Where(s => s.XCoordinate == s.YCoordinate && s.Symbol == Symbol.None || s
-            .XCoordinate
-             + s
-            .YCoordinate
-                == (Size + 1) && s.Symbol == Symbol.None);
-            return cornerSpot.FirstOrDefault();
+            return _boardSquares.Where(s =>
+                s.XCoordinate + s.YCoordinate == (Size + 1));
         }
 
-         public Square GetRowEmptySpot(Symbol symbol)
-        {
-            for (var i = 1; i <= Size; i++)
-            {
-                var row = _boardSquares.Where(r => r.XCoordinate == i);
-                var numberRow = row.Count(x => x.Symbol == symbol);
-                if (numberRow != 2) continue;
-                {
-                    var emptySpot = row.Where(x => x.Symbol != symbol);
-                    return emptySpot.FirstOrDefault();
-                }
-            }
-            return null;
-        }
+        // public Square FindEmptySpot()
+        // {
+        //     var emptySquares = _boardSquares.Where(x => x.Symbol == Symbol.None);
+        //     return emptySquares.FirstOrDefault();
+        // }
 
-         public Square GetColumnEmptySpot(Symbol symbol)
-        {
-            for (var i = 1; i <= Size; i++)
-            {
-                var row = _boardSquares.Where(r => r.YCoordinate == i);
-                var numberColumn = row.Count(x => x.Symbol == symbol);
-                if (numberColumn != 2) continue;
-                {
-                    var emptySpot = row.Where(x => x.Symbol != symbol);
-                    return emptySpot.FirstOrDefault();
-                }
-            }
-            return null;
-        }
-         public IEnumerable<Square> GetDiagonalSpotsLtr()
-         {
-             return _boardSquares.Where(s =>
-                 s.XCoordinate == s.YCoordinate);
-         }
+        // public bool HasEmptyCorner()
+        // {
+        //     var cornerSpot = _boardSquares.Where(s => s.XCoordinate == s.YCoordinate || s
+        //             .XCoordinate
+        //         + s
+        //             .YCoordinate
+        //         == (Size + 1));
+        //     var emptySpot = cornerSpot.Count(x => x.Symbol == Symbol.None);
+        //     return emptySpot > 1;
+        // }
+        
+        //  public Square GetEmptyCorner()
+        // {
+        //     var cornerSpot = _boardSquares.Where(s => s.XCoordinate == s.YCoordinate && s.Symbol == Symbol.None || s
+        //     .XCoordinate
+        //      + s
+        //     .YCoordinate
+        //         == (Size + 1) && s.Symbol == Symbol.None);
+        //     return cornerSpot.FirstOrDefault();
+        // }
+
+        //  public Square GetRowEmptySpot(Symbol symbol)
+        // {
+        //     for (var i = 1; i <= Size; i++)
+        //     {
+        //         var row = _boardSquares.Where(r => r.XCoordinate == i);
+        //         var numberRow = row.Count(x => x.Symbol == symbol);
+        //         if (numberRow != 2) continue;
+        //         {
+        //             var emptySpot = row.Where(x => x.Symbol != symbol);
+        //             return emptySpot.FirstOrDefault();
+        //         }
+        //     }
+        //     return null;
+        // }
+
+        //  public Square GetColumnEmptySpot(Symbol symbol)
+        // {
+        //     for (var i = 1; i <= Size; i++)
+        //     {
+        //         var row = _boardSquares.Where(r => r.YCoordinate == i);
+        //         var numberColumn = row.Count(x => x.Symbol == symbol);
+        //         if (numberColumn != 2) continue;
+        //         {
+        //             var emptySpot = row.Where(x => x.Symbol != symbol);
+        //             return emptySpot.FirstOrDefault();
+        //         }
+        //     }
+        //     return null;
+        // }
+         
 
         // public bool HasOpponentSymbolInDiagonalLTR(Symbol symbol)
         // {
@@ -143,11 +154,7 @@ namespace kata_TicTacToe
         //     return emptySpot.FirstOrDefault();
         // }
         
-        public IEnumerable<Square> GetDiagonalSpotsRtl()
-        {
-            return _boardSquares.Where(s =>
-                s.XCoordinate + s.YCoordinate == (Size + 1));
-        }
+        
         
         // public Square GetDiagonalEmptySpotRTL()
         // {
@@ -163,48 +170,45 @@ namespace kata_TicTacToe
         //     return emptySpot > 0;
         // }
 
-        public bool CheckRow(Symbol symbol)
-        {
-            for (var i = 1; i <= Size; i++)
-            {
-                var row = _boardSquares.Where(r => r.XCoordinate == i);
-                var numberRow = row.Count(x => x.Symbol == symbol);
-                var emptySpot = row.Count(x => x.Symbol == Symbol.None);
-                if (numberRow == 2 && emptySpot == 1 )
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-        
-        // public IEnumerable<Square> GetRowSpots()
+        // public bool CheckRow(Symbol symbol)
         // {
-        //     IEnumerable<Square> squares;
+        //     
         //     for (var i = 1; i <= Size; i++)
         //     {
-        //        squares = _boardSquares.Where(r => r.XCoordinate == i);
+        //         var row = GetSpots().Where(r => r.XCoordinate == i);
+        //         var numberOfSymbols = row.Count(x => x.Symbol == symbol);
+        //         var emptySpot = row.Count(x => x.Symbol == Symbol.None);
+        //         if (numberOfSymbols == 2 && emptySpot == 1 )
+        //         {
+        //             return true;
+        //         }
         //     }
-        //
-        //     //return squares;
+        //     return false;
         // }
         
+        // public Symbol GetSymbolAtCoordinates(int xCoordinate, int yCoordinate)
+        // {
+        //     return _boardSquares[(xCoordinate-1) * Size + (yCoordinate-1)].Symbol;
+        // }
+       // NEED TO FIX
         
         
-        public bool CheckColumn(Symbol symbol)
-        {
-            for (var i = 1; i <= Size; i++)
-            {
-                var column = _boardSquares.Where(r => r.YCoordinate == i);
-                var emptySpot = column.Count(x => x.Symbol == Symbol.None);
-                var numberColumn = column.Count(x => x.Symbol == symbol);
-                if (numberColumn == 2 && emptySpot ==1)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
+        
+        
+        // public bool CheckColumn(Symbol symbol)
+        // {
+        //     for (var i = 1; i <= Size; i++)
+        //     {
+        //         var column = _boardSquares.Where(r => r.YCoordinate == i);
+        //         var emptySpot = column.Count(x => x.Symbol == Symbol.None);
+        //         var numberColumn = column.Count(x => x.Symbol == symbol);
+        //         if (numberColumn == 2 && emptySpot ==1)
+        //         {
+        //             return true;
+        //         }
+        //     }
+        //     return false;
+        // }
         
         // public bool CheckDiagonalLTR(Symbol symbol)
         // {
