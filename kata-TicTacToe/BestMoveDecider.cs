@@ -13,8 +13,8 @@ namespace kata_TicTacToe
         }
         public Move NextMove() //pass in player? so can get symbol?
         {
-            var xCoordinate = (_board.Size + 1) / 2; //make this into a method
-            var yCoordinate = (_board.Size + 1) / 2;
+            var xCoordinate = InitialMove(); //make this into a method
+            var yCoordinate = InitialMove();
             var move = new Move(xCoordinate, yCoordinate);
             
             if (_board.IsSquareBlank(move))
@@ -41,7 +41,12 @@ namespace kata_TicTacToe
             
             return new Move(_board.FindEmptySpot().XCoordinate, _board.FindEmptySpot().YCoordinate);
         }
-        
+
+        private int InitialMove()
+        {
+            return (_board.Size + 1) / 2;
+        }
+
         private Move GetBestMove(Symbol symbol) 
         {
             if (CheckRow(symbol))
@@ -76,26 +81,28 @@ namespace kata_TicTacToe
         {
             for (var i = 1; i <= _board.Size; i++)
             {
-                var row = _board.GetRowSpots(i);
-                var numberOfSymbols = row.Count(x => x.Symbol == symbol);
-                var emptySpot = row.Count(x => x.Symbol == Symbol.None);
-                if (numberOfSymbols == 2 && emptySpot == 1 )
+                //var row = _board.GetRowSpots(i);
+                var numberOfSymbols = _board.GetRowSpots(i).Count(x => x.Symbol == symbol);
+                //var emptySpot = GetEmptySpotsRow(i);
+                if (numberOfSymbols == 2 && GetEmptySpotsRow(i).Count() == 1 )
                 {
                     return true;
                 }
             }
             return false;
         }
+        
+        //done
         private Square GetRowEmptySpot(Symbol symbol)
         {
             for (var i = 1; i <= _board.Size; i++)
             {
-                var row = _board.GetRowSpots(i);
-                var numberOfSymbols = row.Count(x => x.Symbol == symbol);
+                //var row = _board.GetRowSpots(i);
+                var numberOfSymbols = _board.GetRowSpots(i).Count(x => x.Symbol == symbol);
                 if (numberOfSymbols != 2) continue;
                 {
-                    var emptySpot = row.Where(x => x.Symbol != symbol);
-                    return emptySpot.FirstOrDefault();
+                    //var emptySpot = row.Where(x => x.Symbol != symbol);
+                    return GetEmptySpotsRow(i).FirstOrDefault();
                 }
             }
             return null;
@@ -125,10 +132,8 @@ namespace kata_TicTacToe
         {
             for (var i = 1; i <= _board.Size; i++)
             {
-                var column = _board.GetColumnSpots(i);
-                var emptySpot = column.Count(x => x.Symbol == Symbol.None);
-                var numberOfSymbols = column.Count(x => x.Symbol == symbol);
-                if (numberOfSymbols == 2 && emptySpot ==1)
+                var numberOfSymbols = _board.GetColumnSpots(i).Count(x => x.Symbol == symbol);
+                if (numberOfSymbols == 2 && GetEmptySpotsColumn(i).Count() ==1)
                 {
                     return true;
                 }
@@ -140,16 +145,20 @@ namespace kata_TicTacToe
         {
             for (var i = 1; i <= _board.Size; i++)
             {
-                var row = _board.GetColumnSpots(i);
-                var numberOfSymbols = row.Count(x => x.Symbol == symbol);
+                var numberOfSymbols = _board.GetColumnSpots(i).Count(x => x.Symbol == symbol);
                 if (numberOfSymbols != 2) continue;
                 {
-                    var emptySpot = row.Where(x => x.Symbol != symbol);
-                    return emptySpot.FirstOrDefault();
+                    return GetEmptySpotsColumn(i).FirstOrDefault();
                 }
             }
             return null;
         }
+        
+        private IEnumerable<Square> GetEmptySpotsColumn(int columnNumber)
+        {
+            return _board.GetColumnSpots(columnNumber).Where(x => x.Symbol == Symbol.None);
+        }
+        
         private bool HasOpponentSymbolDiagonalLtr(Symbol symbol)
         {
             //find way to refactor this method too
