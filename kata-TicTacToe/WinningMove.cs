@@ -2,7 +2,6 @@ namespace kata_TicTacToe
 {
     public class WinningMove
     {
-        
         private readonly Board _board;
 
         public WinningMove(Board board)
@@ -36,7 +35,6 @@ namespace kata_TicTacToe
             {
                 if (_board.GetSymbolAtCoordinates(i, i) != symbol) return false;
             }
-
             return true;
         }
         public bool HasWonDiagonalRtl(Symbol symbol)
@@ -45,9 +43,7 @@ namespace kata_TicTacToe
             {
                 if (_board.GetSymbolAtCoordinates((_board.Size + 1 - i), i) != symbol) return false;
             }
-
             return true;
         }
-
     }
 }

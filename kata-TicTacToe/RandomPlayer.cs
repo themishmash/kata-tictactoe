@@ -2,10 +2,10 @@ namespace kata_TicTacToe
 {
     public class RandomPlayer : Player
     {
-        private readonly NumberGenerator _iNumberGenerator;
+        private readonly INumberGenerator _iNumberGenerator;
         
 
-        public RandomPlayer(NumberGenerator iNumberGenerator, Symbol symbol, string name) : base(symbol, name)
+        public RandomPlayer(INumberGenerator iNumberGenerator, Symbol symbol, string name) : base(symbol, name)
         {
             _iNumberGenerator = iNumberGenerator;
            

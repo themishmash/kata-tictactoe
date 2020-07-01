@@ -68,39 +68,48 @@ namespace kata_TicTacToe
             return _boardSquares.Where(s =>
                 s.XCoordinate == s.YCoordinate);
         }
-        
         public IEnumerable<Square> GetDiagonalSpotsRtl()
         {
             return _boardSquares.Where(s =>
                 s.XCoordinate + s.YCoordinate == (Size + 1));
         }
-
-        // public Square FindEmptySpot()
-        // {
-        //     var emptySquares = _boardSquares.Where(x => x.Symbol == Symbol.None);
-        //     return emptySquares.FirstOrDefault();
-        // }
-
-        // public bool HasEmptyCorner()
-        // {
-        //     var cornerSpot = _boardSquares.Where(s => s.XCoordinate == s.YCoordinate || s
-        //             .XCoordinate
-        //         + s
-        //             .YCoordinate
-        //         == (Size + 1));
-        //     var emptySpot = cornerSpot.Count(x => x.Symbol == Symbol.None);
-        //     return emptySpot > 1;
-        // }
         
-        //  public Square GetEmptyCorner()
-        // {
-        //     var cornerSpot = _boardSquares.Where(s => s.XCoordinate == s.YCoordinate && s.Symbol == Symbol.None || s
-        //     .XCoordinate
-        //      + s
-        //     .YCoordinate
-        //         == (Size + 1) && s.Symbol == Symbol.None);
-        //     return cornerSpot.FirstOrDefault();
-        // }
+        public IEnumerable<Square> GetRowSpots(int rowNumber)
+        {
+            return _boardSquares.Where(x => x.XCoordinate == rowNumber);
+        }
+        
+        public IEnumerable<Square> GetColumnSpots(int columnNumber)
+        {
+            return _boardSquares.Where(x => x.YCoordinate == columnNumber);
+        }
+
+        public Square FindEmptySpot()
+        {
+            var emptySquares = _boardSquares.Where(x => x.Symbol == Symbol.None);
+            return emptySquares.FirstOrDefault();
+        }
+
+        public bool HasEmptyCorner()
+        {
+            var cornerSpot = _boardSquares.Where(s => s.XCoordinate == s.YCoordinate || s
+                    .XCoordinate
+                + s
+                    .YCoordinate
+                == (Size + 1));
+            var emptySpot = cornerSpot.Count(x => x.Symbol == Symbol.None);
+            return emptySpot > 1;
+        }
+        
+         public Square GetEmptyCorner()
+        {
+            var cornerSpot = _boardSquares.Where(s => s.XCoordinate == s.YCoordinate && s.Symbol == Symbol.None || s
+            .XCoordinate
+             + s
+            .YCoordinate
+                == (Size + 1) && s.Symbol == Symbol.None);
+            return cornerSpot.FirstOrDefault();
+        }
 
         //  public Square GetRowEmptySpot(Symbol symbol)
         // {

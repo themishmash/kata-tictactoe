@@ -2,7 +2,7 @@ using System;
 
 namespace kata_TicTacToe
 {
-    public class RandomNumberGenerator: NumberGenerator
+    public class RandomNumberGenerator: INumberGenerator
     {
         public int GetXCoordinate(int minimum, int maximum)
         {

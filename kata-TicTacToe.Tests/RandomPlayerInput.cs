@@ -1,7 +1,7 @@
 
 namespace kata_TicTacToe.Tests
 {
-    public class RandomPlayerInput: NumberGenerator
+    public class RandomPlayerInput: INumberGenerator
     {
         private readonly int _xCoordinate;
         private readonly int _yCoordinate;
