@@ -84,7 +84,7 @@ namespace kata_TicTacToe
                 //var row = _board.GetRowSpots(i);
                 var numberOfSymbols = _board.GetRowSpots(i).Count(x => x.Symbol == symbol);
                 //var emptySpot = GetEmptySpotsRow(i);
-                if (numberOfSymbols == 2 && GetEmptySpotsRow(i).Count() == 1 )
+                if (numberOfSymbols == _board.Size-1 && GetEmptySpotsRow(i).Count() == 1 )
                 {
                     return true;
                 }
@@ -99,7 +99,7 @@ namespace kata_TicTacToe
             {
                 //var row = _board.GetRowSpots(i);
                 var numberOfSymbols = _board.GetRowSpots(i).Count(x => x.Symbol == symbol);
-                if (numberOfSymbols != 2) continue;
+                if (numberOfSymbols != _board.Size-1) continue;
                 {
                     //var emptySpot = row.Where(x => x.Symbol != symbol);
                     return GetEmptySpotsRow(i).FirstOrDefault();
@@ -133,7 +133,7 @@ namespace kata_TicTacToe
             for (var i = 1; i <= _board.Size; i++)
             {
                 var numberOfSymbols = _board.GetColumnSpots(i).Count(x => x.Symbol == symbol);
-                if (numberOfSymbols == 2 && GetEmptySpotsColumn(i).Count() ==1)
+                if (numberOfSymbols == _board.Size-1 && GetEmptySpotsColumn(i).Count() ==1)
                 {
                     return true;
                 }
@@ -146,7 +146,7 @@ namespace kata_TicTacToe
             for (var i = 1; i <= _board.Size; i++)
             {
                 var numberOfSymbols = _board.GetColumnSpots(i).Count(x => x.Symbol == symbol);
-                if (numberOfSymbols != 2) continue;
+                if (numberOfSymbols != _board.Size-1) continue;
                 {
                     return GetEmptySpotsColumn(i).FirstOrDefault();
                 }
@@ -159,6 +159,7 @@ namespace kata_TicTacToe
             return _board.GetColumnSpots(columnNumber).Where(x => x.Symbol == Symbol.None);
         }
         
+        //TODO CHECK HERE
         private bool HasOpponentSymbolDiagonalLtr(Symbol symbol)
         {
             //find way to refactor this method too
@@ -186,7 +187,7 @@ namespace kata_TicTacToe
         {
             var filledSpots = _board.GetDiagonalSpotsLtr().Count(x => x.Symbol == symbol);
             var emptySpot = GetEmptySpotsDiagonalLtr().Count();
-            return filledSpots == 2 && emptySpot == 1;
+            return filledSpots == _board.Size-1 && emptySpot == 1;
         }
 
         private IEnumerable<Square> GetEmptySpotsDiagonalLtr()
@@ -210,7 +211,7 @@ namespace kata_TicTacToe
         {
             var filledSpots = _board.GetDiagonalSpotsRtl().Count(x => x.Symbol == symbol);
             var emptySpot = GetEmptySpotsDiagonalRtl().Count();
-            return filledSpots == 2 && emptySpot == 1;
+            return filledSpots == _board.Size-1 && emptySpot == 1;
         }
         
         private IEnumerable<Square> GetEmptySpotsDiagonalRtl()
