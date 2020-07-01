@@ -44,6 +44,7 @@ namespace kata_TicTacToe
 
         private int InitialMove()
         {
+            
             return (_board.Size + 1) / 2;
         }
 
