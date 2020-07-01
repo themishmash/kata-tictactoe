@@ -28,7 +28,16 @@ namespace kata_TicTacToe
             move = GetBestMove(Symbol.Naught);
             if (move != null) return move;
             
-            //Getnextbestmove
+            //Getnextbestmovetowin
+            //has 2 or more spots and rest empty for row, column or diagonal - put one in empty spot
+            // if (_board.Size > 3)
+            // {
+            //     if (CheckRowNextBest(Symbol.Cross))
+            //     {
+            //         return new Move(GetRowEmptySpotNextBest(Symbol.Cross).XCoordinate, GetRowEmptySpotNextBest(Symbol.Cross).YCoordinate);
+            //     } 
+            // }
+            
 
             if (HasOpponentSymbolDiagonalLtr(Symbol.Naught) && CheckEmptySpotDiagonalRtlWhenLtrFilledByOpponent())
             {
@@ -80,6 +89,8 @@ namespace kata_TicTacToe
         }
         
         
+        
+        
         private bool CheckRow(Symbol symbol)
         {
             for (var i = 1; i <= _board.Size; i++)
@@ -87,7 +98,7 @@ namespace kata_TicTacToe
                 //var row = _board.GetRowSpots(i);
                 var numberOfSymbols = _board.GetRowSpots(i).Count(x => x.Symbol == symbol);
                 //var emptySpot = GetEmptySpotsRow(i);
-                if (numberOfSymbols == _board.Size-1 && GetEmptySpotsRow(i).Count() == 1 )
+                if (numberOfSymbols == _board.Size-1 && GetEmptySpotsRow(i).Count() == _board.Size - numberOfSymbols )
                 {
                     return true;
                 }
@@ -110,6 +121,40 @@ namespace kata_TicTacToe
             }
             return null;
         }
+        
+        //TODO get next best move - need to research
+        private bool CheckRowNextBest(Symbol symbol)
+        {
+            for (var i = 1; i <= _board.Size; i++)
+            {
+                //var row = _board.GetRowSpots(i);
+                var numberOfSymbols = _board.GetRowSpots(i).Count(x => x.Symbol == symbol);
+                //var emptySpot = GetEmptySpotsRow(i);
+                if (numberOfSymbols == _board.Size-2 && GetEmptySpotsRow(i).Count() == _board.Size-numberOfSymbols ) //UP TO HERE
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        //done
+        private Square GetRowEmptySpotNextBest(Symbol symbol)
+        {
+            for (var i = 1; i <= _board.Size; i++)
+            {
+                //var row = _board.GetRowSpots(i);
+                var numberOfSymbols = _board.GetRowSpots(i).Count(x => x.Symbol == symbol);
+                if (numberOfSymbols != _board.Size-2) continue;
+                {
+                    //var emptySpot = row.Where(x => x.Symbol != symbol);
+                    return GetEmptySpotsRow(i).FirstOrDefault();
+                }
+            }
+            return null;
+        }
+        
+        
         
         private IEnumerable<Square> GetEmptySpotsRow(int rowNumber)
         {
