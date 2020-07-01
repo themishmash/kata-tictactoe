@@ -17,7 +17,7 @@ namespace kata_TicTacToe
             var yCoordinate = InitialMove();
             var move = new Move(xCoordinate, yCoordinate);
             
-            if (_board.IsSquareBlank(move))
+            if (_board.IsSquareBlank(move) && _board.Size%2 == 1)
             {
                 return move;
             }
@@ -27,6 +27,8 @@ namespace kata_TicTacToe
 
             move = GetBestMove(Symbol.Naught);
             if (move != null) return move;
+            
+            //Getnextbestmove
 
             if (HasOpponentSymbolDiagonalLtr(Symbol.Naught) && CheckEmptySpotDiagonalRtlWhenLtrFilledByOpponent())
             {
@@ -205,7 +207,8 @@ namespace kata_TicTacToe
         
         private bool CheckEmptySpotDiagonalRtlWhenLtrFilledByOpponent()
         {
-            return GetEmptySpotsDiagonalRtl().Any();
+            // return GetEmptySpotsDiagonalRtl().Any();
+            return GetEmptySpotsDiagonalRtl().Count() == _board.Size - 1;
         }
 
         private bool CheckDiagonalRtl(Symbol symbol)

@@ -253,8 +253,8 @@ namespace kata_TicTacToe.Tests
             var bestMove = new BestMoveDecider(board).NextMove();
 
             //Assert
-            Assert.Equal(1, bestMove.XCoordinate);
-            Assert.Equal(2, bestMove.YCoordinate);
+            Assert.Equal(4, bestMove.XCoordinate);
+            Assert.Equal(1, bestMove.YCoordinate);
         }
     }
 }
