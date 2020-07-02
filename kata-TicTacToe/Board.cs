@@ -55,14 +55,16 @@ namespace kata_TicTacToe
             return _boardSquares[(xCoordinate-1) * Size + (yCoordinate-1)].Symbol;
         }
 
+     
+
         public bool IsFull()
         {
             return _boardSquares.TrueForAll(square => square.Symbol != Symbol.None);
         }
-        public IEnumerable<Square> GetSpots()
-        {
-            return _boardSquares.FindAll(s => s.XCoordinate <= Size);
-        }
+        // public IEnumerable<Square> GetSpots()
+        // {
+        //     return _boardSquares.FindAll(s => s.XCoordinate <= Size);
+        // }
         public IEnumerable<Square> GetDiagonalSpotsLtr()
         {
             return _boardSquares.Where(s =>
