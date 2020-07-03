@@ -73,22 +73,22 @@ namespace kata_TicTacToe
         //     return emptySpot > 1;
         // }
         
-        public Move HasEmptyCorner()
-        {
-            var emptySpot = GetCornerSpots().Count(x => x.Symbol == Symbol.None);
-            if (emptySpot > 1)
-            {
-                return new Move(GetCornerSpots().FirstOrDefault().XCoordinate,
-                    GetCornerSpots().FirstOrDefault().YCoordinate);
-            }
-
-            return null;
-        }
+        // public Move HasEmptyCorner()
+        // {
+        //     var emptySpot = GetCornerSpots().Count(x => x.Symbol == Symbol.None);
+        //     if (emptySpot > 1)
+        //     {
+        //         return new Move(GetCornerSpots().FirstOrDefault().XCoordinate,
+        //             GetCornerSpots().FirstOrDefault().YCoordinate);
+        //     }
+        //
+        //     return null;
+        // }
         
-         public Square GetEmptyCorner()
-         {
-             return GetCornerSpots().FirstOrDefault(s => s.Symbol == Symbol.None);
-         }
+         // public Square GetEmptyCorner()
+         // {
+         //     return GetCornerSpots().FirstOrDefault(s => s.Symbol == Symbol.None);
+         // }
 
          private IEnumerable<Square> GetCornerSpots()
          {
