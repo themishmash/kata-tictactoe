@@ -65,32 +65,7 @@ namespace kata_TicTacToe
         {
             return _boardSquares.TrueForAll(square => square.Symbol != Symbol.None);
         }
-        
-        //TODO USE THIS?
-        //use this to return empty spots?
-        public IEnumerable<Square> GetSpots()
-        {
-            return _boardSquares.FindAll(s => s.XCoordinate <= Size);
-        }
-        public IEnumerable<Square> GetDiagonalSpotsLtr()
-        {
-            return _boardSquares.Where(s =>
-                s.XCoordinate == s.YCoordinate);
-        }
-        public IEnumerable<Square> GetDiagonalSpotsRtl()
-        {
-            return _boardSquares.Where(s => s.XCoordinate + s.YCoordinate == (Size + 1));
-        }
-        
-        public IEnumerable<Square> GetRowSpots(int rowNumber)
-        {
-            return _boardSquares.Where(x => x.XCoordinate == rowNumber);
-        }
-        
-        public IEnumerable<Square> GetColumnSpots(int columnNumber)
-        {
-            return _boardSquares.Where(x => x.YCoordinate == columnNumber);
-        }
+
 
         public Square FindEmptySpot()
         {
