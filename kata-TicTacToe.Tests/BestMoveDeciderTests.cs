@@ -237,29 +237,5 @@ namespace kata_TicTacToe.Tests
             Assert.Equal(2, bestMove.YCoordinate);
         }
         
-        //makes optimal move for 4 x 4
-        // [Fact]
-        // public void MakesBestMoveFor4X4Board()
-        // {
-        //     var board = new Board(4);
-        //     board.PlaceSymbolToCoordinates(Symbol.Naught, new Move(1,1));
-        //     board.PlaceSymbolToCoordinates(Symbol.Cross, new Move(1,4));
-        //     board.PlaceSymbolToCoordinates(Symbol.Naught, new Move(1,2));
-        //     board.PlaceSymbolToCoordinates(Symbol.Cross, new Move(4,1));
-        //     board.PlaceSymbolToCoordinates(Symbol.Naught, new Move(2,1));
-        //     board.PlaceSymbolToCoordinates(Symbol.Cross, new Move(1,3));
-        //     board.PlaceSymbolToCoordinates(Symbol.Naught, new Move(2,2));
-        //     board.PlaceSymbolToCoordinates(Symbol.Cross, new Move(2,3));
-        //     board.PlaceSymbolToCoordinates(Symbol.Naught, new Move(3,2));
-        //     board.PlaceSymbolToCoordinates(Symbol.Cross, new Move(4,2));
-        //     board.PlaceSymbolToCoordinates(Symbol.Naught, new Move(3,4));
-        //     
-        //     //Act
-        //     var bestMove = new BestMoveDecider(board).NextMove();
-        //
-        //     //Assert
-        //     Assert.Equal(4, bestMove.XCoordinate);
-        //     Assert.Equal(3, bestMove.YCoordinate);
-        // }
     }
 }
