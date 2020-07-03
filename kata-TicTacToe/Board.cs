@@ -61,11 +61,11 @@ namespace kata_TicTacToe
         }
 
 
-        public Square FindEmptySpot()
-        {
-            var emptySquares = _boardSquares.Where(x => x.Symbol == Symbol.None);
-            return emptySquares.FirstOrDefault();
-        }
+        // public Square FindEmptySpot()
+        // {
+        //     var emptySquares = _boardSquares.Where(x => x.Symbol == Symbol.None);
+        //     return emptySquares.FirstOrDefault();
+        // }
 
         // public bool HasEmptyCorner()
         // {
@@ -90,13 +90,13 @@ namespace kata_TicTacToe
          //     return GetCornerSpots().FirstOrDefault(s => s.Symbol == Symbol.None);
          // }
 
-         private IEnumerable<Square> GetCornerSpots()
-         {
-             var cornerSpot = _boardSquares.Where(s =>
-                 s.XCoordinate == 1 && s.YCoordinate == 1 || s.XCoordinate == 1 && s.YCoordinate == Size ||
-                 s.XCoordinate == Size && s.YCoordinate == 1 || s.XCoordinate == Size && s.YCoordinate == Size);
-             return cornerSpot;
-         }
+         // private IEnumerable<Square> GetCornerSpots()
+         // {
+         //     var cornerSpot = _boardSquares.Where(s =>
+         //         s.XCoordinate == 1 && s.YCoordinate == 1 || s.XCoordinate == 1 && s.YCoordinate == Size ||
+         //         s.XCoordinate == Size && s.YCoordinate == 1 || s.XCoordinate == Size && s.YCoordinate == Size);
+         //     return cornerSpot;
+         // }
          
         
     }
