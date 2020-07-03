@@ -98,10 +98,22 @@ namespace kata_TicTacToe
             return emptySquares.FirstOrDefault();
         }
 
-        public bool HasEmptyCorner()
+        // public bool HasEmptyCorner()
+        // {
+        //     var emptySpot = GetCornerSpots().Count(x => x.Symbol == Symbol.None);
+        //     return emptySpot > 1;
+        // }
+        
+        public Move HasEmptyCorner()
         {
             var emptySpot = GetCornerSpots().Count(x => x.Symbol == Symbol.None);
-            return emptySpot > 1;
+            if (emptySpot > 1)
+            {
+                return new Move(GetCornerSpots().FirstOrDefault().XCoordinate,
+                    GetCornerSpots().FirstOrDefault().YCoordinate);
+            }
+
+            return null;
         }
         
          public Square GetEmptyCorner()

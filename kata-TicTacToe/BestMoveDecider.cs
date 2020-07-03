@@ -13,7 +13,7 @@ namespace kata_TicTacToe
         }
         public Move NextMove() //pass in player? so can get symbol?
         {
-            var xCoordinate = initialMove(); //make this into a method
+            var xCoordinate = initialMove(); 
             var yCoordinate = initialMove();
             var move = new Move(xCoordinate, yCoordinate);
             
@@ -28,6 +28,11 @@ namespace kata_TicTacToe
             move = getBestMove(Symbol.Naught);
             if (move != null) return move;
             
+            move = _board.HasEmptyCorner();
+            if (move != null) return move;
+            
+            return new Move(_board.FindEmptySpot().XCoordinate, _board.FindEmptySpot().YCoordinate);
+
             //Getnextbestmovetowin
             //has 2 or more spots and rest empty for row, column or diagonal - put one in empty spot
             // if (_board.Size > 3)
@@ -46,18 +51,25 @@ namespace kata_TicTacToe
             // }
             
 
-            if (HasOpponentSymbolDiagonalLtr(Symbol.Naught) && CheckEmptySpotDiagonalRtlWhenLtrFilledByOpponent())
-            {
-                return new Move(GetDiagonalEmptySpotRtl().XCoordinate, GetDiagonalEmptySpotRtl()
-                .YCoordinate);
-            }
+            // if (HasOpponentSymbolDiagonalLtr(Symbol.Naught) && CheckEmptySpotDiagonalRtlWhenLtrFilledByOpponent())
+            // {
+            //     return new Move(GetDiagonalEmptySpotRtl().XCoordinate, GetDiagonalEmptySpotRtl()
+            //         .YCoordinate);
+            // }
+            // move = HasOpponentSymbolDiagonalLtr(Symbol.Naught);
+            // if (move!=null) return move
+            // if (HasOpponentSymbolDiagonalLtr(Symbol.Naught) && CheckEmptySpotDiagonalRtlWhenLtrFilledByOpponent())
+            // {
+            //     return new Move(GetDiagonalEmptySpotRtl().XCoordinate, GetDiagonalEmptySpotRtl()
+            //     .YCoordinate);
+            // }
             
-            if (_board.HasEmptyCorner())
-            {
-                return new Move(_board.GetEmptyCorner().XCoordinate, _board.GetEmptyCorner().YCoordinate);
-            }
+            // if (_board.HasEmptyCorner())
+            // {
+            //     return new Move(_board.GetEmptyCorner().XCoordinate, _board.GetEmptyCorner().YCoordinate);
+            // }
             
-            return new Move(_board.FindEmptySpot().XCoordinate, _board.FindEmptySpot().YCoordinate);
+            
         }
 
         private int initialMove()
@@ -67,71 +79,54 @@ namespace kata_TicTacToe
 
         private Move getBestMove(Symbol symbol)
         {
-            // var move = CheckRow();
-            // if (move != null) return move;
-            //
-            // move = CheckColumn();
-            //if (move != null) return move;
-            var move = CheckRow(symbol);
-            if (move != null) return move;
-            // if (CheckRow(symbol))
-            // {
-            //    return new Move(GetRowEmptySpot(symbol).XCoordinate, GetRowEmptySpot(symbol)
-            //             .YCoordinate);
-            // }
             
-            //call the method
+            var move = checkRow(symbol);
+            if (move != null) return move;
 
-            if (CheckColumn(symbol))
-            {
-                return new Move(GetColumnEmptySpot(symbol).XCoordinate,
-                        GetColumnEmptySpot(symbol).YCoordinate);
-            }
+            move = CheckColumn(symbol);
+            if (move != null) return move;
 
-            if (CheckDiagonalLtr(symbol))
-            {
-                return new Move(GetDiagonalEmptySpotLtr().XCoordinate, GetDiagonalEmptySpotLtr()
-                        .YCoordinate);
-            }
+            move = CheckDiagonalLtr(symbol);
+            if (move != null) return move;
 
-            if (CheckDiagonalRtl(symbol))
-            {
-                return new Move(GetDiagonalEmptySpotRtl().XCoordinate,
-                        GetDiagonalEmptySpotRtl().YCoordinate);
-            }
+            move = CheckDiagonalRtl(symbol);
+            if (move != null) return move;
+
+            move = HasOpponentSymbolDiagonalLtr(symbol);
+            if (move != null) return move;
 
             return null;
+            // if (CheckColumn(symbol))
+            // {
+            //     return new Move(GetColumnEmptySpot(symbol).XCoordinate,
+            //             GetColumnEmptySpot(symbol).YCoordinate);
+            // }
+
+            // if (CheckDiagonalLtr(symbol))
+            // {
+            //     return new Move(GetDiagonalEmptySpotLtr().XCoordinate, GetDiagonalEmptySpotLtr()
+            //             .YCoordinate);
+            // }
+            //
+            // if (CheckDiagonalRtl(symbol))
+            // {
+            //     return new Move(GetDiagonalEmptySpotRtl().XCoordinate,
+            //             GetDiagonalEmptySpotRtl().YCoordinate);
+            // }
+            //
+            
         }
         
-        
-        // private bool CheckRow(Symbol symbol)
-        // {
-        //     for (var i = 1; i <= _board.Size; i++)
-        //     {
-        //         //var row = _board.GetRowSpots(i);
-        //         var numberOfSymbols = GetRowSpots(i).Count(x => x == symbol);
-        //         //var emptySpot = GetEmptySpotsRow(i);
-        //         if (numberOfSymbols == _board.Size-1 && GetEmptySpotsRow(i).Count() == _board.Size - numberOfSymbols )
-        //         {
-        //             return true; //return the coordinates for the move//
-        //         }
-        //     }
-        //     return false;
-        // }
-        
-        private Move CheckRow(Symbol symbol)
+        private Move checkRow(Symbol symbol)
         {
             for (var i = 1; i <= _board.Size; i++)
-            {
-                //var row = _board.GetRowSpots(i);
+            { 
                 var numberOfSymbols = GetRowSpots(i).Count(x => x == symbol);
-                //var emptySpot = GetEmptySpotsRow(i);
                 if (numberOfSymbols == _board.Size-1 && GetEmptySpotsRow(i).Count() == _board.Size - numberOfSymbols )
                 {
                     return new Move(GetEmptySpotsRow(i).FirstOrDefault().XCoordinate, GetEmptySpotsRow(i).FirstOrDefault().YCoordinate);
                 }
             }
-
             return null;
         }
 
@@ -148,9 +143,124 @@ namespace kata_TicTacToe
         
         private IEnumerable<Square> GetEmptySpotsRow(int rowNumber)
         {
-            //var test = _board.GetRowSpots(rowNumber).Where(x => x.Symbol == Symbol.None);
             return _board.GetRowSpots(rowNumber).Where(x => x.Symbol == Symbol.None);
         }
+        
+        private Move CheckColumn(Symbol symbol)
+        {
+            for (var i = 1; i <= _board.Size; i++)
+            {
+                var numberOfSymbols = GetColumnSpots(i).Count(x => x == symbol);
+                if (numberOfSymbols == _board.Size-1 && GetEmptySpotsColumn(i).Count() ==1)
+                {
+                    return new Move(GetEmptySpotsColumn(i).FirstOrDefault().XCoordinate, GetEmptySpotsColumn(i).FirstOrDefault().YCoordinate);
+                }
+            }
+            return null;
+        }
+        
+        private IEnumerable<Symbol> GetColumnSpots(int columnNumber)
+        {
+            var symbolList = new List<Symbol>();
+            for (var i = 1; i <= _board.Size; i++)
+            {
+                symbolList.Add(_board.GetSymbolAtCoordinates(i, columnNumber));
+            }
+
+            return symbolList;
+        }
+        
+        private IEnumerable<Square> GetEmptySpotsColumn(int columnNumber)
+        {
+            return _board.GetColumnSpots(columnNumber).Where(x => x.Symbol == Symbol.None);
+        }
+
+        //TODO CHECK HERE
+        private Move HasOpponentSymbolDiagonalLtr(Symbol symbol)
+        {
+            //find way to refactor this method too
+            // var diagonal = new[]
+            // {
+            //     _board.GetSymbolAtCoordinates(1, 1), //1, +1
+            //     _board.GetSymbolAtCoordinates(2, 2),//2
+            //     _board.GetSymbolAtCoordinates(3, 3) //3
+            // };
+            var numberOfSymbols = GetDiagonalSpotsLtr().Count(x => x == symbol);
+           var emptySpot = GetDiagonalSpotsLtr().Count(x => x == Symbol.None);
+           if (numberOfSymbols == 1 && emptySpot == 1 && CheckEmptySpotDiagonalRtlWhenLtrFilledByOpponent())
+           {
+               return new Move(GetEmptySpotsDiagonalRtl().FirstOrDefault().XCoordinate, GetEmptySpotsDiagonalRtl()
+               .FirstOrDefault().YCoordinate);
+           }
+           return null;
+        }
+        private bool CheckEmptySpotDiagonalRtlWhenLtrFilledByOpponent()
+        {
+            // return GetEmptySpotsDiagonalRtl().Any();
+            return GetEmptySpotsDiagonalRtl().Count() == _board.Size - 1;
+        }
+
+        private IEnumerable<Symbol> GetDiagonalSpotsLtr()
+        {
+            var symbolList = new List<Symbol>();
+            for (var i = 1; i <= _board.Size; i++)
+            {
+                 symbolList.Add(_board.GetSymbolAtCoordinates(i, i));
+            }
+            return symbolList;
+        }
+        
+        private Move CheckDiagonalLtr(Symbol symbol)
+        {
+            var filledSpots = GetDiagonalSpotsLtr().Count(x => x == symbol);
+            var emptySpot = GetEmptySpotsDiagonalLtr().Count();
+            if (filledSpots == _board.Size - 1 && emptySpot == 1)
+            {
+                return new Move(GetEmptySpotsDiagonalLtr().FirstOrDefault().XCoordinate, GetEmptySpotsDiagonalLtr()
+                .FirstOrDefault().YCoordinate);
+            }
+            return null;
+        }
+
+        private IEnumerable<Square> GetEmptySpotsDiagonalLtr()
+        {
+            return _board.GetDiagonalSpotsLtr().Where(x => x.Symbol == Symbol.None);
+        }
+        
+        private Move CheckDiagonalRtl(Symbol symbol)
+        {
+            var filledSpots = _board.GetDiagonalSpotsRtl().Count(x => x.Symbol == symbol);
+            var emptySpot = GetEmptySpotsDiagonalRtl().Count();
+            if (filledSpots == _board.Size - 1 && emptySpot == 1)
+            {
+                return new Move(GetEmptySpotsDiagonalRtl().FirstOrDefault().XCoordinate, GetEmptySpotsDiagonalRtl().FirstOrDefault().YCoordinate);
+            }
+            return null;
+        }
+        
+        private IEnumerable<Square> GetEmptySpotsDiagonalRtl()
+        {
+            return _board.GetDiagonalSpotsRtl().Where(x => x.Symbol == Symbol.None);
+        }
+        
+        
+        
+         
+        // private bool CheckRow(Symbol symbol)
+        // {
+        //     for (var i = 1; i <= _board.Size; i++)
+        //     {
+        //         //var row = _board.GetRowSpots(i);
+        //         var numberOfSymbols = GetRowSpots(i).Count(x => x == symbol);
+        //         //var emptySpot = GetEmptySpotsRow(i);
+        //         if (numberOfSymbols == _board.Size-1 && GetEmptySpotsRow(i).Count() == _board.Size - numberOfSymbols )
+        //         {
+        //             return true; //return the coordinates for the move//
+        //         }
+        //     }
+        //     return false;
+        // }
+        
         
         //done
         // private Square GetRowEmptySpot(Symbol symbol)
@@ -186,117 +296,20 @@ namespace kata_TicTacToe
         //     return null;
         // }
 
-        private bool CheckColumn(Symbol symbol)
-        {
-            for (var i = 1; i <= _board.Size; i++)
-            {
-                var numberOfSymbols = GetColumnSpots(i).Count(x => x == symbol);
-                if (numberOfSymbols == _board.Size-1 && GetEmptySpotsColumn(i).Count() ==1)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
+       
 
-        private Square GetColumnEmptySpot(Symbol symbol)
-        {
-            for (var i = 1; i <= _board.Size; i++)
-            {
-                var numberOfSymbols = GetColumnSpots(i).Count(x => x == symbol);
-                if (numberOfSymbols != _board.Size-1) continue;
-                {
-                    return GetEmptySpotsColumn(i).FirstOrDefault();
-                }
-            }
-            return null;
-        }
-        
-        private IEnumerable<Square> GetEmptySpotsColumn(int columnNumber)
-        {
-            return _board.GetColumnSpots(columnNumber).Where(x => x.Symbol == Symbol.None);
-        }
-        
-        private IEnumerable<Symbol> GetColumnSpots(int columnNumber)
-        {
-            var symbolList = new List<Symbol>();
-            for (var i = 1; i <= _board.Size; i++)
-            {
-                symbolList.Add(_board.GetSymbolAtCoordinates(i, columnNumber));
-            }
-
-            return symbolList;
-        }
-        
-        //TODO CHECK HERE
-        private bool HasOpponentSymbolDiagonalLtr(Symbol symbol)
-        {
-            //find way to refactor this method too
-            // var diagonal = new[]
-            // {
-            //     _board.GetSymbolAtCoordinates(1, 1), //1, +1
-            //     _board.GetSymbolAtCoordinates(2, 2),//2
-            //     _board.GetSymbolAtCoordinates(3, 3) //3
-            // };
-            var numberOfSymbols = GetDiagonalSpotsLtr().Count(x => x == symbol);
-           var emptySpot = GetDiagonalSpotsLtr().Count(x => x == Symbol.None);
-           return numberOfSymbols == 1 && emptySpot == 1;
-        }
-
-        private IEnumerable<Symbol> GetDiagonalSpotsLtr()
-        {
-            var symbolList = new List<Symbol>();
-            for (var i = 1; i <= _board.Size; i++)
-            {
-                 symbolList.Add(_board.GetSymbolAtCoordinates(i, i));
-            }
-            return symbolList;
-        }
-
-        
-        //works
-        private Square GetDiagonalEmptySpotLtr()
-        {
-            return GetEmptySpotsDiagonalLtr().FirstOrDefault();
-        }
-
-        private bool CheckDiagonalLtr(Symbol symbol)
-        {
-            var filledSpots = GetDiagonalSpotsLtr().Count(x => x == symbol);
-            var emptySpot = GetEmptySpotsDiagonalLtr().Count();
-            return filledSpots == _board.Size-1 && emptySpot == 1;
-        }
-
-        private IEnumerable<Square> GetEmptySpotsDiagonalLtr()
-        {
-            return _board.GetDiagonalSpotsLtr().Where(x => x.Symbol == Symbol.None);
-        }
-        
-        private Square GetDiagonalEmptySpotRtl()
-        {
-           // var diagonal = _board.GetDiagonalSpotsRtl();
-            //var emptySpot = diagonal.Where(x => x.Symbol == Symbol.None);
-            return GetEmptySpotsDiagonalRtl().FirstOrDefault();
-        }
-        
-        private bool CheckEmptySpotDiagonalRtlWhenLtrFilledByOpponent()
-        {
-            // return GetEmptySpotsDiagonalRtl().Any();
-            return GetEmptySpotsDiagonalRtl().Count() == _board.Size - 1;
-        }
-
-        private bool CheckDiagonalRtl(Symbol symbol)
-        {
-            var filledSpots = _board.GetDiagonalSpotsRtl().Count(x => x.Symbol == symbol);
-            var emptySpot = GetEmptySpotsDiagonalRtl().Count();
-            return filledSpots == _board.Size-1 && emptySpot == 1;
-        }
-        
-        private IEnumerable<Square> GetEmptySpotsDiagonalRtl()
-        {
-            return _board.GetDiagonalSpotsRtl().Where(x => x.Symbol == Symbol.None);
-        }
-        
+        // private Square GetColumnEmptySpot(Symbol symbol)
+        // {
+        //     for (var i = 1; i <= _board.Size; i++)
+        //     {
+        //         var numberOfSymbols = GetColumnSpots(i).Count(x => x == symbol);
+        //         if (numberOfSymbols != _board.Size-1) continue;
+        //         {
+        //             return GetEmptySpotsColumn(i).FirstOrDefault();
+        //         }
+        //     }
+        //     return null;
+        // }
         
         
         
