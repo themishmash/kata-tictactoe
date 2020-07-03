@@ -27,7 +27,7 @@ namespace kata_TicTacToe.Tests
             //Arrange
             var board = new Board(3);
             board.PlaceSymbolToCoordinates(Symbol.Cross, new Move(2,2));
-            board.PlaceSymbolToCoordinates(Symbol.Naught,new Move(3,1));
+            board.PlaceSymbolToCoordinates(Symbol.Naught, new Move(3,1));
             
             //Act
             var bestMove = new BestMoveDecider(board).NextMove();
