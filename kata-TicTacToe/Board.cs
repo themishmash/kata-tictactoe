@@ -54,13 +54,7 @@ namespace kata_TicTacToe
         {
             return _boardSquares[(xCoordinate-1) * Size + (yCoordinate-1)].Symbol;
         }
-
-        public IEnumerable<Square> GetSquareAtCoordinates(int xCoordinate, int yCoordinate)
-        {
-            return _boardSquares.Where(x => x.XCoordinate == xCoordinate && x.YCoordinate == yCoordinate);
-        }
-     
-
+        
         public bool IsFull()
         {
             return _boardSquares.TrueForAll(square => square.Symbol != Symbol.None);

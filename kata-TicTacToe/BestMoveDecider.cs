@@ -11,7 +11,7 @@ namespace kata_TicTacToe
         {
             _board = board;
         }
-        public Move NextMove() //p
+        public Move NextMove() //change interface to allow symbol to be passed in
         {
             var xCoordinate = initialMove(); 
             var yCoordinate = initialMove();
@@ -28,11 +28,14 @@ namespace kata_TicTacToe
             move = getBestMove(Symbol.Naught);
             if (move != null) return move;
             
-            move = _board.HasEmptyCorner();
+            // move = _board.HasEmptyCorner();
+            // if (move != null) return move;
+
+            move = GetCornerSpots().FirstOrDefault();
             if (move != null) return move;
             
             return new Move(_board.FindEmptySpot().XCoordinate, _board.FindEmptySpot().YCoordinate);
-
+            
             //Getnextbestmovetowin
             //has 2 or more spots and rest empty for row, column or diagonal - put one in empty spot
             // if (_board.Size > 3)
@@ -95,25 +98,7 @@ namespace kata_TicTacToe
             if (move != null) return move;
 
             return null;
-            // if (CheckColumn(symbol))
-            // {
-            //     return new Move(GetColumnEmptySpot(symbol).XCoordinate,
-            //             GetColumnEmptySpot(symbol).YCoordinate);
-            // }
 
-            // if (CheckDiagonalLtr(symbol))
-            // {
-            //     return new Move(GetDiagonalEmptySpotLtr().XCoordinate, GetDiagonalEmptySpotLtr()
-            //             .YCoordinate);
-            // }
-            //
-            // if (CheckDiagonalRtl(symbol))
-            // {
-            //     return new Move(GetDiagonalEmptySpotRtl().XCoordinate,
-            //             GetDiagonalEmptySpotRtl().YCoordinate);
-            // }
-            //
-            
         }
         
         private Move checkRow(Symbol symbol)
@@ -282,8 +267,27 @@ namespace kata_TicTacToe
             }
             return moveList;
         }
-        
-        
+
+        private IEnumerable<Move> GetCornerSpots()
+        {
+            var moveList = new List<Move>();
+            for (var i = 1; i < _board.Size; i++)
+            {
+                if (_board.GetSymbolAtCoordinates(1, 1) == Symbol.None 
+                    || _board.GetSymbolAtCoordinates(1, _board.Size)
+                    == Symbol.None 
+                    || _board.GetSymbolAtCoordinates(_board.Size, 1) == Symbol.None 
+                    || _board.GetSymbolAtCoordinates(_board.Size, _board.Size) == Symbol.None)
+                {
+                    moveList.Add(new Move(1, 1));
+                    moveList.Add(new Move(1, _board.Size));
+                    moveList.Add(new Move(_board.Size, 1));
+                    moveList.Add(new Move(_board.Size, _board.Size));
+                }
+            }
+
+            return moveList;
+        }
         
         
         
