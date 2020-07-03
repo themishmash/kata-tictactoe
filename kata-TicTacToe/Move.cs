@@ -7,13 +7,8 @@ namespace kata_TicTacToe
         
         public Move(int xCoordinate, int yCoordinate)
         {
-           
             XCoordinate = xCoordinate;
             YCoordinate = yCoordinate;
         }
-
-
-     
-        
     }
 }

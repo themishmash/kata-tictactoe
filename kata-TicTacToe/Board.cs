@@ -26,7 +26,6 @@ namespace kata_TicTacToe
                 }
             }
         }
-
         public string DisplayBoard()
         {
             var rows = new List<string>();
@@ -36,7 +35,6 @@ namespace kata_TicTacToe
                 rows.Add( string.Join("",row));
             }
             return string.Join(System.Environment.NewLine, rows);
-          
         }
         
         public bool IsSquareBlank(Move move)
@@ -49,7 +47,6 @@ namespace kata_TicTacToe
             var spot = _boardSquares.Find(s => s.XCoordinate == move.XCoordinate && s.YCoordinate == move.YCoordinate);
             _boardSquares[_boardSquares.IndexOf(spot)] = new Square(move.XCoordinate,move.YCoordinate, symbol);
         }
-        
         public Symbol GetSymbolAtCoordinates(int xCoordinate, int yCoordinate)
         {
             return _boardSquares[(xCoordinate-1) * Size + (yCoordinate-1)].Symbol;
@@ -59,45 +56,5 @@ namespace kata_TicTacToe
         {
             return _boardSquares.TrueForAll(square => square.Symbol != Symbol.None);
         }
-
-
-        // public Square FindEmptySpot()
-        // {
-        //     var emptySquares = _boardSquares.Where(x => x.Symbol == Symbol.None);
-        //     return emptySquares.FirstOrDefault();
-        // }
-
-        // public bool HasEmptyCorner()
-        // {
-        //     var emptySpot = GetCornerSpots().Count(x => x.Symbol == Symbol.None);
-        //     return emptySpot > 1;
-        // }
-        
-        // public Move HasEmptyCorner()
-        // {
-        //     var emptySpot = GetCornerSpots().Count(x => x.Symbol == Symbol.None);
-        //     if (emptySpot > 1)
-        //     {
-        //         return new Move(GetCornerSpots().FirstOrDefault().XCoordinate,
-        //             GetCornerSpots().FirstOrDefault().YCoordinate);
-        //     }
-        //
-        //     return null;
-        // }
-        
-         // public Square GetEmptyCorner()
-         // {
-         //     return GetCornerSpots().FirstOrDefault(s => s.Symbol == Symbol.None);
-         // }
-
-         // private IEnumerable<Square> GetCornerSpots()
-         // {
-         //     var cornerSpot = _boardSquares.Where(s =>
-         //         s.XCoordinate == 1 && s.YCoordinate == 1 || s.XCoordinate == 1 && s.YCoordinate == Size ||
-         //         s.XCoordinate == Size && s.YCoordinate == 1 || s.XCoordinate == Size && s.YCoordinate == Size);
-         //     return cornerSpot;
-         // }
-         
-        
     }
 }
