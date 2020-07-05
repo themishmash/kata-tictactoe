@@ -8,11 +8,11 @@ namespace kata_TicTacToe
         
         public Symbol Symbol { get; set; }
 
-        public Square(int xCoordinate, int yCoordinate)
+        public Square(int xCoordinate, int yCoordinate, Symbol symbol = Symbol.None)
         {
             XCoordinate = xCoordinate;
             YCoordinate = yCoordinate;
-            Symbol = Symbol.None;
+            Symbol = symbol;
         }
 
         public override string ToString()

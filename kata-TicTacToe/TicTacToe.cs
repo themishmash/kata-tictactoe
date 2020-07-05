@@ -31,23 +31,27 @@ namespace kata_TicTacToe
              while (true)
              {
                  currentPlayer = currentPlayer != _player1 ? _player1 : _player2;
-                 var move = currentPlayer.PlayTurn();
+                 if (currentPlayer != null)
+                 {
+                     var move = currentPlayer.PlayTurn();
                  
-                 while(!MoveValidator.IsValidMove(move, _board))
-                 {
-                     _iio.Output("Oh no, a piece is already at this place! Try again...");
-                     move = currentPlayer.PlayTurn();
-                 }
-                 _board.PlaceSymbolToCoordinates(currentPlayer.Symbol, move);
-                 _iio.Output("Move accepted, here's the current board:");
-                 _iio.Output(_board.DisplayBoard());
+                     while(!MoveValidator.IsValidMove(move, _board))
+                     {
+                         _iio.Output("Oh no, a piece is already at this place! Try again...");
+                         move = currentPlayer.PlayTurn();
+                     }
 
-                 if (HasPlayerWon(currentPlayer, move))
-                 {
-                     GameStatus = GameStatus.Won;
-                     _iio.Output("Move accepted, well done you've won the game!");
+                     _board.PlaceSymbolToCoordinates(currentPlayer.Symbol, move);
+                     _iio.Output("Move accepted, here's the current board:");
                      _iio.Output(_board.DisplayBoard());
-                     return;
+
+                     if (HasPlayerWon(currentPlayer, move))
+                     {
+                         GameStatus = GameStatus.Won;
+                         _iio.Output("Move accepted, well done you've won the game!");
+                         _iio.Output(_board.DisplayBoard());
+                         return;
+                     }
                  }
 
                  if (_board.IsFull())

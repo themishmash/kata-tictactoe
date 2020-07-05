@@ -26,7 +26,6 @@ namespace kata_TicTacToe
                 }
             }
         }
-
         public string DisplayBoard()
         {
             var rows = new List<string>();
@@ -36,60 +35,26 @@ namespace kata_TicTacToe
                 rows.Add( string.Join("",row));
             }
             return string.Join(System.Environment.NewLine, rows);
-            //[1,2,3]
-            //123
-            //1+2+3
-            //1
-            //2
-            //3
-            //needed groupby because of 1D array i set up. taking each row, joining them with empty string
-            //Then newline 
-            //[[x,x,x],[ ,o, ],[o, , ]] //group by puts it like that
         }
         
         public bool IsSquareBlank(Move move)
         {
-            foreach (var square in _boardSquares)
-            {
-                if (square.XCoordinate == move.XCoordinate && square.YCoordinate == move.YCoordinate && square.Symbol == Symbol.None)
-                    return true;
-            }
-            return false;
+            return _boardSquares.Any(square => square.XCoordinate == move.XCoordinate && square.YCoordinate == move.YCoordinate && square.Symbol == Symbol.None);
         }
         
         public void PlaceSymbolToCoordinates(Symbol symbol, Move move)
         {
             var spot = _boardSquares.Find(s => s.XCoordinate == move.XCoordinate && s.YCoordinate == move.YCoordinate);
-            _boardSquares[_boardSquares.IndexOf(spot)].Symbol = symbol;
-            //_boardSquares[_boardSquares.IndexOf(spot)].SquareStatus = SquareStatus.Filled;
-            
-            // your list contains 9 square obj
-            //     find the coordinate
-            //         get the existing obj and change the property of the object
-            
-            //I was creating a new object, find the coordinate and then updating with new object
-            
-
-            // var newValidMove = new Square(move.XCoordinate, move.YCoordinate) {Symbol = symbol};
-            // var foundNewMoveCoordinateInList = _boardSquares.First(square => square.XCoordinate == move.XCoordinate && square
-            // .YCoordinate ==
-            //     move.YCoordinate);
-            // var index = _boardSquares.IndexOf(foundNewMoveCoordinateInList);
-            // if (index != -1)
-            //     _boardSquares[index] = newValidMove;
+            _boardSquares[_boardSquares.IndexOf(spot)] = new Square(move.XCoordinate,move.YCoordinate, symbol);
         }
-        
         public Symbol GetSymbolAtCoordinates(int xCoordinate, int yCoordinate)
         {
             return _boardSquares[(xCoordinate-1) * Size + (yCoordinate-1)].Symbol;
         }
-
-        //Draw
+        
         public bool IsFull()
         {
             return _boardSquares.TrueForAll(square => square.Symbol != Symbol.None);
         }
-        
-       
     }
 }

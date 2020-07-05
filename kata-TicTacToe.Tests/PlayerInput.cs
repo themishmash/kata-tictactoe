@@ -41,19 +41,31 @@ namespace kata_TicTacToe.Tests
         {
             _turn = turn;
         }
+
+        public PlayerInput((int x, int y) turn, (int x, int y)turn2)
+        {
+            _turn = (1, 1);
+            _turn2 = (1, 2);
+        }
         
         public (int x, int y) AskQuestion(string question)
         {
             _counter++;
-            return _counter switch
+            switch (_counter)
             {
-                1 => _turn,
-                2 => _turn2,
-                3 => _turn3,
-                4 => _turn4,
-                5 => _turn5,
-                _ => (1, 1)
-            };
+                case 1:
+                    return _turn;
+                case 2:
+                    return _turn2;
+                case 3:
+                    return _turn3;
+                case 4:
+                    return _turn4;
+                case 5:
+                    return _turn5;
+                default:
+                    return (1, 1);
+            }
         }
 
         public void Output(string message)

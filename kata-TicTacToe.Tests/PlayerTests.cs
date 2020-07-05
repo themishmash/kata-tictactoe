@@ -10,7 +10,7 @@ namespace kata_TicTacToe.Tests
          {
              //arrange
              var input = new PlayerInput((1,1));
-             var playerX = new Player(input, Symbol.Cross, "player X");
+             var playerX = new Human(input, Symbol.Cross, "player X");
              //act
              var move = playerX.PlayTurn();
              //assert
@@ -23,7 +23,7 @@ namespace kata_TicTacToe.Tests
         public void PlayerHasCorrectXSymbol()
         {
             var input = new PlayerInput((1,1));
-            var playerX = new Player(input, Symbol.Cross, "player X");
+            var playerX = new Human(input, Symbol.Cross, "player X");
             Assert.Equal(Symbol.Cross, playerX.Symbol);
         }
         
