@@ -120,7 +120,34 @@ namespace kata_TicTacToe.Tests
         }
         
         //create another test with best move computer player can play a game - don't necessarily need to win. 
+        [Fact]
+        public void CanDrawPlayer2()
+        {
+            //Arrange
+            var board = new Board(3);
+            var testInputO = new PlayerInput((1,1),(1,3),(3,2),(2,3),(2,1));
+            var playerO = new Human(testInputO, Symbol.Naught, "player o");
+            var computer = new ComputerNeverLose(Symbol.Cross, "computer", new BestMoveDecider(board));
+            var ticTacToe = new TicTacToe(board, playerO, computer, new NullInputOutput());
+            //Act
+            ticTacToe.PlayGame();
+            //Assert
+            Assert.Equal(GameStatus.Drew, ticTacToe.GameStatus);
+            //Arrange
+           // var board = new Board(3);
+            //board.PlaceSymbolToCoordinates(Symbol.Naught, new Move(1,1));
+            //board.PlaceSymbolToCoordinates(Symbol.Cross, new Move(2,2));
+            // board.PlaceSymbolToCoordinates(Symbol.Naught, new Move(1,3));
+            // board.PlaceSymbolToCoordinates(Symbol.Cross, new Move(1,2));
+            // board.PlaceSymbolToCoordinates(Symbol.Naught, new Move(3,2));
+            
+            //Act
+           // var bestMove = new BestMoveDecider(board).NextMove();
         
+            //Assert
+            // Assert.Equal(1, bestMove.XCoordinate);
+            // Assert.Equal(1, bestMove.YCoordinate);
+        }
         
         // [Fact]
         // public void ComputerMakeMove2()

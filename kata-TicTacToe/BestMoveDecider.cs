@@ -21,6 +21,19 @@ namespace kata_TicTacToe
             {
                 return move;
             }
+
+            if (CheckSingleFilledSpot())
+            {
+                move = GetCornerSpots();
+                return move;
+            }
+
+            
+            // if (_board.GetSymbolAtCoordinates(move.XCoordinate, move.XCoordinate) != Symbol.None)
+            // {
+            //     return GetCornerSpots();
+            // }
+            
             
             move = GetBestMove(); 
             if (move != null) return move;
@@ -53,10 +66,49 @@ namespace kata_TicTacToe
 
             move = HasOpponentSymbolDiagonalLtr();
             if (move != null) return move;
+            
+            move = CheckOptimalMove();
+            if (move != null) return move;
 
             return null;
         }
         
+        private bool CheckSingleFilledSpot()
+        {
+            var listOfSymbols = new List<Symbol>();
+            for (var i = 1; i <= _board.Size; i++)
+            {
+                var coordinateSymbol = _board.GetSymbolAtCoordinates(i, i);
+                if (coordinateSymbol == Symbol.None)
+                {
+                    listOfSymbols.Add(coordinateSymbol);
+                }
+            }
+            return listOfSymbols.Count == _board.Size-1;
+        }
+
+        private Move CheckOptimalMove()
+        {
+            var move = CheckRowBestMove();
+            if (move != null) return move;
+            return null;
+        }
+
+        private Move CheckRowBestMove()
+        {
+            for (var i = 1; i <= _board.Size; i++)
+            { 
+                var numberOfXSymbols = GetRowSpots(i, Symbol.Cross);
+                var numberOfOSymbols = GetRowSpots(i, Symbol.Naught);
+                var emptySpotsRow = GetEmptySpotsRow(i);
+                if ((numberOfXSymbols == 1 || numberOfOSymbols == 1) && emptySpotsRow != null) //This is checking to see if there are 2 filled in spots with the same symbol and 1 empty spot
+                {
+                    return emptySpotsRow;
+                }
+            }
+            return null;
+        }
+
         private Move CheckRow()
         {
             for (var i = 1; i <= _board.Size; i++)
@@ -232,17 +284,25 @@ namespace kata_TicTacToe
             var moveList = new List<Move>();
             for (var i = 1; i < _board.Size; i++)
             {
-                if (_board.GetSymbolAtCoordinates(1, 1) == Symbol.None 
-                    || _board.GetSymbolAtCoordinates(1, _board.Size)
-                    == Symbol.None 
-                    || _board.GetSymbolAtCoordinates(_board.Size, 1) == Symbol.None 
-                    || _board.GetSymbolAtCoordinates(_board.Size, _board.Size) == Symbol.None)
+                if (_board.GetSymbolAtCoordinates(1, 1) == Symbol.None)
                 {
                     moveList.Add(new Move(1, 1));
+                }
+                if (_board.GetSymbolAtCoordinates(1, _board.Size) == Symbol.None)
+                {
                     moveList.Add(new Move(1, _board.Size));
+                }
+
+                if (_board.GetSymbolAtCoordinates(_board.Size, 1) == Symbol.None)
+                {
                     moveList.Add(new Move(_board.Size, 1));
+                }
+
+                if (_board.GetSymbolAtCoordinates(_board.Size, _board.Size) == Symbol.None)
+                {
                     moveList.Add(new Move(_board.Size, _board.Size));
                 }
+                
             }
             return moveList.FirstOrDefault();
         }
