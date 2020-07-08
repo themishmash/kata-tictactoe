@@ -17,13 +17,17 @@ namespace kata_TicTacToe
             var answer = Console.ReadLine();
             var coordinates = ParseStringCoordinatesToInt(answer);
             return (coordinates[0], coordinates[1]);
-            
         }
-
-
+        
         public void Output(string message)
         {
             Console.WriteLine(message);
+        }
+
+        public void PrintCurrentBoardCaption()
+        {
+            Console.WriteLine("Here's the current board:");
+            //Console.WriteLine(MyResource.BoardCaption);
         }
         
         private int[] ParseStringCoordinatesToInt(string number)

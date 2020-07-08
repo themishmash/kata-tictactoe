@@ -2,7 +2,6 @@ namespace kata_TicTacToe
 {
     public abstract class Player
     {
-        //protected readonly IInputOutput _iio;
 
         public Symbol Symbol { get; private set; }
         protected string Name { get; }

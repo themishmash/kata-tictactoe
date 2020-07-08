@@ -9,7 +9,7 @@ namespace kata_TicTacToe
         private readonly Board _board;
         private readonly Player _player1;
         private readonly Player _player2;
-        public GameStatus GameStatus { get; private set; }
+        private GameStatus GameStatus { get; set; }
 
 
         public TicTacToe(Board board, Player player1, Player player2, IInputOutput iio)
@@ -27,6 +27,9 @@ namespace kata_TicTacToe
         {
             Player currentPlayer = null;
             _iio.Output("Here's the current board:");
+            //printCaption();
+            //_iio.Output(MyRsc.CurrentBoard)
+            
              _iio.Output(_board.DisplayBoard());
              while (true)
              {
@@ -63,7 +66,6 @@ namespace kata_TicTacToe
              }
         }
         
-
         private bool HasPlayerWon(Player player, Move move)
         {
             return _winningMove.HasWonHorizontallyCheckCoordinates(player.Symbol, move.XCoordinate) || _winningMove.HasWonVerticallyCheckCoordinates(player.Symbol, move.YCoordinate) || _winningMove.HasWonDiagonalLtr(player.Symbol) || _winningMove.HasWonDiagonalRtl(player.Symbol);
