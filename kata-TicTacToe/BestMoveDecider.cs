@@ -47,11 +47,17 @@ namespace kata_TicTacToe
             move = FindAWinningColumnMove(Symbol.Cross);
             if (move != null) return move;
 
-            move = CheckDiagonalLtr();
+            move = FindAWinningDiagonalLtrMove(Symbol.Cross);
+            if (move != null) return move;
+            
+            move = FindAWinningDiagonalRtlMove(Symbol.Cross);
             if (move != null) return move;
 
-            move = CheckDiagonalRtl();
-            if (move != null) return move;
+            // move = CheckDiagonalLtr();
+            // if (move != null) return move;
+
+            // move = CheckDiagonalRtl();
+            // if (move != null) return move;
 
             move = HasOpponentSymbolDiagonalRtl();
             if (move != null) return move;
@@ -68,7 +74,6 @@ namespace kata_TicTacToe
 
             return null;
         }
-        
         
         private Move FindAWinningRowMove(Symbol symbol)
         {
@@ -134,8 +139,53 @@ namespace kata_TicTacToe
             return nextMove;
         }
         
-        //create diagonal LTR method here
+        private Move FindAWinningDiagonalLtrMove(Symbol symbol)
+        {
+            Move nextMove = null;
+            for (var i = 1; i <= _board.Size; i++)
+            {
+                var currentSymbol = _board.GetSymbolAtCoordinates(i, i);
+                if (currentSymbol != symbol && currentSymbol !=Symbol.None)
+                {
+                    nextMove = null;
+                    break;
+                }
+                if (currentSymbol == Symbol.None && nextMove != null)
+                {
+                    nextMove = null;
+                    break;
+                }
+                if (currentSymbol == Symbol.None)
+                {
+                    nextMove = new Move(i, i);
+                } 
+            }
+            return nextMove;
+        }
         
+        private Move FindAWinningDiagonalRtlMove(Symbol symbol)
+        {
+            Move nextMove = null;
+            for (var i = 1; i <= _board.Size; i++)
+            {
+                var currentSymbol = _board.GetSymbolAtCoordinates(_board.Size +1 -i, i);
+                if (currentSymbol != symbol && currentSymbol !=Symbol.None)
+                {
+                    nextMove = null;
+                    break;
+                }
+                if (currentSymbol == Symbol.None && nextMove != null)
+                {
+                    nextMove = null;
+                    break;
+                }
+                if (currentSymbol == Symbol.None)
+                {
+                    nextMove = new Move(_board.Size +1 -i, i);
+                } 
+            }
+            return nextMove;
+        }
 
         private Move HasOpponentSymbolDiagonalLtr()
         {
