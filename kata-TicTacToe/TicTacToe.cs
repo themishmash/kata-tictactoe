@@ -26,8 +26,10 @@ namespace kata_TicTacToe
         public void PlayGame()
         {
             Player currentPlayer = null;
-            _iio.Output("Here's the current board:");
-            //printCaption();
+           // _iio.Output("Here's the current board:");
+           _iio.Output(Messages.BoardMessage);
+
+           //printCaption();
             //_iio.Output(MyRsc.CurrentBoard)
             
              _iio.Output(_board.DisplayBoard());
@@ -40,18 +42,18 @@ namespace kata_TicTacToe
                  
                      while(!MoveValidator.IsValidMove(move, _board))
                      {
-                         _iio.Output("Oh no, a piece is already at this place! Try again...");
+                         _iio.Output(Messages.BoardPieceTakenMessage);
                          move = currentPlayer.PlayTurn();
                      }
 
                      _board.PlaceSymbolToCoordinates(currentPlayer.Symbol, move);
-                     _iio.Output("Move accepted, here's the current board:");
+                     _iio.Output(Messages.MoveAcceptedMessage);
                      _iio.Output(_board.DisplayBoard());
 
                      if (HasPlayerWon(currentPlayer, move))
                      {
                          GameStatus = GameStatus.Won;
-                         _iio.Output("Move accepted, well done you've won the game!");
+                         _iio.Output(Messages.WinMessage);
                          _iio.Output(_board.DisplayBoard());
                          return;
                      }
@@ -59,7 +61,7 @@ namespace kata_TicTacToe
 
                  if (_board.IsFull())
                  {
-                     _iio.Output("No winner today, there is a draw!");
+                     _iio.Output(Messages.DrawMessage);
                      GameStatus = GameStatus.Drew;
                      return;
                  }

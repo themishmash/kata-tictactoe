@@ -18,4 +18,27 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    
+    //TicTacToe game messages
+    <data name="BoardMessage">
+        <value>Here's the current board:</value>
+        <comment></comment>
+    </data>
+    <data name="BoardPieceTakenMessage">
+        <value>Oh no, a piece is already at this place! Try again...</value>
+        <comment></comment>
+    </data>
+    <data name="MoveAcceptedMessage">
+        <value>Move accepted, here's the current board:</value>
+        <comment></comment>
+    </data>
+    <data name="WinMessage">
+        <value>Move accepted, here's the current board:</value>
+        <comment></comment>
+    </data>
+    <data name="DrawMessage">
+        <value>No winner today, there is a draw!</value>
+        <comment></comment>
+    </data>
+    
 </root>

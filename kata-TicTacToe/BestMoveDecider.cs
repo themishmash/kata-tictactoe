@@ -221,18 +221,6 @@ namespace kata_TicTacToe
             return GetDiagonalSpotsRtl(Symbol.None).Count() == _board.Size - 1;
         }
         
-        private Move CheckDiagonalLtr()
-        {
-            var numberOfCross = GetDiagonalSpotsLtr(Symbol.Cross);
-            var numberOfNaught = GetDiagonalSpotsLtr(Symbol.Naught);
-            var emptySpot = GetDiagonalSpotsLtr(Symbol.None);
-            if ((numberOfCross.Count() == _board.Size - 1 || numberOfNaught.Count() == _board.Size -1) && emptySpot !=null)
-            {
-                return GetDiagonalSpotsLtr(Symbol.None).FirstOrDefault();
-            }
-            return null;
-        }
-
         private IEnumerable<Move> GetDiagonalSpotsLtr(Symbol symbol)
         {
             var moveList = new List<Move>();
@@ -246,22 +234,6 @@ namespace kata_TicTacToe
             return moveList;
         }
         
-        //create 
-
-        private Move CheckDiagonalRtl()
-        {
-            var numberOfCross = GetDiagonalSpotsRtl(Symbol.Cross);
-            var numberOfNaught = GetDiagonalSpotsRtl(Symbol.Naught);
-            var emptySpot = GetDiagonalSpotsRtl(Symbol.None);
-            if (numberOfCross.Count() == _board.Size - 1 && emptySpot.Count() == 1 || numberOfNaught.Count() == _board.Size
-             - 1 && 
-            emptySpot.Count() == 1)
-            {
-                return GetDiagonalSpotsRtl(Symbol.None).FirstOrDefault();
-            }
-            return null;
-        }
-
         private IEnumerable<Move> GetDiagonalSpotsRtl(Symbol symbol)
         {
             var moveList = new List<Move>();

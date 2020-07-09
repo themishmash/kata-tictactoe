@@ -14,21 +14,21 @@ namespace kata_TicTacToe {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class MyResource {
+    internal class Messages {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal MyResource() {
+        internal Messages() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("kata_TicTacToe.MyResource", typeof(MyResource).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("kata_TicTacToe.Messages", typeof(Messages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -42,6 +42,36 @@ namespace kata_TicTacToe {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        internal static string BoardMessage {
+            get {
+                return ResourceManager.GetString("BoardMessage", resourceCulture);
+            }
+        }
+        
+        internal static string BoardPieceTakenMessage {
+            get {
+                return ResourceManager.GetString("BoardPieceTakenMessage", resourceCulture);
+            }
+        }
+        
+        internal static string MoveAcceptedMessage {
+            get {
+                return ResourceManager.GetString("MoveAcceptedMessage", resourceCulture);
+            }
+        }
+        
+        internal static string WinMessage {
+            get {
+                return ResourceManager.GetString("WinMessage", resourceCulture);
+            }
+        }
+        
+        internal static string DrawMessage {
+            get {
+                return ResourceManager.GetString("DrawMessage", resourceCulture);
             }
         }
     }
