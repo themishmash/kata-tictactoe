@@ -24,12 +24,6 @@ namespace kata_TicTacToe
             Console.WriteLine(message);
         }
 
-        public void PrintCurrentBoardCaption()
-        {
-            Console.WriteLine("Here's the current board:");
-            //Console.WriteLine(MyResource.BoardCaption);
-        }
-        
         private int[] ParseStringCoordinatesToInt(string number)
         {
             var stringCoordinates = number.Split(",", StringSplitOptions.RemoveEmptyEntries);

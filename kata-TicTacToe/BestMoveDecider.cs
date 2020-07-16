@@ -1,11 +1,9 @@
-using System.Collections.Generic;
-using System.Linq;
-
 namespace kata_TicTacToe
 {
     public class BestMoveDecider:IMoveDecider
     {
         private readonly Board _board;
+        
         
         public BestMoveDecider(Board board)
         {
@@ -56,7 +54,10 @@ namespace kata_TicTacToe
             move = FindAWinningColumnMove(symbol);
             if (move != null) return move;
 
-            move = FindAWinningDiagonalMove(symbol);
+            move = FindAWinningDiagonalMoveLtr(symbol);
+            if (move != null) return move;
+            
+            move = FindAWinningDiagonalMoveRtl(symbol);
             if (move != null) return move;
             
             return move;
@@ -126,15 +127,15 @@ namespace kata_TicTacToe
             return nextMove;
         }
         
-        private Move FindAWinningDiagonalMove(Symbol symbol)
+        private Move FindAWinningDiagonalMoveLtr(Symbol symbol)
         {
             var move = GetCentreMove();
-            
             var center = _board.GetSymbolAtCoordinates(move.XCoordinate, move.YCoordinate);
             if (center != symbol)
             {
                 return null;
             }
+            
             var topLeft = _board.GetSymbolAtCoordinates(1, 1);
             var bottomRight = _board.GetSymbolAtCoordinates(_board.Size, _board.Size);
             
@@ -148,6 +149,18 @@ namespace kata_TicTacToe
                 return new Move(1,1);
             }
             
+            return null;
+        }
+        
+        private Move FindAWinningDiagonalMoveRtl(Symbol symbol)
+        {
+            var move = GetCentreMove();
+            var center = _board.GetSymbolAtCoordinates(move.XCoordinate, move.YCoordinate);
+            if (center != symbol)
+            {
+                return null;
+            }
+
             var topRight = _board.GetSymbolAtCoordinates(1, _board.Size);
             var bottomLeft = _board.GetSymbolAtCoordinates(_board.Size, 1);
             

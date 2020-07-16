@@ -9,7 +9,7 @@ namespace kata_TicTacToe
         private readonly Board _board;
         private readonly Player _player1;
         private readonly Player _player2;
-        private GameStatus GameStatus { get; set; }
+        public GameStatus GameStatus { get; set; }
 
 
         public TicTacToe(Board board, Player player1, Player player2, IInputOutput iio)
