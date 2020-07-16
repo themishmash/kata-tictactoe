@@ -11,6 +11,7 @@ namespace kata_TicTacToe
 
         public override Move PlayTurn()
         {
+            //var(x,y) = _iio.AskQuestion($"{Name} please enter a coordinate x,y to place your {Symbol} or enter control c to give up");
             var(x,y) = _iio.AskQuestion($"{Name} please enter a coordinate x,y to place your {Symbol} or enter control c to give up");
             var move = new Move(x, y);
             return move;

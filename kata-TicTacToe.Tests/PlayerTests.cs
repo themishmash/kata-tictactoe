@@ -17,7 +17,6 @@ namespace kata_TicTacToe.Tests
              Assert.Equal(1, move.XCoordinate);
              Assert.Equal(1, move.YCoordinate);
          }
-        
          
         [Fact]
         public void PlayerHasCorrectXSymbol()
@@ -26,6 +25,5 @@ namespace kata_TicTacToe.Tests
             var playerX = new Human(input, Symbol.Cross, "player X");
             Assert.Equal(Symbol.Cross, playerX.Symbol);
         }
-        
     }
 }

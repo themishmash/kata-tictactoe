@@ -9,7 +9,7 @@ namespace kata_TicTacToe
             Console.WriteLine("Welcome to Tic Tac Toe!");
             Player player1 = null;
             Player player2 = null;
-            var board = new Board(5);
+            var board = new Board(3);
             var consoleInputOutput = new ConsoleInputOutput();
             var bestMoveDecider = new BestMoveDecider(board);
             var randomNumberGenerator = new RandomNumberGenerator();
